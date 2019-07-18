@@ -1,0 +1,13 @@
+<form class="example-form" fxLayout="column"
+      fxLayoutAlign="center center" [formGroup]="logInData"
+      (ngSubmit)="logIn()">
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="email" placeholder="Email">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="password" placeholder="Password">
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="!logInData.valid">Primary</button>
+  <a (click)="routeToSignUp()">Log in</a>
+</form>
+

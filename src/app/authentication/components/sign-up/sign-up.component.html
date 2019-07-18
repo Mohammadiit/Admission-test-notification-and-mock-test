@@ -1,0 +1,17 @@
+<form class="example-form" fxLayout="column"
+      fxLayoutAlign="center center" [formGroup]="signUpData"
+      (ngSubmit)="signUp()" >
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="fullName" placeholder="Full name" >
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="email" placeholder="Email" >
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="password" placeholder="Password" >
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="confirmPassword" placeholder="Confirm password" >
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="!signUpData.valid" (click)='onSubmit()'>Sign Up</button>
+</form>
