@@ -33,13 +33,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 // user defined service
 
 import {AuthenticationService} from './services/authentication.service';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
+import {SharedModule} from '../shared/shared.module';
+import {SnackbarComponent} from '../shared/components/snackbar/snackbar.component';
 
 const appRoutes: Routes = [
 
   ];
 
 @NgModule({
-  declarations: [SignUpComponent, LogInComponent],
+  declarations: [SignUpComponent, LogInComponent, AccountRecoveryComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -53,8 +57,11 @@ const appRoutes: Routes = [
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    AngularFireAuthModule,
+    SharedModule
   ],
   providers: [AuthenticationService],
+  entryComponents:[ SnackbarComponent ]
 })
 export class AuthenticationModule { }

@@ -1,8 +1,10 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
-import * as util from 'util' // has no default export
-import { inspect } from 'util' // or directly
+import * as util from 'util'; // has no default export
+import { inspect } from 'util';
+import {first} from 'rxjs/operators';
+import {urlPaths} from '../../../config/constants/defaultConstants'; // or directly
 
 @Component({
   selector: 'app-log-in',
@@ -19,8 +21,19 @@ export class LogInComponent implements OnInit {
   }
   logIn() {
     console.log(util.inspect(this.logInData.value));
+    this.authService.signIn(this.logInData.value).pipe(first()).subscribe((res) => {
+      if (res && res.code) {
+         console.log(res.code);
+      } else {
+        this.router.navigate([ urlPaths.AdmissionInfo.AdmissionInfoUpload.url]);
+      }
+    });
   }
   routeToSignUp() {
     this.router.navigate(['auth/sign-up']);
+  }
+
+  routeToRecoverAccount() {
+    this.router.navigate([urlPaths.Authentication.AccountRecovery.url]);
   }
 }

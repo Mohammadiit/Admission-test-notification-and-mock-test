@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./authentication/authentication.module').then(mod => mod.AuthenticationModule)
+  },
+  {
+    path: 'admission-info',
+    loadChildren: () => import('./admission-info/admission-info.module').then(mod => mod.AdmissionInfoModule)
   }
 ];
 

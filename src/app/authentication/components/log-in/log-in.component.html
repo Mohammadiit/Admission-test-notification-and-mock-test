@@ -7,7 +7,9 @@
   <mat-form-field class="example-full-width">
     <input matInput formControlName="password" placeholder="Password">
   </mat-form-field>
-  <button mat-raised-button color="primary" [disabled]="!logInData.valid">Primary</button>
-  <a (click)="routeToSignUp()">Log in</a>
+  <button mat-raised-button color="primary" [disabled]="!logInData.valid">Log in</button>
+  <a (click)="routeToSignUp()">Sign up</a>
+  Foget password ?
+  <button mat-button (click)="routeToRecoverAccount()">recover account</button>
 </form>
 

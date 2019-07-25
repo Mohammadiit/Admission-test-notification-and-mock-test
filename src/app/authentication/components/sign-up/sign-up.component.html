@@ -14,4 +14,8 @@
     <input matInput formControlName="confirmPassword" placeholder="Confirm password" >
   </mat-form-field>
   <button mat-raised-button color="primary" [disabled]="!signUpData.valid" (click)='onSubmit()'>Sign Up</button>
+  Already have an account?
+  <button mat-button (click)="routeToLogIn()">Log in</button>
 </form>
+
+
