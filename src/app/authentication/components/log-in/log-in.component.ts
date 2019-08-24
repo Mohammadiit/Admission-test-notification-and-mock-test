@@ -25,6 +25,8 @@ export class LogInComponent implements OnInit {
       if (res && res.code) {
          console.log(res.code);
       } else {
+        debugger;
+        this.authService.isLoggedIn.next(true);
         this.router.navigate([ urlPaths.AdmissionInfo.AdmissionInfoUpload.url]);
       }
     });

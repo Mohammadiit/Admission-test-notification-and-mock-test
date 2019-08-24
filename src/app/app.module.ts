@@ -20,7 +20,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatPaginatorModule, MatSortModule,
-  MatTableModule
+  MatTableModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule
 } from '@angular/material';
 
 ///  firebase     ////
@@ -33,10 +33,15 @@ import {FormsModule} from '@angular/forms';
 
 // flex //
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { FileDropZoneDirective } from './shared/directives/File-drop-zone/FileDropZone.directive';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FileDropZoneDirective,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,12 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

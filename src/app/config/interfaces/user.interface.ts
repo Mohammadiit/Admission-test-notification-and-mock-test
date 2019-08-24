@@ -4,6 +4,15 @@ export interface UserInformation  {
   email?: string;
   metaData?:CustomerUserInformation;
 }
+export interface FileUploadConfig {
+  multiple?: string;
+  formatsAllowed?: string;
+  maxSize?: string;
+  uploadAPI?: UploadAPI;
+}
+export interface UploadAPI {
+  url?: string;
+}
 export interface CustomerUserInformation {
   uid?:string;
   fullName?:string;

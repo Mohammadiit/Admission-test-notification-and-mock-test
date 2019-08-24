@@ -7,13 +7,20 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatCardModule, MatFormFieldModule, MatInputModule,
-  MatDividerModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
+import {
+  MatCardModule, MatFormFieldModule, MatInputModule,
+  MatDividerModule, MatProgressBarModule, MatSnackBarModule, MatNativeDateModule
+} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {SharedService} from './shared.service';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { AngularFileUploaderModule } from "angular-file-uploader";
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { FileUploadTaskComponent } from './components/file-upload-task/file-upload-task.component';
+
 
 @NgModule({
-  declarations: [SnackbarComponent],
+  declarations: [SnackbarComponent, FileUploaderComponent, FileUploadTaskComponent],
   imports: [
     MatToolbarModule,
     MatIconModule,
@@ -29,7 +36,10 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     MatInputModule,
     MatDividerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AngularFileUploaderModule
   ],
   exports: [
     MatToolbarModule,
@@ -45,7 +55,10 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     MatInputModule,
     MatDividerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AngularFileUploaderModule
   ],
   providers: [SharedService]
 })

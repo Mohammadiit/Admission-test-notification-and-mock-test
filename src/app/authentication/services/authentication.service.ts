@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
@@ -10,6 +10,8 @@ import {CustomerUserInformation, UserInformation} from '../../config/interfaces/
   providedIn: 'root'
 })
 export class AuthenticationService {
+  public isLoggedIn: BehaviorSubject<boolean> ;
+
   public logInForm = this.fb.group({
     email: [''],
     password: ['']
@@ -29,6 +31,7 @@ export class AuthenticationService {
               private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router) {
+    this.isLoggedIn = new BehaviorSubject(false);
   }
 
   signUp(user: UserInformation) {
