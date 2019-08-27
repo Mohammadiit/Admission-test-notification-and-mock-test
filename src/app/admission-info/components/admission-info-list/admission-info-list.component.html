@@ -1,0 +1,6 @@
+<div *ngFor="let item of items">
+  <div>
+    {{item.payload.doc.data().universityName}}
+  </div>
+  <button mat-button (click)="goToDetails(item)">details</button>
+</div>

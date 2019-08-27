@@ -44,7 +44,6 @@ export class NavbarComponent {
     this.authenticationService.isLoggedIn.subscribe(
       data => {
         console.log(data);
-        debugger;
         this.isLoggedIn = data;
       }
     );

@@ -18,6 +18,12 @@ export const urlPaths = {
   AdmissionInfo: {
     AdmissionInfoUpload: {
       url: '/admission-info/upload'
+    },
+    AdmissionInfo: {
+      url: '/admission-info/info'
+    },
+    AdmissionInfoList: {
+      url: '/admission-info/list'
     }
   }
 };

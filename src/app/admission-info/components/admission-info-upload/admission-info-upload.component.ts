@@ -30,20 +30,29 @@ export class AdmissionInfoUploadComponent implements OnInit {
 
   onSubmit() {
     this.admissionInformation = {
-      universityName: this.admissionInfoService.admissionInfoForm.un,
-      unitName: ,
-      applicationStarts: ,
-      applicationEnds: ,
-      seatPlanDeclaration: ,
-      meritListDeclaration: ,
-      examTime: ,
-      officialNoticeLink: ,
-      minimumCGPA: ,
-      hscPassingYear: ,
-      extraRequirements: ,
-      totalFees: ,
-      applicationLink: ,
-      admitCardLink: 
+      universityName: this.admissionInfoData.value.universityName,
+      unitName: this.admissionInfoData.value.unitName,
+      applicationStarts: this.admissionInfoData.value.applicationStarts,
+      applicationEnds: this.admissionInfoData.value.applicationEnds,
+      seatPlanDeclaration: this.admissionInfoData.value.seatPlanDeclaration,
+      meritListDeclaration: this.admissionInfoData.value.meritListDeclaration,
+      examTime: this.admissionInfoData.value.examTime,
+      officialNoticeLink: this.admissionInfoData.value.officialNoticeLink,
+      minimumCGPA: this.admissionInfoData.value.minimumCGPA,
+      hscPassingYear: this.admissionInfoData.value.hscPassingYear,
+      extraRequirements: this.admissionInfoData.value.extraRequirements,
+      totalFees: this.admissionInfoData.value.totalFees,
+      applicationLink: this.admissionInfoData.value.applicationLink,
+      admitCardLink: this.admissionInfoData.value.admitCardLink
     };
+    this.admissionInfoUpload(this.admissionInformation);
+  }
+
+  private admissionInfoUpload(admissionInformation: AdmissionInformation) {
+    this.admissionInfoService.admissionInfoUpload(admissionInformation );
+  }
+
+  routeToAdmissionInfoList() {
+    this.router.navigate([urlPaths.AdmissionInfo.AdmissionInfoList.url]);
   }
 }
