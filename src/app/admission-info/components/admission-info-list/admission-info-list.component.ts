@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AdmissionInfoService} from '../../services/admission-info.service';
 import {first} from 'rxjs/operators';
 import {QueryServiceService} from '../../../shared/service/query-service.service';
+import {Router} from '@angular/router';
+import {urlPaths} from '../../../config/constants/defaultConstants';
 
 @Component({
   selector: 'app-admission-info-list',
@@ -11,10 +13,10 @@ import {QueryServiceService} from '../../../shared/service/query-service.service
 export class AdmissionInfoListComponent implements OnInit {
 
   constructor( private admissionInfoService: AdmissionInfoService
-  ,private queryService: QueryServiceService
+                ,private queryService: QueryServiceService
+               , private router: Router
   ) { }
   items;
-  singleItem;
   ngOnInit() {
     this.admissionInfoService.getAllAdmissionInfo()
       .subscribe(result => {
@@ -23,10 +25,7 @@ export class AdmissionInfoListComponent implements OnInit {
   }
 
   goToDetails(item: any) {
-    this.queryService.getSingleData('admission-info', item.payload.doc.id)
-      .pipe(first()).subscribe((res) => {
-        this.singleItem = res;
-
-    });
+    this.admissionInfoService.item = item;
+    this.router.navigate([urlPaths.AdmissionInfo.AdmissionInfo.url]);
   }
 }

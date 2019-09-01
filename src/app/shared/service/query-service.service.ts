@@ -8,15 +8,18 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class QueryServiceService {
 
-  constructor(public af: AngularFirestore) { }
-  getSingleData(collectionName: string, documentId:string): Observable<any> {
+  constructor(public af: AngularFirestore) {
+  }
+
+  getSingleData(collectionName: string, documentId: string): Observable<any> {
     return new Observable((observer) => {
       this.af.collection(collectionName).doc(documentId).get().pipe(first()).subscribe(
         (res) => {
-          observer.next(res.data()?res.data():null);
+          observer.next(res.data() ? res.data() : null);
         },
         (err) => observer.error(err),
         () => observer.complete()
       );
     });
+  }
 }

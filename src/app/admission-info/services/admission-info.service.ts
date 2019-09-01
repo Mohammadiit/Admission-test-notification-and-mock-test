@@ -9,7 +9,7 @@ import {first} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdmissionInfoService {
-
+  item;
   constructor(private fb: FormBuilder
   ,public af: AngularFirestore
   ) {
