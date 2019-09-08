@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
+import {question} from '../../config/interfaces/question.interface';
+import {QuestionService} from '../services/question.service';
 
 
 @Component({
@@ -9,9 +11,10 @@ import * as XLSX from 'xlsx';
 })
 export class QuestionUploadComponent implements OnInit {
   private file: File;
-  public  data;
+  public  data: string [][];
+  public questions: question[] = [];
 
-  constructor() {
+  constructor(public questionService:QuestionService) {
 
   }
 
@@ -33,7 +36,45 @@ export class QuestionUploadComponent implements OnInit {
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
-      console.log(this.data);
+      let j=0;
+      for(let i=0;i<10;++i) {
+          j=0;
+          var statements1, a1,b1,c1,d1,discrimination1,difficulties1,psuedoguessing1,answer1;
+          statements1 = this.data [i][j];
+          ++j;
+          a1 = this.data [i][j];
+          ++j;
+          b1 = this.data [i][j];
+          ++j;
+          c1 = this.data [i][j];
+          ++j;
+          d1 = this.data [i][j];
+          ++j;
+          discrimination1 = this.data [i][j];
+          ++j;
+          difficulties1 = this.data [i][j];
+          ++j;
+          psuedoguessing1 = this.data [i][j];
+          ++j;
+          answer1 = this.data [i][j];
+          ++j;
+          if(i !=0){
+            var question: question = {
+              statements: statements1,
+              a: a1,
+              b: b1,
+              c: c1,
+              d: d1,
+              discrimination: discrimination1,
+              difficulties: difficulties1,
+              answer: answer1,
+            };
+            this.questions = [ ...this.questions , question];
+          }
+
+      }
+      this.questionService.uploadQuestion(this.questions);
+
       };
     reader.readAsBinaryString(evt.target.files[0]);
   }
