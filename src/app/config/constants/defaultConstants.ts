@@ -25,5 +25,14 @@ export const urlPaths = {
     AdmissionInfoList: {
       url: '/admission-info/list'
     }
+  },
+  Question: {
+    QuesionUpload: {
+      url: '/questions/upload'
+    },
+    exam: {
+      url: '/questions/exam'
+    }
   }
+
 };

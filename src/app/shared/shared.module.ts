@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
-  MatDividerModule, MatProgressBarModule, MatSnackBarModule, MatNativeDateModule
+  MatDividerModule, MatProgressBarModule, MatSnackBarModule, MatNativeDateModule, MatRadioModule
 } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {SharedService} from './shared.service';
@@ -22,6 +22,7 @@ import { FileUploadTaskComponent } from './components/file-upload-task/file-uplo
 @NgModule({
   declarations: [SnackbarComponent, FileUploaderComponent, FileUploadTaskComponent],
   imports: [
+    MatRadioModule,
     MatToolbarModule,
     MatIconModule,
     CommonModule,
@@ -42,6 +43,7 @@ import { FileUploadTaskComponent } from './components/file-upload-task/file-uplo
     AngularFileUploaderModule
   ],
   exports: [
+    MatRadioModule,
     MatToolbarModule,
     MatIconModule,
     FlexLayoutModule,

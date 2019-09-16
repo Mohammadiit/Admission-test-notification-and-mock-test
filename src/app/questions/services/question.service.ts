@@ -7,6 +7,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class QuestionService {
 
+  public questionPaper;
+
   constructor(public af: AngularFirestore) { }
 
   uploadQuestion(questions: question[]) {
@@ -23,4 +25,8 @@ export class QuestionService {
       question10: questions[9],
     });
   }
+
+  getAllQuestions() {
+
+    return this.af.collection('question-paper').snapshotChanges();  }
 }

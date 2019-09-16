@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import {question} from '../../config/interfaces/question.interface';
 import {QuestionService} from '../services/question.service';
+import {urlPaths} from '../../config/constants/defaultConstants';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,12 +15,19 @@ export class QuestionUploadComponent implements OnInit {
   private file: File;
   public  data: string [][];
   public questions: question[] = [];
-
-  constructor(public questionService:QuestionService) {
+  public questionPapers;
+  constructor(public questionService: QuestionService,
+              private router: Router) {
 
   }
 
   ngOnInit() {
+      this.questionService.getAllQuestions() .subscribe(result => {
+        this.questionPapers = result;
+        console.log(this.questionPapers);
+
+      });
+
   }
 
   incomingfile($event: Event) {
@@ -37,7 +46,7 @@ export class QuestionUploadComponent implements OnInit {
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
       let j=0;
-      for(let i=0;i<10;++i) {
+      for(let i=0;i<11;++i) {
           j=0;
           var statements1, a1,b1,c1,d1,discrimination1,difficulties1,psuedoguessing1,answer1;
           statements1 = this.data [i][j];
@@ -69,6 +78,7 @@ export class QuestionUploadComponent implements OnInit {
               difficulties: difficulties1,
               answer: answer1,
             };
+            console.log(question);
             this.questions = [ ...this.questions , question];
           }
 
@@ -79,4 +89,8 @@ export class QuestionUploadComponent implements OnInit {
     reader.readAsBinaryString(evt.target.files[0]);
   }
 
+  press(questionPaper: any) {
+    this.questionService.questionPaper = questionPaper;
+    this.router.navigate([urlPaths.Question.exam.url]);
+  }
 }
