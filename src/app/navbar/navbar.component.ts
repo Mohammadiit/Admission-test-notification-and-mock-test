@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {first, map, switchMap, tap} from 'rxjs/operators';
 import {AuthenticationService} from '../authentication/services/authentication.service';
 import {Router} from '@angular/router';
 import {UserInformation} from '../config/interfaces/user.interface';
@@ -20,8 +20,25 @@ export class NavbarComponent {
     .pipe(
       map(result => result.matches)
     );
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean ;
   observer: any;
+
+  checkIfLogin() {
+    this.logIn().pipe(
+      tap(user => {
+        if (user) {
+          // do something
+          this.isLoggedIn = true;
+          console.log(this.isLoggedIn);
+        } else {
+          // do something else
+          this.isLoggedIn = false;
+          console.log(this.isLoggedIn);
+        }
+      })
+    )
+      .subscribe()
+  }
 
   constructor(private breakpointObserver: BreakpointObserver,
               private  router: Router,
@@ -29,27 +46,29 @@ export class NavbarComponent {
               private afs: AngularFirestore,
               private authenticationService: AuthenticationService
   ) {
-    this.user = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          this.authenticationService.isLoggedIn.next(true);
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          this.authenticationService.isLoggedIn.next(false);
-          return of(null);
-        }
-      })
-    );
+    this.checkIfLogin();
+    // this.user = this.afAuth.authState.pipe(
+    //   switchMap(user => {
+    //     if (user) {
+    //       this.authenticationService.isLoggedIn.next(true);
+    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+    //     } else {
+    //       this.authenticationService.isLoggedIn.next(false);
+    //       return of(null);
+    //     }
+    //   })
+    // );
     this.afAuth.auth.onAuthStateChanged
-    this.authenticationService.isLoggedIn.subscribe(
-      data => {
-        console.log(data);
-        this.isLoggedIn = data;
-      }
-    );
-    // console.log(this.isLoggedIn);
+    // this.authenticationService.isLoggedIn.subscribe(
+    //   data => {
+    //     console.log(data);
+    //     this.isLoggedIn = data;
+    //   }
+    // );
   }
-
+  logIn() {
+    return this.afAuth.authState.pipe(first());
+  }
   routeToLogIn() {
     this.router.navigate(['auth/log-in']);
   }
@@ -60,7 +79,7 @@ export class NavbarComponent {
 
   routeToLogOut() {
     this.authenticationService.signOut();
-    this.authenticationService.isLoggedIn.next(false);
+    // this.authenticationService.isLoggedIn.next(false);
     this.router.navigate(['']);
   }
 }

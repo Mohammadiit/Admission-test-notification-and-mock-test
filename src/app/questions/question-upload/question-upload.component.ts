@@ -22,11 +22,7 @@ export class QuestionUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.questionService.getAllQuestions() .subscribe(result => {
-        this.questionPapers = result;
-        console.log(this.questionPapers);
 
-      });
 
   }
 
@@ -67,7 +63,7 @@ export class QuestionUploadComponent implements OnInit {
           ++j;
           answer1 = this.data [i][j];
           ++j;
-          if(i !=0){
+          if(i != 0){
             var question: question = {
               statements: statements1,
               a: a1,
@@ -84,13 +80,14 @@ export class QuestionUploadComponent implements OnInit {
 
       }
       this.questionService.uploadQuestion(this.questions);
+      this.router.navigate([urlPaths.Question.list.url]);
 
       };
+
+    //  1st file ta parse krte call kre. tarpor reader.onload() call hoy
+
     reader.readAsBinaryString(evt.target.files[0]);
   }
 
-  press(questionPaper: any) {
-    this.questionService.questionPaper = questionPaper;
-    this.router.navigate([urlPaths.Question.exam.url]);
-  }
+
 }

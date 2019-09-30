@@ -32,6 +32,12 @@ export const urlPaths = {
     },
     exam: {
       url: '/questions/exam'
+    },
+    list: {
+      url: '/questions/list'
+    },
+    result: {
+      url: '/questions/result'
     }
   }
 

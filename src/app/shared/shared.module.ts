@@ -12,7 +12,7 @@ import {
   MatDividerModule, MatProgressBarModule, MatSnackBarModule, MatNativeDateModule, MatRadioModule
 } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {SharedService} from './shared.service';
+import {SharedService} from './service/shared.service';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';

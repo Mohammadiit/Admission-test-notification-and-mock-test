@@ -31,7 +31,7 @@ export class AuthenticationService {
               private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router) {
-    this.isLoggedIn = new BehaviorSubject(false);
+    this.isLoggedIn = new BehaviorSubject(true);
   }
 
   signUp(user: UserInformation) {
@@ -74,7 +74,7 @@ export class AuthenticationService {
     return userRef.set(data);
   }
   sendPasswordResetEmail(user: UserInformation): Observable<any> {
-    return new Observable(observer=>{
+    return new Observable(observer=> {
       this.afAuth.auth.sendPasswordResetEmail(user.email).then(acc=>{
         observer.next(acc);
       }).catch(err=>{

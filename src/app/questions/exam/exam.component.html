@@ -1,9 +1,6 @@
 Statements: {{statement}}
 <mat-radio-group aria-label="Select an option" [(ngModel)]="selected" >
-  <mat-radio-button value="a">{{a}}</mat-radio-button>
-  <mat-radio-button value="b">{{b}}</mat-radio-button>
-  <mat-radio-button value="c">{{c}}</mat-radio-button>
-  <mat-radio-button value="d">{{d}}</mat-radio-button>
+  <mat-radio-button *ngFor="let option of options" [value]="option">{{option}}</mat-radio-button>
 </mat-radio-group>
-
+<button (click)="next()"> Proceed </button>
 

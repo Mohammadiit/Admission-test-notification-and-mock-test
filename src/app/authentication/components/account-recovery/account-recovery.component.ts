@@ -3,7 +3,7 @@ import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {UserInformation} from '../../../config/interfaces/user.interface';
 import {first} from 'rxjs/operators';
-import {SharedService} from '../../../shared/shared.service';
+import {SharedService} from '../../../shared/service/shared.service';
 import {defaultConst} from '../../../config/constants/defaultConstants';
 
 @Component({

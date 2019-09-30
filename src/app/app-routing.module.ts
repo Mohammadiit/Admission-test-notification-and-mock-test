@@ -1,12 +1,14 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
+import {AuthGuard} from './shared/service/security-service/auth.guard';
+import {AdminGuard} from './shared/service/security-service/admin.guard';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -19,11 +21,24 @@ const routes: Routes = [
       },
       {
         path: 'questions',
-        loadChildren: () => import('./questions/questions.module').then(mod => mod.QuestionsModule)
+        loadChildren: () => import('./questions/questions.module').then(mod => mod.QuestionsModule),
+        canActivate: [ AuthGuard ]
       }
     ]
   },
 
+
+
+  {
+    path: '',
+    component: NavbarComponent,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then(mod => mod.HomeModule)
+      }
+    ]
+  },
   {
     path: '',
     component: NavbarComponent,

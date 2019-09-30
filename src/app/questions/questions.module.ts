@@ -7,8 +7,10 @@ import { QuestionUploadComponent } from './question-upload/question-upload.compo
 import readXlsxFile from 'read-excel-file';
 import { ExamComponent } from './exam/exam.component'
 import {SharedModule} from '../shared/shared.module';
+import { QuestionListComponent } from './question-list/question-list.component';
+import { ResultComponent } from './result/result.component';
 @NgModule({
-  declarations: [QuestionUploadComponent, ExamComponent],
+  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent],
   imports: [
     CommonModule,
     QuestionsRoutingModule,

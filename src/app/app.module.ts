@@ -41,7 +41,7 @@ import { LayoutModule } from '@angular/cdk/layout';
   declarations: [
     AppComponent,
     FileDropZoneDirective,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

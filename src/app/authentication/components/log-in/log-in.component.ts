@@ -4,7 +4,8 @@ import {AuthenticationService} from '../../services/authentication.service';
 import * as util from 'util'; // has no default export
 import { inspect } from 'util';
 import {first} from 'rxjs/operators';
-import {urlPaths} from '../../../config/constants/defaultConstants'; // or directly
+import {urlPaths} from '../../../config/constants/defaultConstants';
+import {SecurityService} from '../../../shared/service/security-service/security.service'; // or directly
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +16,9 @@ export class LogInComponent implements OnInit {
 
   logInData = this.authService.logInForm;
 
-  constructor(private authService: AuthenticationService, private  router: Router) { }
+  constructor(private authService: AuthenticationService, private  router: Router,
+              private securityService: SecurityService
+              ) { }
 
   ngOnInit() {
   }
@@ -26,10 +29,20 @@ export class LogInComponent implements OnInit {
          console.log(res.code);
       } else {
         this.authService.isLoggedIn.next(true);
-        this.router.navigate([ urlPaths.AdmissionInfo.AdmissionInfoUpload.url]);
+        this.AdminCheck();
+        console.log( "gese");
       }
     });
   }
+
+  AdminCheck(){
+    this.securityService.isAdmin().subscribe(res => {
+      if (res) {
+        console.log("         aaaaaaaaaaaaa  Admin bbbbbbbbbbb   ");
+      }
+    })
+  }
+
   routeToSignUp() {
     this.router.navigate(['auth/sign-up']);
   }

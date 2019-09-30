@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {QuestionUploadComponent} from './question-upload/question-upload.component';
 import {ExamComponent} from './exam/exam.component';
+import {QuestionListComponent} from './question-list/question-list.component';
+import {ResultComponent} from './result/result.component';
 
 
 const routes: Routes = [
@@ -11,6 +13,12 @@ const routes: Routes = [
   }, {
     path: 'exam',
     component: ExamComponent
+  }, {
+    path: 'list',
+    component: QuestionListComponent
+  }, {
+    path: 'result',
+    component: ResultComponent
   }
 ];
 
