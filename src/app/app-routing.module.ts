@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: 'questions',
         loadChildren: () => import('./questions/questions.module').then(mod => mod.QuestionsModule),
-        canActivate: [ StudentGuard ]
+
       }
     ]
   },
