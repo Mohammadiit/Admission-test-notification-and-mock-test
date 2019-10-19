@@ -1,6 +1,29 @@
-Statements: {{statement}}
-<mat-radio-group aria-label="Select an option" [(ngModel)]="selected" >
-  <mat-radio-button *ngFor="let option of options" [value]="option">{{option}}</mat-radio-button>
-</mat-radio-group>
-<button (click)="next()"> Proceed </button>
+<div fxLayout="column" fxLayoutAlign="center center" class='px-250'>
+  <mat-card class='w-100-p p-48 m-56'>
+    <h3 class="mat-h2">{{statement}}</h3>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="selected">
+      <div fxLayout="column" class="pb-20" fxLayoutGap="4px">
+        <mat-radio-button *ngFor="let option of options" [value]="option" [disabled]="correct || wrong"
+                          (click)="enableButton()">{{option}}</mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <button (click)="lock()" *ngIf="!(correct || wrong)" [disabled]="disabled" mat-raised-button color="primary"> OK
+    </button>
+    <mat-card *ngIf="correct" class=" w-28-p">
+      <p style="color: green" class="bold font-size-20"> Right Answer </p>
+    </mat-card>
+    <mat-card *ngIf="wrong" class=" w-90-p">
+      <p style="color: red" class="bold font-size-20">
+        Wrong Answer
+      </p>
+      <p class="bold font-size-20">
+        Correct Answer is : <span class="bold font-size-20" style="color: red">{{correctAnswer}}</span>
+      </p>
+    </mat-card>
+    <button (click)="next()" *ngIf="wrong || correct"
+            [disabled]="disabled" class="mt-20"
+            mat-raised-button color="primary"> Proceed
+    </button>
 
+  </mat-card>
+</div>

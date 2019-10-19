@@ -50,6 +50,10 @@ $custom-typography: mat-typography-config($font-family: 'DIN-Regular');
 .mat-error {
   font-size: 12px !important;
 }
+
+.bold{
+  font-weight: 600 !important;
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
