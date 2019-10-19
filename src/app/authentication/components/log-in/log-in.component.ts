@@ -30,11 +30,17 @@ export class LogInComponent implements OnInit {
       } else {
         this.authService.isLoggedIn.next(true);
         this.AdminCheck();
-        console.log( "gese");
+        this.StudentCheck();
       }
     });
   }
-
+  private StudentCheck() {
+    this.securityService.isStudent().subscribe(res => {
+      if (res) {
+        console.log("         aaaaaaaaaaaaa  Student bbbbbbbbbbb   ");
+      }
+    })
+  }
   AdminCheck(){
     this.securityService.isAdmin().subscribe(res => {
       if (res) {
@@ -50,4 +56,6 @@ export class LogInComponent implements OnInit {
   routeToRecoverAccount() {
     this.router.navigate([urlPaths.Authentication.AccountRecovery.url]);
   }
+
+
 }

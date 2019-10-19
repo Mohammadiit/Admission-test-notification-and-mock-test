@@ -1,30 +1,44 @@
-<h1>{{singleItem.universityName}}</h1>
-<h3>{{singleItem.unitName}}.</h3>
+<div fxLayout="column" fxLayoutAlign="center center" class='px-250'>
+  <mat-card class='w-100-p p-48 m-56'>
 
-<h2>Important Dates</h2>
+    <h1>{{singleItem.universityName}}</h1>
+    <h3>Unit Name: {{singleItem.unitName}}.</h3>
 
-<p>Application starts:{{singleItem.applicationStarts}}</p>
-<p>Application ends:{{singleItem.applicationEnds}}</p>
-<p>Seat plan deadlines:{{singleItem.seatPlanDeclaration}}</p>
-<p>Merit list declaration:{{singleItem.meritListDeclaration}}</p>
-<p>Exam time:{{singleItem.examTime}}</p>
+    <h2>Important Dates And Informations</h2>
 
-<h2>Admission Notice</h2>
+    <p>Application starts:{{singleItem.applicationStarts}}</p>
 
-<iframe>{{singleItem.officialNoticeLink}}</iframe>
-<a>{{singleItem.officialNoticeLink}}</a>
+    <p>Application ends:{{singleItem.applicationEnds}}</p>
 
-<h2>Requirements</h2>
+    <p>Exam Date:{{singleItem.examDate}}</p>
 
-<p>Minimumn CGPA:{{singleItem.minimumCGPA}}</p>
-<p>HSC passing year:{{singleItem.hscPassingYear}}</p>
-<p>Extra requirements:{{singleItem.extraRequirements}}</p>
+    <p>Total fees:{{singleItem.totalFees}}</p>
 
-<h2>Application Process</h2>
 
-<p>Total fees:{{singleItem.totalFees}}</p>
-<a>{{singleItem.applicationLink}}</a>
+    <h2>Admission Notice</h2>
 
-<h2>Admit cast download</h2>
+    <p style="display: inline">You can download official admission notice form </p>
+    <a href="{{singleItem.officialNoticeLink}}" style="display: inline">here</a>
+    <br>
+    <a mat-raised-button class="h-60 w-352 font-size-28 pt-8 ml-116 mt-28"
+       style="background-color:#76448a;color: #F1C40F; font-weight: 600; text-decoration: none"
+      href="{{singleItem.admitCardLink}}">
+      Admit Card Download</a>
 
-<a>{{singleItem.admitCardLink}}</a>
+
+    <h2>Requirements</h2>
+
+    <p>Minimumn CGPA:{{singleItem.minimumCGPA}}</p>
+    <p>HSC passing year:{{singleItem.hscPassingYear}}</p>
+    <p>SSC passing year:{{singleItem.sscPassingYear}}</p>
+    <a mat-raised-button class="h-60 w-352 font-size-28 pt-8 ml-116 mt-28"
+       style="background-color:#239856;color: #F1C40F; font-weight: 600; text-decoration: none"
+      href="{{singleItem.seatPlanLink}}">
+      Seat Plan Download</a>
+    <a mat-raised-button class="h-60 w-352 font-size-28 pt-8 ml-116 mt-28"
+       style="background-color:#2874a6;color: #F1C40F; font-weight: 600; text-decoration: none"
+       href="{{singleItem.meritListLink}}">
+      Merit List Download</a>
+
+  </mat-card>
+</div>

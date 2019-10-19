@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
 import {AuthGuard} from './shared/service/security-service/auth.guard';
 import {AdminGuard} from './shared/service/security-service/admin.guard';
+import {StudentGuard} from './shared/service/security-service/student.guard';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
       {
         path: 'questions',
         loadChildren: () => import('./questions/questions.module').then(mod => mod.QuestionsModule),
-        canActivate: [ AuthGuard ]
+        canActivate: [ StudentGuard ]
       }
     ]
   },

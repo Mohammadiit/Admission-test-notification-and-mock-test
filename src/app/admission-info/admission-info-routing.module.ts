@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'upload',
     component: AdmissionInfoUploadComponent,
-    canActivate: [ AuthGuard ]
+
   },
   {
     path: 'info',

@@ -62,6 +62,7 @@ import { FileUploadTaskComponent } from './components/file-upload-task/file-uplo
     MatNativeDateModule,
     AngularFileUploaderModule
   ],
-  providers: [SharedService]
+  providers: [
+    SharedService]
 })
 export class SharedModule { }

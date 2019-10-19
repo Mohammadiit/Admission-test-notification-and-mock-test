@@ -29,22 +29,33 @@ export class AdmissionInfoUploadComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.admissionInformation = {
       universityName: this.admissionInfoData.value.universityName,
       unitName: this.admissionInfoData.value.unitName,
       applicationStarts: this.admissionInfoData.value.applicationStarts,
       applicationEnds: this.admissionInfoData.value.applicationEnds,
-      seatPlanDeclaration: this.admissionInfoData.value.seatPlanDeclaration,
-      meritListDeclaration: this.admissionInfoData.value.meritListDeclaration,
-      examTime: this.admissionInfoData.value.examTime,
+
+       examDate: this.admissionInfoData.value.examDate,
+
+
+
       officialNoticeLink: this.admissionInfoData.value.officialNoticeLink,
       minimumCGPA: this.admissionInfoData.value.minimumCGPA,
+
+
       hscPassingYear: this.admissionInfoData.value.hscPassingYear,
-      extraRequirements: this.admissionInfoData.value.extraRequirements,
+      sscPassingYear: this.admissionInfoData.value.sscPassingYear,
+
+
       totalFees: this.admissionInfoData.value.totalFees,
-      applicationLink: this.admissionInfoData.value.applicationLink,
-      admitCardLink: this.admissionInfoData.value.admitCardLink
+      admitCardLink: this.admissionInfoData.value.admitCardLink,
+
+
+      seatPlanLink: this.admissionInfoData.value.seatPlanLink,
+      meritListLink: this.admissionInfoData.value.meritListLink,
     };
+    console.log(this.admissionInfoData.value);
     this.admissionInfoUpload(this.admissionInformation);
   }
 
@@ -53,6 +64,9 @@ export class AdmissionInfoUploadComponent implements OnInit {
   }
 
   routeToAdmissionInfoList() {
+   let  kk = JSON.stringify(this.admissionInfoData.value.applicationStarts);
+    console.log(kk.substring(0,15));
+    this.onSubmit();
     this.router.navigate([urlPaths.AdmissionInfo.AdmissionInfoList.url]);
   }
 }

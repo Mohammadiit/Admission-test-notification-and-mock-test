@@ -9,8 +9,10 @@ import { ExamComponent } from './exam/exam.component'
 import {SharedModule} from '../shared/shared.module';
 import { QuestionListComponent } from './question-list/question-list.component';
 import { ResultComponent } from './result/result.component';
+import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 @NgModule({
-  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent],
+  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent, StudentProfileComponent, AddAdminComponent],
   imports: [
     CommonModule,
     QuestionsRoutingModule,

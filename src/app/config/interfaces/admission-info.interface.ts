@@ -4,14 +4,23 @@ export interface AdmissionInformation  {
   unitName?: string,
   applicationStarts?: string,
   applicationEnds?: string,
-  seatPlanDeclaration?: string,
-  meritListDeclaration?: string,
-  examTime?: string,
+
+  examDate: string,
+
+
   officialNoticeLink?: string,
   minimumCGPA?: string,
   hscPassingYear?: string,
+
+  sscPassingYear?: string,
+
   extraRequirements?: string,
   totalFees?: string,
-  applicationLink?: string,
-  admitCardLink?: string
+  admitCardLink?: string,
+
+
+  seatPlanLink?: string,
+  meritListLink?: string,
+
+
 }

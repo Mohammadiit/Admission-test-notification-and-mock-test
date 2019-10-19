@@ -11,7 +11,7 @@ import {first} from 'rxjs/operators';
 export class AdmissionInfoService {
   item;
   constructor(private fb: FormBuilder
-  ,public af: AngularFirestore
+  , public af: AngularFirestore
   ) {
   }
 
@@ -20,16 +20,15 @@ export class AdmissionInfoService {
     unitName: [''],
     applicationStarts: [''],
     applicationEnds: [''],
-    seatPlanDeclaration: [''],
-    meritListDeclaration: [''],
-    examTime: [''],
+    examDate: [''],
+    totalFees: [''],
     officialNoticeLink: [''],
     minimumCGPA: [''],
     hscPassingYear: [''],
-    extraRequirements: [''],
-    totalFees: [''],
-    applicationLink: [''],
-    admitCardLink: ['']
+    sscPassingYear: [''],
+    admitCardLink: [''],
+    seatPlanLink: [''],
+    meritListLink: ['']
   });
 
   admissionInfoUpload(admissionInformation: AdmissionInformation) {
@@ -38,16 +37,25 @@ export class AdmissionInfoService {
       unitName: admissionInformation.unitName,
       applicationStarts: admissionInformation.applicationStarts,
       applicationEnds: admissionInformation.applicationEnds,
-      seatPlanDeclaration: admissionInformation.seatPlanDeclaration,
-      meritListDeclaration: admissionInformation.meritListDeclaration,
-      examTime: admissionInformation.examTime,
+
+      examDate: admissionInformation.examDate,
+
+
       officialNoticeLink: admissionInformation.officialNoticeLink,
       minimumCGPA: admissionInformation.minimumCGPA,
+
+
       hscPassingYear: admissionInformation.hscPassingYear,
-      extraRequirements: admissionInformation.extraRequirements,
+      sscPassingYear: admissionInformation.sscPassingYear,
+
+
       totalFees: admissionInformation.totalFees,
-      applicationLink: admissionInformation.applicationLink,
-      admitCardLink: admissionInformation.admitCardLink
+      admitCardLink: admissionInformation.admitCardLink,
+
+
+
+      seatPlanLink: admissionInformation.seatPlanLink,
+      meritListLink: admissionInformation.meritListLink,
     });
   }
 

@@ -1,0 +1,118 @@
+[debug] [2019-10-02T10:14:29.157Z] ----------------------------------------------------------------------
+[debug] [2019-10-02T10:14:29.159Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\IIT\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2019-10-02T10:14:29.159Z] CLI Version:   7.4.0
+[debug] [2019-10-02T10:14:29.159Z] Platform:      win32
+[debug] [2019-10-02T10:14:29.159Z] Node Version:  v10.16.0
+[debug] [2019-10-02T10:14:29.160Z] Time:          Wed Oct 02 2019 16:14:29 GMT+0600 (Bangladesh Standard Time)
+[debug] [2019-10-02T10:14:29.160Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-02T10:14:29.165Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-02T10:14:29.165Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  G:\admission-notice-and-mock-test
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-10-02T10:15:22.833Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?pageSize=100  
+ 
+[debug] [2019-10-02T10:15:24.661Z] <<< HTTP RESPONSE 200
+[info] i  Using project notice-and-mock-test (Notice-and-mock-test)
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2019-10-02T10:18:43.655Z] ----------------------------------------------------------------------
+[debug] [2019-10-02T10:18:43.658Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\IIT\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2019-10-02T10:18:43.658Z] CLI Version:   7.4.0
+[debug] [2019-10-02T10:18:43.658Z] Platform:      win32
+[debug] [2019-10-02T10:18:43.658Z] Node Version:  v10.16.0
+[debug] [2019-10-02T10:18:43.659Z] Time:          Wed Oct 02 2019 16:18:43 GMT+0600 (Bangladesh Standard Time)
+[debug] [2019-10-02T10:18:43.659Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-02T10:18:43.664Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-02T10:18:43.664Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  G:\admission-notice-and-mock-test
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-10-02T10:20:33.200Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?pageSize=100  
+ 
+[debug] [2019-10-02T10:20:35.107Z] <<< HTTP RESPONSE 200
+[info] i  Using project notice-and-mock-test (Notice-and-mock-test)
+[info] 
+=== Firestore Setup
+[debug] [2019-10-02T10:20:37.039Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-02T10:20:37.039Z] > authorizing via signed-in user
+[debug] [2019-10-02T10:20:37.040Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/notice-and-mock-test  
+ 
+[debug] [2019-10-02T10:20:38.215Z] <<< HTTP RESPONSE 200
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2019-10-02T10:22:18.638Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/notice-and-mock-test/releases?pageSize=10&pageToken=  
+ 
+[debug] [2019-10-02T10:22:20.504Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-02T10:22:20.510Z] Found ruleset: projects/notice-and-mock-test/rulesets/d53867b6-7eee-4685-9797-7a2daa373e05
+[debug] [2019-10-02T10:22:20.511Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/notice-and-mock-test/rulesets/d53867b6-7eee-4685-9797-7a2daa373e05  
+ 
+[debug] [2019-10-02T10:22:22.187Z] <<< HTTP RESPONSE 200
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2019-10-02T10:22:27.278Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/notice-and-mock-test/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2019-10-02T10:22:27.278Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/notice-and-mock-test/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2019-10-02T10:22:29.004Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-02T10:22:29.031Z] <<< HTTP RESPONSE 200
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2019-10-02T10:25:57.469Z] >>> HTTP REQUEST GET https://www.gstatic.com/firebasejs/releases.json  
+ 
+[debug] [2019-10-02T10:25:59.540Z] Error: unable to verify the first certificate
+    at TLSSocket.onConnectSecure (_tls_wrap.js:1055:34)
+    at TLSSocket.emit (events.js:198:13)
+    at TLSSocket.EventEmitter.emit (domain.js:448:20)
+    at TLSSocket._finishInit (_tls_wrap.js:633:8)
+[error] 
+[error] Error: Server Error. unable to verify the first certificate
