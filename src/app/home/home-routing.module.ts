@@ -6,7 +6,7 @@ import {AnonymousComponent} from './anonymous/anonymous.component';
 
 const routes: Routes = [
   {
-    path: 'anonymous',
+    path: '',
     component: AnonymousComponent
   }
 ];

@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
-  MatDividerModule, MatProgressBarModule, MatSnackBarModule, MatNativeDateModule, MatRadioModule
+  MatDividerModule, MatProgressBarModule, MatSnackBarModule, MatNativeDateModule, MatRadioModule, MatTableModule, MatTableDataSource
 } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {SharedService} from './service/shared.service';
@@ -17,11 +17,12 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { FileUploadTaskComponent } from './components/file-upload-task/file-upload-task.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [SnackbarComponent, FileUploaderComponent, FileUploadTaskComponent],
   imports: [
+    MatPaginatorModule,
     MatRadioModule,
     MatToolbarModule,
     MatIconModule,
@@ -40,9 +41,11 @@ import { FileUploadTaskComponent } from './components/file-upload-task/file-uplo
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AngularFileUploaderModule
+    AngularFileUploaderModule,
+    MatTableModule,
   ],
   exports: [
+    MatPaginatorModule,
     MatRadioModule,
     MatToolbarModule,
     MatIconModule,
@@ -60,7 +63,8 @@ import { FileUploadTaskComponent } from './components/file-upload-task/file-uplo
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AngularFileUploaderModule
+    AngularFileUploaderModule,
+    MatTableModule
   ],
   providers: [
     SharedService]

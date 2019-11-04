@@ -1,29 +1,36 @@
-<div fxLayout="column" fxLayoutAlign="center center" class='px-250'>
-  <mat-card class='w-100-p p-48 m-56'>
-    <h3 class="mat-h2">{{statement}}</h3>
-    <mat-radio-group aria-label="Select an option" [(ngModel)]="selected">
-      <div fxLayout="column" class="pb-20" fxLayoutGap="4px">
-        <mat-radio-button *ngFor="let option of options" [value]="option" [disabled]="correct || wrong"
-                          (click)="enableButton()">{{option}}</mat-radio-button>
-      </div>
-    </mat-radio-group>
-    <button (click)="lock()" *ngIf="!(correct || wrong)" [disabled]="disabled" mat-raised-button color="primary"> OK
-    </button>
-    <mat-card *ngIf="correct" class=" w-28-p">
-      <p style="color: green" class="bold font-size-20"> Right Answer </p>
-    </mat-card>
-    <mat-card *ngIf="wrong" class=" w-90-p">
-      <p style="color: red" class="bold font-size-20">
-        Wrong Answer
-      </p>
-      <p class="bold font-size-20">
-        Correct Answer is : <span class="bold font-size-20" style="color: red">{{correctAnswer}}</span>
-      </p>
-    </mat-card>
-    <button (click)="next()" *ngIf="wrong || correct"
-            [disabled]="disabled" class="mt-20"
-            mat-raised-button color="primary"> Proceed
-    </button>
+<div fxLayout="row" fxLayoutAlign="start start"  class='mt-56 mb-56 ml-200' fxLayoutGap="15px">
+  <div fxLayout="column"  class='w-70-p'>
+    <mat-card class='w-100-p p-48 '>
+      <h3 class="mat-h2">{{statement}}</h3>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="selected">
+        <div fxLayout="column" class="pb-20" fxLayoutGap="4px">
+          <mat-radio-button *ngFor="let option of options" [value]="option" [disabled]="correct || wrong"
+                            (click)="enableButton()">{{option}}</mat-radio-button>
+        </div>
+      </mat-radio-group>
+      <button (click)="lock()" *ngIf="!(correct || wrong)" [disabled]="disabled" mat-raised-button color="primary"> OK
+      </button>
+      <mat-card *ngIf="correct" class=" w-28-p">
+        <p style="color: #28c287" class="bold font-size-20"> Right Answer </p>
+      </mat-card>
+      <mat-card *ngIf="wrong" class=" w-90-p">
+        <p style="color: #EC4A1F" class="bold font-size-20">
+          Wrong Answer
+        </p>
+        <p class="bold font-size-20">
+          Correct Answer is : <span class="bold font-size-20" style="color:#EC4A1F">{{correctAnswer}}</span>
+        </p>
+      </mat-card>
+      <button (click)="next()" *ngIf="wrong || correct"
+              [disabled]="disabled" class="mt-20"
+              mat-raised-button color="primary"> Proceed
+      </button>
 
+    </mat-card>
+  </div>
+  <mat-card class='w-25-p p-48'>
+    <p class="font-size-20">Difficulty Label</p>
+    <p fxLayout="row" fxLayoutAlign="center center" class="font-size-36"
+       style="color: #f26e07">{{difficulty}}</p>
   </mat-card>
 </div>

@@ -42,7 +42,7 @@ export class QuestionUploadComponent implements OnInit {
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
       let j=0;
-      for(let i=0;i<11;++i) {
+      for(let i=0;i<51;++i) {
           j=0;
           var statements1, a1,b1,c1,d1,discrimination1,difficulties1,psuedoguessing1,answer1;
           statements1 = this.data [i][j];
@@ -79,8 +79,7 @@ export class QuestionUploadComponent implements OnInit {
           }
 
       }
-      this.questionService.uploadQuestion(this.questions);
-      this.router.navigate([urlPaths.Question.list.url]);
+
 
       };
 
@@ -90,4 +89,8 @@ export class QuestionUploadComponent implements OnInit {
   }
 
 
+  questionUpload() {
+    this.questionService.uploadQuestion(this.questions);
+    this.questionService.close();
+  }
 }

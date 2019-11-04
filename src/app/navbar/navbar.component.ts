@@ -8,6 +8,8 @@ import {UserInformation} from '../config/interfaces/user.interface';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {User} from 'firebase';
+import {SecurityService} from '../shared/service/security-service/security.service';
+import {admissionHelperConst} from '../config/constants/defaultConstants';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +18,10 @@ import {User} from 'firebase';
 })
 export class NavbarComponent {
   user: Observable<UserInformation>;
+  isExpanded: boolean = false;
+  sidebar = [];
+  selectedRow: number;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -44,7 +50,8 @@ export class NavbarComponent {
               private  router: Router,
               private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              private authenticationService: AuthenticationService
+              private authenticationService: AuthenticationService,
+              private securityService:SecurityService
   ) {
     this.checkIfLogin();
     // this.user = this.afAuth.authState.pipe(
@@ -65,6 +72,42 @@ export class NavbarComponent {
     //     this.isLoggedIn = data;
     //   }
     // );
+
+
+  this.makeSideBar();
+
+  }
+  route(url) {
+    console.log(url);
+    this.router.navigate([ url ]).then(res=>{
+
+    });
+  }
+  selectRow(index) {
+    this.selectedRow = index;
+  }
+  makeSideBar() {
+    let admin;
+    this.securityService.isAdmin().subscribe((res)=>{
+        if(res){
+          this.sideBarPush('Admin');
+        }
+        else{
+          this.sideBarPush('Student');
+        }
+    })
+
+
+  }
+  private sideBarPush(position) {
+    admissionHelperConst.sideBar.forEach((item)=>{
+      item.role.forEach((role)=>{
+        if(role == position){
+          this.sidebar.push(item);
+        }
+
+      })
+    })
   }
   logIn() {
     return this.afAuth.authState.pipe(first());
@@ -80,6 +123,8 @@ export class NavbarComponent {
   routeToLogOut() {
     this.authenticationService.signOut();
     // this.authenticationService.isLoggedIn.next(false);
-    this.router.navigate(['']);
+    this.router.navigate(['auth/log-in']);
   }
+
+
 }

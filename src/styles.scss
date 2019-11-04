@@ -40,6 +40,11 @@ $custom-typography: mat-typography-config($font-family: 'DIN-Regular');
 .mat-form-field {
   width: 100%;
 }
+pre{
+  background-color: white;
+
+  border-color: white;
+}
 
 .mat-card {
   padding: 0px;

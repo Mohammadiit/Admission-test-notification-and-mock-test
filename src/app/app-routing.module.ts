@@ -4,6 +4,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {AuthGuard} from './shared/service/security-service/auth.guard';
 import {AdminGuard} from './shared/service/security-service/admin.guard';
 import {StudentGuard} from './shared/service/security-service/student.guard';
+import {BlankComponent} from './blank/blank.component';
 
 
 const routes: Routes = [
@@ -27,9 +28,6 @@ const routes: Routes = [
       }
     ]
   },
-
-
-
   {
     path: '',
     component: NavbarComponent,
@@ -42,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: NavbarComponent,
+    component: BlankComponent,
     children: [
       {
         path: 'auth',

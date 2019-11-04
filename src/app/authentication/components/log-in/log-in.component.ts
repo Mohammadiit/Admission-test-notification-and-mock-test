@@ -31,6 +31,8 @@ export class LogInComponent implements OnInit {
         this.authService.isLoggedIn.next(true);
         this.AdminCheck();
         this.StudentCheck();
+        this.router.navigate(['']);
+
       }
     });
   }

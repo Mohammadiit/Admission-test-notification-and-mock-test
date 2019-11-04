@@ -11,12 +11,16 @@ import { QuestionListComponent } from './question-list/question-list.component';
 import { ResultComponent } from './result/result.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import {QuestionService} from './services/question.service';
 @NgModule({
   declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent, StudentProfileComponent, AddAdminComponent],
   imports: [
     CommonModule,
     QuestionsRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [ QuestionService ],
+
+  entryComponents: [ QuestionUploadComponent ]
 })
 export class QuestionsModule { }

@@ -36,12 +36,14 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { FileDropZoneDirective } from './shared/directives/File-drop-zone/FileDropZone.directive';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { BlankComponent } from './blank/blank.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileDropZoneDirective,
     NavbarComponent,
+    BlankComponent,
   ],
   imports: [
     BrowserModule,
