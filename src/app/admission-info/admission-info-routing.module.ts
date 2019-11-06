@@ -5,6 +5,7 @@ import {AdmissionInfoComponent} from './components/admission-info/admission-info
 import {AdmissionInfoListComponent} from './components/admission-info-list/admission-info-list.component';
 import {AuthGuard} from '../shared/service/security-service/auth.guard';
 import {AdminGuard} from '../shared/service/security-service/admin.guard';
+import {PracticeComponent} from './components/practice/practice.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: AdmissionInfoListComponent
+  },
+  {
+    path: 'practice',
+    component: PracticeComponent
   }
 ];
 

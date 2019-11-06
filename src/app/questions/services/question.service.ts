@@ -3,6 +3,8 @@ import {question} from '../../config/interfaces/question.interface';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {QuestionUploadComponent} from '../question-upload/question-upload.component';
 import {MatDialog} from '@angular/material';
+import {map} from 'rxjs/operators';
+import {FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,9 @@ export class QuestionService {
   constructor(public af: AngularFirestore,public dialog: MatDialog) { }
 
   uploadQuestion(questions: question[]) {
-    return this.af.collection('question-paper').add({
-
+    let now = new Date();
+    return this.af.collection('question-paper').doc(now.toString()).set({
+      id: now.toString(),
       question1: questions[0],
       question2: questions[1],
       question3: questions[2],
@@ -71,10 +74,30 @@ export class QuestionService {
       question50: questions[49],
     });
   }
-
+  demo(){
+    let now = new Date();
+    console.log(now.toString());
+  }
+  getAllContest(){
+    return this.af.collection('contests').snapshotChanges();
+  }
   getAllQuestions() {
 
     return this.af.collection('question-paper').snapshotChanges();
+
+
+    // this.af.collection('businesses').snapshotChanges().pipe(
+    //   map(changes => {
+    //       return changes.map(change => {
+    //         const data = change.payload.doc.data();
+    //         const id = change.payload.doc.id;
+    //         return { id, ...data };
+    //       });
+    //     }
+    //   )).subscribe(changes => {
+    //   console.log(changes[0].id);
+    // });
+
   }
 
     openQuestionModal(width?: string){
@@ -87,4 +110,18 @@ export class QuestionService {
     close(){
       this.dialog.closeAll();
     }
+
+  uploadContest(contestForm: FormGroup) {
+    let now = new Date();
+    return this.af.collection('contests').doc(now.toString()).set({
+      id: now.toString(),
+      questionId: contestForm.value.question,
+      attended : [],
+      marks: [],
+      startTime: contestForm.value.startTime,
+      druation: contestForm.value.duration,
+      status: true
+    });
+  }
+
 }

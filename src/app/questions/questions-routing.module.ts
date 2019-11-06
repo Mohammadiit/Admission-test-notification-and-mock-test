@@ -4,6 +4,7 @@ import {QuestionUploadComponent} from './question-upload/question-upload.compone
 import {ExamComponent} from './exam/exam.component';
 import {QuestionListComponent} from './question-list/question-list.component';
 import {ResultComponent} from './result/result.component';
+import {SetContestComponent} from './set-contest/set-contest.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,9 @@ const routes: Routes = [
   }, {
     path: 'result',
     component: ResultComponent
+  }, {
+    path: 'set-contest',
+    component: SetContestComponent
   }
 ];
 

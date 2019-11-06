@@ -1,0 +1,38 @@
+<mat-card>
+  <form class="example-form" fxLayout="column"
+        fxLayoutAlign="center center" [formGroup]="contestForm"
+        >
+    <mat-form-field class="example-full-width">
+      <input matInput formControlName="startTime" placeholder="Start time">
+      <mat-error
+        *ngIf="contestForm.get('startTime').errors?.required &&
+                   contestForm.get('startTime').touched">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput formControlName="duration" placeholder="Duration">
+      <mat-error
+        *ngIf="contestForm.get('duration').errors?.required &&
+                   contestForm.get('duration').touched">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Favorite food</mat-label>
+      <mat-select formControlName="question">
+        <mat-option *ngFor="let questionPaper of questionPapers; let i = index"  [value]="questionPaper.payload.doc.id">
+          Question {{i+1}}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="contestForm.get('question').errors?.required &&
+                   contestForm.get('question').touched">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="!contestForm.valid" (click)='onSubmit()'>Sign Up</button>
+
+  </form>
+</mat-card>

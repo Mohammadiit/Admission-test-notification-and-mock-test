@@ -1,3 +1,4 @@
+<mat-card>
 <form class="example-form" fxLayout="column"
       fxLayoutAlign="center center" [formGroup]="recoverAccountData"
       (ngSubmit)="recoverAccount()">
@@ -6,3 +7,4 @@
   </mat-form-field>
   <button mat-raised-button color="primary" [disabled]="!recoverAccountData.valid">Recover account</button>
 </form>
+</mat-card>

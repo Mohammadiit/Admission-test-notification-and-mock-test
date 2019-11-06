@@ -18,6 +18,8 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { FileUploadTaskComponent } from './components/file-upload-task/file-upload-task.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { HttpClientModule }    from '@angular/common/http';
+import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN  } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [SnackbarComponent, FileUploaderComponent, FileUploadTaskComponent],
@@ -43,6 +45,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatNativeDateModule,
     AngularFileUploaderModule,
     MatTableModule,
+    HttpClientModule,
+    AngularFireFunctionsModule,
   ],
   exports: [
     MatPaginatorModule,
@@ -64,9 +68,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatDatepickerModule,
     MatNativeDateModule,
     AngularFileUploaderModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
+    AngularFireFunctionsModule,
   ],
   providers: [
-    SharedService]
+    SharedService,
+    // { provide: FUNCTIONS_ORIGIN, useValue: 'http://localhost:5005' }
+  ]
 })
 export class SharedModule { }
