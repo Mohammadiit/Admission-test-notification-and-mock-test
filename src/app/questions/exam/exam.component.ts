@@ -3,7 +3,10 @@ import {QuestionService} from '../services/question.service';
 import {NavigationStart, Router} from '@angular/router';
 import {question} from '../../config/interfaces/question.interface';
 import {urlPaths} from '../../config/constants/defaultConstants';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {QueryServiceService} from '../../shared/service/query-service.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-exam',
@@ -13,6 +16,7 @@ import {Subscription} from 'rxjs';
 export class ExamComponent implements OnInit {
 
   constructor(public questionService: QuestionService,
+              private queryService: QueryServiceService,
               private router: Router) { }
   questionPaper;
   questionAttempt = [];
@@ -28,28 +32,85 @@ export class ExamComponent implements OnInit {
   W=0;
   D=0;
   R=0;
+  type;
+  interval;
+  contest;
+  isContest = true;
+  duration;
+  time; contestId;
+  userName;
+  estimate;
   subscription: Subscription;
   correctAnswer = null; correct = false; wrong = false;
+
   ngOnInit() {
-    this.subscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        let browserRefresh = !this.router.navigated;
-        console.log("kkk   " + browserRefresh);
-      }
-    });
+    // this.router.navigate(['**']);
+
+
+    // this.questionService.update();
+    // this.getUserName().subscribe(res=>{
+    //   console.log(res);
+    // });
+
+
+
+    let url = this.router.url;
+    console.log(url + "      "+ url.length +'     '+url.indexOf('contest'));
+    this.type = url.substring(16,23);
+    let questionId = url.substring(43,63);
+    this.contestId = url.substring(16,36);
+    console.log(url.substring(16,36)+ '   '+url.substring(43,63));
+
+    if (url.indexOf('contest')) {
+      this.isContest = true;
+      this.queryService.getSingleData('contests',this.contestId).subscribe(res =>{
+        this.contest = res;
+        this.calculateDuration();
+        console.log(res);
+      });
+      this.queryService.getSingleData('question-paper', questionId).subscribe(res =>{
+        this.questionPaper = res;
+        this.loadProjects();
+        this.questionShow();
+        console.log(this.questionPaper.question1.statements);
+      });
+
+      this.timeCheck();
+
+    }
+
+
+
+
     if (this.questionService.questionPaper != undefined) {
       this.questionPaper = this.questionService.questionPaper;
       this.loadProjects();
       this.questionShow();
       // console.log( this.questions[this.iterator].statements);
     }
-    else {
-
-    }
-
-
+    else {}
   }
 
+  private calculateDuration() {
+    var contestTimeWithDuration = moment(this.contest.startTime).add(this.contest.duration, 'm').toDate();
+    var diff = contestTimeWithDuration - new Date();
+    this.duration = Math.floor((diff/1000));
+    console.log("Timmmmmmmmmmmmmmmmmmmmmmm       "+ this.duration);
+    if(this.duration <= 0) {
+      this.router.navigate(['**']);
+    }
+  }
+
+  private timeCheck() {
+    this.interval = setInterval(() => {
+      if(this.duration == 0) this.finish();
+      this.time = moment().startOf('day')
+        .seconds(this.duration)
+        .format('H:mm:ss');
+      // console.log('time          '+this.time);
+      --this.duration;
+    },1000);
+  }
 
   private questionShow() {
     ++this.L;
@@ -96,11 +157,58 @@ export class ExamComponent implements OnInit {
     }
   }
   finish(){
-    this.questionService.D = this.D;
-    this.questionService.R = this.R;
-    this.questionService.W = this.W;
-    this.questionService.L = this.L;
-    this.router.navigate([urlPaths.Question.result.url]);
+    if(this.isContest){
+      this.getUserName().subscribe(res=>{
+        console.log(res);
+        this.estimateMark();
+        let payload = res.metaData.fullName + ':' +this.estimate;
+        this.questionService.upadateArrayField('contests',
+          this.contestId,'marks',payload);
+        let time =0;
+        this.interval = setInterval(() => {
+            ++ time;
+            if(time >=2) {
+              clearInterval(this.interval);
+            }
+        },2000);
+        this.router.navigate(['/questions/contest-result/',this.contestId]);
+        console.log(this.estimate);
+      });
+    }
+    else{
+      this.questionService.D = this.D;
+      this.questionService.R = this.R;
+      this.questionService.W = this.W;
+      this.questionService.L = this.L;
+      this.router.navigate([urlPaths.Question.result.url]);
+    }
+  }
+  private estimateMark() {
+    let e;
+    if(this.R ==0 || this.W ==0){
+      if(this.R ==0)  e = (this.D/this.L) + (Math.log((this.R+.5)/(this.W-0.5)) / Math.log(2.718));
+      if(this.W ==0)  e = (this.D/this.L) + (Math.log((this.R-.5)/(this.W+0.5)) / Math.log(2.718));
+    }
+    else{
+      e = (this.D/this.L) + (Math.log(this.R/this.W) / Math.log(2.718));
+    }
+    e = Number((e).toFixed(2));
+    this.estimate = (e+1.89)*10;
+  }
+  private getUserName(): Observable<any>  {
+  let user;
+    return new Observable((observer) => {
+      this.queryService.getLoggedInUserID().subscribe(res =>{
+        this.queryService.getSingleData('users',res).subscribe((res2 =>{
+          user = res2;
+          console.log(user.metaData.fullName);
+          observer.next(res2);
+        }))
+
+      })
+    })
+
+
 
   }
   private easier() {
@@ -133,63 +241,63 @@ export class ExamComponent implements OnInit {
 
     }
     let i=0,j=0;
-    this.questions[j][i] = this.questionPaper.payload.doc.data().question1;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question2;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question3;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question4;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question5;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question6;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question7;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question8;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question9;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question10;
+    this.questions[j][i] = this.questionPaper.question1;
+    this.questions[j][++i] = this.questionPaper.question2;
+    this.questions[j][++i] = this.questionPaper.question3;
+    this.questions[j][++i] = this.questionPaper.question4;
+    this.questions[j][++i] = this.questionPaper.question5;
+    this.questions[j][++i] = this.questionPaper.question6;
+    this.questions[j][++i] = this.questionPaper.question7;
+    this.questions[j][++i] = this.questionPaper.question8;
+    this.questions[j][++i] = this.questionPaper.question9;
+    this.questions[j][++i] = this.questionPaper.question10;
     i =-1; ++j;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question11;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question12;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question13;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question14;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question15;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question16;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question17;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question18;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question19;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question20;
-    i =-1; ++j;
-
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question21;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question22;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question23;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question24;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question25;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question26;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question27;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question28;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question29;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question30;
+    this.questions[j][++i] = this.questionPaper.question11;
+    this.questions[j][++i] = this.questionPaper.question12;
+    this.questions[j][++i] = this.questionPaper.question13;
+    this.questions[j][++i] = this.questionPaper.question14;
+    this.questions[j][++i] = this.questionPaper.question15;
+    this.questions[j][++i] = this.questionPaper.question16;
+    this.questions[j][++i] = this.questionPaper.question17;
+    this.questions[j][++i] = this.questionPaper.question18;
+    this.questions[j][++i] = this.questionPaper.question19;
+    this.questions[j][++i] = this.questionPaper.question20;
     i =-1; ++j;
 
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question31;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question32;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question33;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question34;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question35;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question36;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question37;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question38;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question39;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question40;
+    this.questions[j][++i] = this.questionPaper.question21;
+    this.questions[j][++i] = this.questionPaper.question22;
+    this.questions[j][++i] = this.questionPaper.question23;
+    this.questions[j][++i] = this.questionPaper.question24;
+    this.questions[j][++i] = this.questionPaper.question25;
+    this.questions[j][++i] = this.questionPaper.question26;
+    this.questions[j][++i] = this.questionPaper.question27;
+    this.questions[j][++i] = this.questionPaper.question28;
+    this.questions[j][++i] = this.questionPaper.question29;
+    this.questions[j][++i] = this.questionPaper.question30;
     i =-1; ++j;
 
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question41;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question42;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question43;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question44;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question45;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question46;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question47;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question48;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question49;
-    this.questions[j][++i] = this.questionPaper.payload.doc.data().question50;
+    this.questions[j][++i] = this.questionPaper.question31;
+    this.questions[j][++i] = this.questionPaper.question32;
+    this.questions[j][++i] = this.questionPaper.question33;
+    this.questions[j][++i] = this.questionPaper.question34;
+    this.questions[j][++i] = this.questionPaper.question35;
+    this.questions[j][++i] = this.questionPaper.question36;
+    this.questions[j][++i] = this.questionPaper.question37;
+    this.questions[j][++i] = this.questionPaper.question38;
+    this.questions[j][++i] = this.questionPaper.question39;
+    this.questions[j][++i] = this.questionPaper.question40;
+    i =-1; ++j;
+
+    this.questions[j][++i] = this.questionPaper.question41;
+    this.questions[j][++i] = this.questionPaper.question42;
+    this.questions[j][++i] = this.questionPaper.question43;
+    this.questions[j][++i] = this.questionPaper.question44;
+    this.questions[j][++i] = this.questionPaper.question45;
+    this.questions[j][++i] = this.questionPaper.question46;
+    this.questions[j][++i] = this.questionPaper.question47;
+    this.questions[j][++i] = this.questionPaper.question48;
+    this.questions[j][++i] = this.questionPaper.question49;
+    this.questions[j][++i] = this.questionPaper.question50;
     console.log(this.questions);
 
 
@@ -209,6 +317,4 @@ export class ExamComponent implements OnInit {
     }
     else  this.wrong = true;
   }
-
-
 }

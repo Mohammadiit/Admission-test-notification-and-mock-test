@@ -5,6 +5,8 @@ import {ExamComponent} from './exam/exam.component';
 import {QuestionListComponent} from './question-list/question-list.component';
 import {ResultComponent} from './result/result.component';
 import {SetContestComponent} from './set-contest/set-contest.component';
+import {ContestListComponent} from './contest-list/contest-list.component';
+import {ContestResultComponent} from './contest-result/contest-result.component';
 
 
 const routes: Routes = [
@@ -12,7 +14,7 @@ const routes: Routes = [
     path: 'upload',
     component: QuestionUploadComponent
   }, {
-    path: 'exam',
+    path: 'exam/:id',
     component: ExamComponent
   }, {
     path: 'list',
@@ -23,6 +25,12 @@ const routes: Routes = [
   }, {
     path: 'set-contest',
     component: SetContestComponent
+  }, {
+    path: 'contest-list',
+    component: ContestListComponent
+  }, {
+    path: 'contest-result/:id',
+    component: ContestResultComponent
   }
 ];
 

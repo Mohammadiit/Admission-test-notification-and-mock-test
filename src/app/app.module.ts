@@ -37,6 +37,7 @@ import { FileDropZoneDirective } from './shared/directives/File-drop-zone/FileDr
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BlankComponent } from './blank/blank.component';
+import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { BlankComponent } from './blank/blank.component';
     FileDropZoneDirective,
     NavbarComponent,
     BlankComponent,
+    PageNotFoundComponentComponent,
   ],
   imports: [
     BrowserModule,

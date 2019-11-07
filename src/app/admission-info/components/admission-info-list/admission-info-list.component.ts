@@ -21,6 +21,11 @@ export class AdmissionInfoListComponent implements OnInit {
   items;
   kk;
   ngOnInit() {
+    var obj = {};
+    for(let i =0;i<5;++i){
+      obj[i] = 'asd'
+    }
+    console.log(obj);
     this.admissionInfoService.getAllAdmissionInfo()
       .subscribe(result => {
         this.items = result;
@@ -31,4 +36,5 @@ export class AdmissionInfoListComponent implements OnInit {
     this.admissionInfoService.item = item;
     this.router.navigate([urlPaths.AdmissionInfo.AdmissionInfo.url]);
   }
+
 }

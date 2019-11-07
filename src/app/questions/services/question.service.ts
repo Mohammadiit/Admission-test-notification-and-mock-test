@@ -5,6 +5,7 @@ import {QuestionUploadComponent} from '../question-upload/question-upload.compon
 import {MatDialog} from '@angular/material';
 import {map} from 'rxjs/operators';
 import {FormGroup} from '@angular/forms';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,16 @@ export class QuestionService {
   R=0;
   constructor(public af: AngularFirestore,public dialog: MatDialog) { }
 
+  upadateArrayField(collectionName,id,fieldName,fieldValue){
+    this.af.collection(collectionName).doc(id).update({
+      marks: firestore.FieldValue.arrayUnion(fieldValue)
+    });
+  }
+
   uploadQuestion(questions: question[]) {
     let now = new Date();
-    return this.af.collection('question-paper').doc(now.toString()).set({
-      id: now.toString(),
+    return this.af.collection('question-paper').add({
+
       question1: questions[0],
       question2: questions[1],
       question3: questions[2],
@@ -113,13 +120,13 @@ export class QuestionService {
 
   uploadContest(contestForm: FormGroup) {
     let now = new Date();
-    return this.af.collection('contests').doc(now.toString()).set({
-      id: now.toString(),
+    return this.af.collection('contests').add({
+
       questionId: contestForm.value.question,
       attended : [],
       marks: [],
       startTime: contestForm.value.startTime,
-      druation: contestForm.value.duration,
+      duration: contestForm.value.duration,
       status: true
     });
   }

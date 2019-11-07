@@ -3,7 +3,7 @@
         fxLayoutAlign="center center" [formGroup]="contestForm"
         >
     <mat-form-field class="example-full-width">
-      <input matInput formControlName="startTime" placeholder="Start time">
+      <input matInput formControlName="startTime" type="datetime-local" placeholder="YYYY/MM/DD HH:MM:SS">
       <mat-error
         *ngIf="contestForm.get('startTime').errors?.required &&
                    contestForm.get('startTime').touched">
@@ -11,7 +11,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput formControlName="duration" placeholder="Duration">
+      <input matInput formControlName="duration" type="number" placeholder="Duration (Minute)">
       <mat-error
         *ngIf="contestForm.get('duration').errors?.required &&
                    contestForm.get('duration').touched">

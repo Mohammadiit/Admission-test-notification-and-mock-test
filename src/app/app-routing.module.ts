@@ -5,6 +5,7 @@ import {AuthGuard} from './shared/service/security-service/auth.guard';
 import {AdminGuard} from './shared/service/security-service/admin.guard';
 import {StudentGuard} from './shared/service/security-service/student.guard';
 import {BlankComponent} from './blank/blank.component';
+import {PageNotFoundComponentComponent} from './page-not-found-component/page-not-found-component.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
         loadChildren: () => import('./authentication/authentication.module').then(mod => mod.AuthenticationModule)
       }
     ]
-  }
+  },
+  { path: '**', component: PageNotFoundComponentComponent }
 ];
 
 @NgModule({

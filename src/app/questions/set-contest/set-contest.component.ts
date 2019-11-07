@@ -59,7 +59,9 @@ export class SetContestComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.contestForm.value);
+    var d = new Date(this.contestForm.value.startTime);
+    console.log(d);
+    // this.contestForm.value.startTime = d;
     this.questionService.uploadContest(this.contestForm);
   }
 }
