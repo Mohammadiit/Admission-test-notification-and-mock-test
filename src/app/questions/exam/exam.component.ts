@@ -72,9 +72,10 @@ export class ExamComponent implements OnInit {
       });
       this.queryService.getSingleData('question-paper', questionId).subscribe(res =>{
         this.questionPaper = res;
+        console.log(res);
         this.loadProjects();
         this.questionShow();
-        console.log(this.questionPaper.question1.statements);
+        // console.log(this.questionPaper.question1.statements);
       });
 
       this.timeCheck();
@@ -116,6 +117,10 @@ export class ExamComponent implements OnInit {
 
   private questionShow() {
     ++this.L;
+    this.iterator;
+    this.column;
+    this.column;
+
     this.D+= Number(this.questions[this.column][this.iterator].difficulties);
     this.disabled = true;
     this.correct = false;
@@ -270,66 +275,77 @@ export class ExamComponent implements OnInit {
       this.questions[key] = [];
 
     }
-    let i=0,j=0;
-    this.questions[j][i] = this.questionPaper.question1;
-    this.questions[j][++i] = this.questionPaper.question2;
-    this.questions[j][++i] = this.questionPaper.question3;
-    this.questions[j][++i] = this.questionPaper.question4;
-    this.questions[j][++i] = this.questionPaper.question5;
-    this.questions[j][++i] = this.questionPaper.question6;
-    this.questions[j][++i] = this.questionPaper.question7;
-    this.questions[j][++i] = this.questionPaper.question8;
-    this.questions[j][++i] = this.questionPaper.question9;
-    this.questions[j][++i] = this.questionPaper.question10;
-    i =-1; ++j;
-    this.questions[j][++i] = this.questionPaper.question11;
-    this.questions[j][++i] = this.questionPaper.question12;
-    this.questions[j][++i] = this.questionPaper.question13;
-    this.questions[j][++i] = this.questionPaper.question14;
-    this.questions[j][++i] = this.questionPaper.question15;
-    this.questions[j][++i] = this.questionPaper.question16;
-    this.questions[j][++i] = this.questionPaper.question17;
-    this.questions[j][++i] = this.questionPaper.question18;
-    this.questions[j][++i] = this.questionPaper.question19;
-    this.questions[j][++i] = this.questionPaper.question20;
-    i =-1; ++j;
+    let i=0,j=0,k=0;
 
-    this.questions[j][++i] = this.questionPaper.question21;
-    this.questions[j][++i] = this.questionPaper.question22;
-    this.questions[j][++i] = this.questionPaper.question23;
-    this.questions[j][++i] = this.questionPaper.question24;
-    this.questions[j][++i] = this.questionPaper.question25;
-    this.questions[j][++i] = this.questionPaper.question26;
-    this.questions[j][++i] = this.questionPaper.question27;
-    this.questions[j][++i] = this.questionPaper.question28;
-    this.questions[j][++i] = this.questionPaper.question29;
-    this.questions[j][++i] = this.questionPaper.question30;
-    i =-1; ++j;
+    for( i=0;i<5;++i){
+      for (j=0;j<10;++j){
+        this.questionPaper [k];
+        console.log( this.questionPaper.questionArray [k]);
+        this.questions [i][j] = this.questionPaper.questionArray [k];
+        ++k;
+      }
+    }
 
-    this.questions[j][++i] = this.questionPaper.question31;
-    this.questions[j][++i] = this.questionPaper.question32;
-    this.questions[j][++i] = this.questionPaper.question33;
-    this.questions[j][++i] = this.questionPaper.question34;
-    this.questions[j][++i] = this.questionPaper.question35;
-    this.questions[j][++i] = this.questionPaper.question36;
-    this.questions[j][++i] = this.questionPaper.question37;
-    this.questions[j][++i] = this.questionPaper.question38;
-    this.questions[j][++i] = this.questionPaper.question39;
-    this.questions[j][++i] = this.questionPaper.question40;
-    i =-1; ++j;
+    // this.questions[j][i] = this.questionPaper.question1;
+    // this.questions[j][++i] = this.questionPaper.question2;
+    // this.questions[j][++i] = this.questionPaper.question3;
+    // this.questions[j][++i] = this.questionPaper.question4;
+    // this.questions[j][++i] = this.questionPaper.question5;
+    // this.questions[j][++i] = this.questionPaper.question6;
+    // this.questions[j][++i] = this.questionPaper.question7;
+    // this.questions[j][++i] = this.questionPaper.question8;
+    // this.questions[j][++i] = this.questionPaper.question9;
+    // this.questions[j][++i] = this.questionPaper.question10;
+    // i =-1; ++j;
+    // this.questions[j][++i] = this.questionPaper.question11;
+    // this.questions[j][++i] = this.questionPaper.question12;
+    // this.questions[j][++i] = this.questionPaper.question13;
+    // this.questions[j][++i] = this.questionPaper.question14;
+    // this.questions[j][++i] = this.questionPaper.question15;
+    // this.questions[j][++i] = this.questionPaper.question16;
+    // this.questions[j][++i] = this.questionPaper.question17;
+    // this.questions[j][++i] = this.questionPaper.question18;
+    // this.questions[j][++i] = this.questionPaper.question19;
+    // this.questions[j][++i] = this.questionPaper.question20;
+    // i =-1; ++j;
+    //
+    // this.questions[j][++i] = this.questionPaper.question21;
+    // this.questions[j][++i] = this.questionPaper.question22;
+    // this.questions[j][++i] = this.questionPaper.question23;
+    // this.questions[j][++i] = this.questionPaper.question24;
+    // this.questions[j][++i] = this.questionPaper.question25;
+    // this.questions[j][++i] = this.questionPaper.question26;
+    // this.questions[j][++i] = this.questionPaper.question27;
+    // this.questions[j][++i] = this.questionPaper.question28;
+    // this.questions[j][++i] = this.questionPaper.question29;
+    // this.questions[j][++i] = this.questionPaper.question30;
+    // i =-1; ++j;
+    //
+    // this.questions[j][++i] = this.questionPaper.question31;
+    // this.questions[j][++i] = this.questionPaper.question32;
+    // this.questions[j][++i] = this.questionPaper.question33;
+    // this.questions[j][++i] = this.questionPaper.question34;
+    // this.questions[j][++i] = this.questionPaper.question35;
+    // this.questions[j][++i] = this.questionPaper.question36;
+    // this.questions[j][++i] = this.questionPaper.question37;
+    // this.questions[j][++i] = this.questionPaper.question38;
+    // this.questions[j][++i] = this.questionPaper.question39;
+    // this.questions[j][++i] = this.questionPaper.question40;
+    // i =-1; ++j;
+    //
+    // this.questions[j][++i] = this.questionPaper.question41;
+    // this.questions[j][++i] = this.questionPaper.question42;
+    // this.questions[j][++i] = this.questionPaper.question43;
+    // this.questions[j][++i] = this.questionPaper.question44;
+    // this.questions[j][++i] = this.questionPaper.question45;
+    // this.questions[j][++i] = this.questionPaper.question46;
+    // this.questions[j][++i] = this.questionPaper.question47;
+    // this.questions[j][++i] = this.questionPaper.question48;
+    // this.questions[j][++i] = this.questionPaper.question49;
+    // this.questions[j][++i] = this.questionPaper.question50;
 
-    this.questions[j][++i] = this.questionPaper.question41;
-    this.questions[j][++i] = this.questionPaper.question42;
-    this.questions[j][++i] = this.questionPaper.question43;
-    this.questions[j][++i] = this.questionPaper.question44;
-    this.questions[j][++i] = this.questionPaper.question45;
-    this.questions[j][++i] = this.questionPaper.question46;
-    this.questions[j][++i] = this.questionPaper.question47;
-    this.questions[j][++i] = this.questionPaper.question48;
-    this.questions[j][++i] = this.questionPaper.question49;
-    this.questions[j][++i] = this.questionPaper.question50;
     console.log(this.questions);
-
+    debugger;
 
   }
 
