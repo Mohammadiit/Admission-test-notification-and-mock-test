@@ -7,6 +7,7 @@ import {ResultComponent} from './result/result.component';
 import {SetContestComponent} from './set-contest/set-contest.component';
 import {ContestListComponent} from './contest-list/contest-list.component';
 import {ContestResultComponent} from './contest-result/contest-result.component';
+import {ContestResultListComponent} from './contest-result-list/contest-result-list.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,9 @@ const routes: Routes = [
   }, {
     path: 'contest-result/:id',
     component: ContestResultComponent
+  }, {
+    path: 'contest-result-list',
+    component: ContestResultListComponent
   }
 ];
 

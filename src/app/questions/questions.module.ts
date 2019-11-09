@@ -15,8 +15,9 @@ import {QuestionService} from './services/question.service';
 import { SetContestComponent } from './set-contest/set-contest.component';
 import { ContestListComponent } from './contest-list/contest-list.component';
 import { ContestResultComponent } from './contest-result/contest-result.component';
+import { ContestResultListComponent } from './contest-result-list/contest-result-list.component';
 @NgModule({
-  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent, StudentProfileComponent, AddAdminComponent, SetContestComponent, ContestListComponent, ContestResultComponent],
+  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent, StudentProfileComponent, AddAdminComponent, SetContestComponent, ContestListComponent, ContestResultComponent, ContestResultListComponent],
   imports: [
     CommonModule,
     QuestionsRoutingModule,

@@ -63,5 +63,6 @@ export class SetContestComponent implements OnInit {
     console.log(d);
     // this.contestForm.value.startTime = d;
     this.questionService.uploadContest(this.contestForm);
+    this.router.navigate(['/questions/contest-list/'])
   }
 }

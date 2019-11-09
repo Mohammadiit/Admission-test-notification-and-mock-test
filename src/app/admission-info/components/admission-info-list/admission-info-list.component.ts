@@ -21,6 +21,20 @@ export class AdmissionInfoListComponent implements OnInit {
   items;
   kk;
   ngOnInit() {
+    let i=0;
+    (function repeat(){
+      if (i++ > 5) {
+       console.log('hoise');
+       return;
+      }
+      setTimeout(function(){
+        // document.write("Iteration" + i + "<br />");
+        console.log("kkkkkk    ");
+        repeat();
+      }, 5000);
+    })();
+
+
     var obj = {};
     for(let i =0;i<5;++i){
       obj[i] = 'asd'

@@ -94,7 +94,7 @@ export class ContestListComponent implements OnInit {
         console.log(contest);
         let previousContest = contest.startTime;
         ///     if contest time with duration over      ///
-        var contestTimeWithDuration = moment(contest.startTime).add(contest.duration, 'm').toDate();
+        let contestTimeWithDuration = moment(contest.startTime).add(contest.duration, 'm').toDate();
         var diff = contestTimeWithDuration - new Date();
         let status;
 

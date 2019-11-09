@@ -40,13 +40,15 @@ export class ExamComponent implements OnInit {
   time; contestId;
   userName;
   estimate;
+  interval2;
   subscription: Subscription;
   correctAnswer = null; correct = false; wrong = false;
+  attendedDifficulties = [];
 
   ngOnInit() {
     // this.router.navigate(['**']);
 
-
+    // this.finish();
     // this.questionService.update();
     // this.getUserName().subscribe(res=>{
     //   console.log(res);
@@ -131,6 +133,9 @@ export class ExamComponent implements OnInit {
     this.questionAttempt.push( this.statement);
     this.correctAnswer = this.questions[this.column][this.iterator].answer;
     this.difficulty = this.questions[this.column][this.iterator].difficulties;
+    this.attendedDifficulties.push(this.difficulty);
+
+
   }
 
   next() {
@@ -140,12 +145,17 @@ export class ExamComponent implements OnInit {
       console.log( "kkkkkkk  " + this.selected + "      " + answer);
       this.iterator = -1;
       if ( answer == this.selected) {
-        if (this.column < 4 ) ++this.column;
           ++this.R;
-         this.proceedOn();
+          this.calculateEstimate();
+        if (this.column < 4 ) ++this.column;
+
+        this.proceedOn();
       }
       else {
         ++this.W;
+        this.calculateEstimate();
+
+
         if (this.column > 0 ) --this.column;
 
         this.proceedOn();
@@ -156,6 +166,28 @@ export class ExamComponent implements OnInit {
       this.finish();
     }
   }
+
+  calculateEstimate(){
+      let sum = this.sumPm();
+      console.log ("summmmmmmmmmmmmmmmmmmm          "+sum);
+      this.column = Math.round(this.column +((this.R - sum[0])/sum[1]));
+      this.column;
+  }
+  sumPm(){
+      let pm1 = 0;
+      let pm2 = 0;
+      let i=0;
+      for(i =0 ;i<this.attendedDifficulties.length;++i){
+        let x = Math.exp((this.column+1)-this.attendedDifficulties[i]);
+        let newPm = (x/(1+x));
+        pm1 += newPm;
+        pm2 += (newPm * (1-newPm));
+      }
+      let res = [];
+      res.push(pm1);
+      res.push(pm2);
+      return res;
+  }
   finish(){
     if(this.isContest){
       this.getUserName().subscribe(res=>{
@@ -164,14 +196,11 @@ export class ExamComponent implements OnInit {
         let payload = res.metaData.fullName + ':' +this.estimate;
         this.questionService.upadateArrayField('contests',
           this.contestId,'marks',payload);
-        let time =0;
-        this.interval = setInterval(() => {
-            ++ time;
-            if(time >=2) {
-              clearInterval(this.interval);
-            }
-        },2000);
-        this.router.navigate(['/questions/contest-result/',this.contestId]);
+        let time = 0;
+
+
+
+        this.router.navigate(['home']);
         console.log(this.estimate);
       });
     }
@@ -183,6 +212,7 @@ export class ExamComponent implements OnInit {
       this.router.navigate([urlPaths.Question.result.url]);
     }
   }
+
   private estimateMark() {
     let e;
     if(this.R ==0 || this.W ==0){
