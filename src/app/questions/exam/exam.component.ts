@@ -24,7 +24,7 @@ export class ExamComponent implements OnInit {
   public questions: question[][] = [ [],[] ] ;
   options = [];
   iterator = 0;
-  column = 2;
+  column = 19;
   selected = null;
   disabled = true;
   difficulty ;
@@ -53,6 +53,8 @@ export class ExamComponent implements OnInit {
     // this.getUserName().subscribe(res=>{
     //   console.log(res);
     // });
+
+
 
 
 
@@ -121,6 +123,8 @@ export class ExamComponent implements OnInit {
     this.column;
     this.column;
 
+    console.log(this.column  +'  column  '+this.iterator);
+
     this.D+= Number(this.questions[this.column][this.iterator].difficulties);
     this.disabled = true;
     this.correct = false;
@@ -145,14 +149,14 @@ export class ExamComponent implements OnInit {
 
   next() {
 
-    if(this.iterator <10){
+    if(this.iterator <10  ){
       let answer =  this.questions[this.column][this.iterator].answer;
       console.log( "kkkkkkk  " + this.selected + "      " + answer);
       this.iterator = -1;
       if ( answer == this.selected) {
           ++this.R;
           this.calculateEstimate();
-        if (this.column < 4 ) ++this.column;
+        // if (this.column < 4 ) ++this.column;
 
         this.proceedOn();
       }
@@ -161,7 +165,7 @@ export class ExamComponent implements OnInit {
         this.calculateEstimate();
 
 
-        if (this.column > 0 ) --this.column;
+        // if (this.column > 0 ) --this.column;
 
         this.proceedOn();
         // console.log(" Correnct  "+ this.answers.get(answer));
@@ -176,7 +180,10 @@ export class ExamComponent implements OnInit {
       let sum = this.sumPm();
       console.log ("summmmmmmmmmmmmmmmmmmm          "+sum);
       this.column = Math.round(this.column +((this.R - sum[0])/sum[1]));
-      this.column;
+      if(this.column >39){
+        this.column =39;
+      }
+      if(this.column<0) this.column = 0;
   }
   sumPm(){
       let pm1 = 0;
@@ -271,16 +278,18 @@ export class ExamComponent implements OnInit {
     }
   }
   private loadProjects() {
-    for(var key: number = 0; key < 5; key++) {
+    for(var key: number = 0; key < 80; key++) {
       this.questions[key] = [];
 
     }
     let i=0,j=0,k=0;
 
-    for( i=0;i<5;++i){
+    for( i=0;i<40;++i){
       for (j=0;j<10;++j){
-        this.questionPaper [k];
-        console.log( this.questionPaper.questionArray [k]);
+
+
+
+
         this.questions [i][j] = this.questionPaper.questionArray [k];
         ++k;
       }
@@ -345,7 +354,6 @@ export class ExamComponent implements OnInit {
     // this.questions[j][++i] = this.questionPaper.question50;
 
     console.log(this.questions);
-    debugger;
 
   }
 
