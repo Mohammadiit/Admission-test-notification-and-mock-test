@@ -4,6 +4,7 @@ import {question} from '../../config/interfaces/question.interface';
 import {QuestionService} from '../services/question.service';
 import {urlPaths} from '../../config/constants/defaultConstants';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -16,16 +17,24 @@ export class QuestionUploadComponent implements OnInit {
   public  data: string [][];
   public questions: question[] = [];
   public questionPapers;
+  private fileUploadForm: FormGroup;
   constructor(public questionService: QuestionService,
+              private fb: FormBuilder,
               private router: Router) {
 
   }
 
   ngOnInit() {
-
+    this.makeFileUploadForm();
 
   }
-
+  makeFileUploadForm() {
+    this.fileUploadForm = this.fb.group({
+      questionSize: [ '', [ Validators.required] ],
+      numberOfQuestion: [ '', [ Validators.required ] ],
+      fileInfo: [ '', [ Validators.required,  ] ]
+    });
+  }
   incomingfile($event: Event) {
     // this.file = event.target.files[0];
 
@@ -92,5 +101,14 @@ export class QuestionUploadComponent implements OnInit {
   questionUpload() {
     this.questionService.uploadQuestion(this.questions);
     this.questionService.close();
+  }
+
+  onSubmit() {
+
+  }
+
+  onFileSelected(evt: any) {
+    console.log(evt +"        "+"eeeeeeeeevvvvvvtttttttt");
+    debugger;
   }
 }

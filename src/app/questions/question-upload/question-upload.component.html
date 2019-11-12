@@ -1,8 +1,51 @@
-<input type="file" style="display: inline-block;"
-       (change)="onFileChange($event)" placeholder="Upload file" accept=".xlsx">
-<div fxLayout=row fxLayoutAlign="end column">
-  <button (click)='questionUpload()' mat-button>Upload</button>
-</div>
+<mat-card>
+  <form class="example-form" fxLayout="column"
+        fxLayoutAlign="center center" [formGroup]="fileUploadForm"
+        >
+    <mat-form-field class="example-full-width">
+      <input matInput
+             formControlName="questionSize" type="number" placeholder="Question Size">
+    </mat-form-field>
+    <mat-form-field  class="example-full-width">
+      <input matInput
+             formControlName="numberOfQuestion" type="number"
+             placeholder="Number of questions each difficulty">
+    </mat-form-field>
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+
+    <input type = 'hidden'
+           (change)="onFileSelected($event)" #fileInput type="file" id="file" accept=".xlsx">
+      <input mat-button mat-raised-button
+        style="display: inline-block;" formControlName="fileInfo" type="file"
+             (change)="onFileChange($event)" placeholder="Upload file" accept=".xlsx">
+    <label for="file-upload" class="custom-file-upload">
+      Custom Upload
+    </label>
+    <input id="file-upload" type="file"/>
+
+
+    <button mat-raised-button color="primary" [disabled]="!fileUploadForm.valid" (click)='onSubmit()'>Upload</button>
+  </form>
+</mat-card>
+
+<form action="#type your action here" method="POST" enctype="multipart/form-data" name="myForm">
+  <div id="yourBtn" onclick="getFile()">click to upload a file</div>
+  <!-- this is your file input tag, so i hide it!-->
+  <!-- i used the onchange event to fire the form submission-->
+  <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload" onchange="sub(this)" /></div>
+  <!-- here you can have file submit button or you can write a simple script to upload the file automatically-->
+  <!-- <input type="submit" value='submit' > -->
+</form>
+<!--<input type="file" style="display: inline-block;"-->
+<!--       (change)="onFileChange($event)" placeholder="Upload file" accept=".xlsx">-->
+<!--<div fxLayout=row fxLayoutAlign="end column">-->
+<!--  <button (click)='questionUpload()' mat-button>Upload</button>-->
+<!--</div>-->
+
+
+
+
+
 
 <!--<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 <!--<div class="file-upload">-->

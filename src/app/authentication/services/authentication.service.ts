@@ -12,6 +12,7 @@ import {CustomerUserInformation, UserInformation} from '../../config/interfaces/
 export class AuthenticationService {
   public isLoggedIn: BehaviorSubject<boolean> ;
 
+
   public logInForm = this.fb.group({
     email: [''],
     password: ['']

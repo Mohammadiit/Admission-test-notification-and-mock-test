@@ -51,17 +51,17 @@ export class QuestionListComponent implements OnInit {
 
   ngOnInit() {
 
-    window.addEventListener("beforeunload", function (e) {
-      var confirmationMessage = "\o/";
-      console.log("cond");
-      e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
-      return confirmationMessage;              // Gecko, WebKit, Chrome <34
-    });
+    // window.addEventListener("beforeunload", function (e) {
+    //   var confirmationMessage = "\o/";
+    //   console.log("cond");
+    //   e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+    //   return confirmationMessage;              // Gecko, WebKit, Chrome <34
+    // });
 
     console.log('    j;je;rw   ' + this.router.url);
     this.questionService.getAllQuestions() .subscribe(result => {
       this.questionPapers = result;
-      console.log(this.questionPapers);
+      console.log(this.questionPapers[0].payload.doc.id);
       this.loadData();
       this.dataSource.paginator = this.paginator;
     });
@@ -70,18 +70,21 @@ export class QuestionListComponent implements OnInit {
   }
 
   private loadData() {
-    for( let i=0;i< this.questionPapers.length+30; ++i) {
+
+    for( let i=0;i< this.questionPapers.length; ++i) {
+
       this.data[i]={
         name : "Question " + (i+1),
       NumberOfQuestions : 50,
-        link : (i)
+        link : this.questionPapers[i].payload.doc.id
       }
     }
   }
 
   press(row: any) {
     this.questionService.questionPaper = this.questionPapers[row.link];
-    this.router.navigate([urlPaths.Question.exam.url]);
+    let link = row.link + 'exammmm';
+    this.router.navigate(['/questions/exam/' , link]);
   }
 
 

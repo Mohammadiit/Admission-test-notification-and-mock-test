@@ -35,7 +35,7 @@ export class ExamComponent implements OnInit {
   type;
   interval;
   contest;
-  isContest = true;
+  isContest ;
   duration;
   time; contestId;
   userName;
@@ -46,26 +46,28 @@ export class ExamComponent implements OnInit {
   attendedDifficulties = [];
 
   ngOnInit() {
-    // this.router.navigate(['**']);
-
-    // this.finish();
-    // this.questionService.update();
-    // this.getUserName().subscribe(res=>{
-    //   console.log(res);
-    // });
-
-
-
-
 
     let url = this.router.url;
     console.log(url + "      "+ url.length +'     '+url.indexOf('contest'));
     this.type = url.substring(16,23);
-    let questionId = url.substring(43,63);
-    this.contestId = url.substring(16,36);
-    console.log(url.substring(16,36)+ '   '+url.substring(43,63));
+    let questionId = url.substring(16,36);
 
-    if (url.indexOf('contest')) {
+    if(url.indexOf('exammmm')>0) {
+      this.isContest = false;
+      this.queryService.getSingleData('question-paper', questionId).subscribe(res =>{
+        this.questionPaper = res;
+        console.log(res);
+
+        this.loadProjects();
+        this.questionShow();
+        // console.log(this.questionPaper.question1.statements);
+      });
+    }
+
+    if (url.indexOf('contest')>0) {
+      this.contestId = url.substring(43,63);
+      console.log(url.substring(16,36)+ '   '+url.substring(43,63));
+
       this.isContest = true;
       this.queryService.getSingleData('contests',this.contestId).subscribe(res =>{
         this.contest = res;

@@ -121,7 +121,7 @@ export class ContestListComponent implements OnInit {
 
 
   exam(questionLink: any, contestLink:any) {
-    questionLink = contestLink  +'contest' + questionLink;
+    questionLink = questionLink  +'contest' + contestLink;
     this.router.navigate(['/questions/exam/' , questionLink]);
   }
 }
