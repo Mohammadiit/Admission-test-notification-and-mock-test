@@ -8,6 +8,8 @@ import {SetContestComponent} from './set-contest/set-contest.component';
 import {ContestListComponent} from './contest-list/contest-list.component';
 import {ContestResultComponent} from './contest-result/contest-result.component';
 import {ContestResultListComponent} from './contest-result-list/contest-result-list.component';
+import {StudentGuard} from '../shared/service/security-service/student.guard';
+import {ContestRegisteredGuard} from '../shared/service/security-service/contest-registered.guard';
 
 
 const routes: Routes = [
@@ -16,10 +18,13 @@ const routes: Routes = [
     component: QuestionUploadComponent
   }, {
     path: 'exam/:id',
-    component: ExamComponent
+    component: ExamComponent,
+    canActivate: [ ContestRegisteredGuard ]
+
   }, {
     path: 'list',
-    component: QuestionListComponent
+    component: QuestionListComponent,
+
   }, {
     path: 'result',
     component: ResultComponent
@@ -31,7 +36,8 @@ const routes: Routes = [
     component: ContestListComponent
   }, {
     path: 'contest-result/:id',
-    component: ContestResultComponent
+    component: ContestResultComponent,
+
   }, {
     path: 'contest-result-list',
     component: ContestResultListComponent

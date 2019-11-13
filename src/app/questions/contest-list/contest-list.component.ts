@@ -4,6 +4,9 @@ import {QuestionService} from '../services/question.service';
 import {Router} from '@angular/router';
 import {QueryServiceService} from '../../shared/service/query-service.service';
 import * as moment from 'moment';
+import {SecurityService} from '../../shared/service/security-service/security.service';
+import {register} from 'ts-node';
+import {Observable} from 'rxjs';
 
 export interface PeriodicElement {
   name: string,
@@ -11,7 +14,8 @@ export interface PeriodicElement {
   startTime : string,
   status : boolean,
   questionLink : string,
-  contestLink : string
+  contestLink : string,
+  register : boolean
 }
 
 @Component({
@@ -22,14 +26,16 @@ export interface PeriodicElement {
 export class ContestListComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'duration', 'startTime', 'Actions'];
   data : PeriodicElement[] = [];
-  dataSource = new MatTableDataSource<PeriodicElement>(this.data);
+  dataSource = new MatTableDataSource<PeriodicElement>();
   interval;
   timeLeft;
   public contests;
-
+  public array = [];
+  public register = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(public questionService: QuestionService,
               private queryService: QueryServiceService,
+              private securityService: SecurityService,
               private router: Router) { }
 
   ngOnInit() {
@@ -52,11 +58,42 @@ export class ContestListComponent implements OnInit {
     this.questionService.getAllContest() .subscribe(result => {
       this.contests = result;
 
+
+
+
+
+
+
+
+
       this.loadData();
       this.dataSource.paginator = this.paginator;
       this.check();
+      this.loadRegisterArray().subscribe(res=>{
+        console.log(this.register);
+        for(let j=0;j<this.array.length;++j){
+          this.data[j].register = this.register [this.array[j]];
+        }
+      });
     });
   }
+
+  loadRegisterArray(): Observable<any> {
+    return new Observable((observer) => {
+      let i=0;
+        for( i=0;i<this.contests.length;++i){
+          this.securityService.isRegisteredInContest(this.contests[i].payload.doc.id).subscribe(res =>{
+            if(res){
+              this.register.push(true);
+            }
+            else  this.register.push(false);
+
+          });
+        }
+       observer.next();
+    });
+  }
+
   private check() {
 
     this.interval = setInterval(() => {
@@ -73,6 +110,7 @@ export class ContestListComponent implements OnInit {
         else status = false;
 
         if(status) {
+          this.array.push(i);
           let b1 = new Date(contest.startTime) - now  ;
           b1 = Math.floor((b1/1000)/60);
           if(b1 < 0){
@@ -105,6 +143,8 @@ export class ContestListComponent implements OnInit {
         contest.startTime = moment(contest.startTime).format('MMMM Do YYYY, h:mm:ss a');
 
         if (status) {
+          let isRegistered = false;
+
 
           this.data[j] = {
             name: "contests " + (i + 1),
@@ -112,11 +152,13 @@ export class ContestListComponent implements OnInit {
             startTime: contest.startTime,
             status: true,
             questionLink: contest.questionId,
-            contestLink: this.contests[i].payload.doc.id
+            contestLink: this.contests[i].payload.doc.id,
+            register: false,
           };
           ++j;
         }
       }
+      this.dataSource.data = this.data;
   }
 
 

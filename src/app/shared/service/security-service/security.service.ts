@@ -64,4 +64,33 @@ export class SecurityService {
         () => observer.complete();
     });
   }
+
+  isRegisteredInContest(contestID: string): Observable<boolean> {
+    let studentId;
+    return new Observable((observer) => {
+      this.query
+        .getLoggedInUserID()
+        .pipe(
+          switchMap((res) => {
+            studentId = res;
+            return this.query.getSingleData('contests', contestID);
+          })
+        )
+        .pipe(first())
+        .subscribe((res2) => {
+          console.log(res2);
+          let students = res2.attended;
+          let ok = false;
+          for(let i =0;i<students.length;++i){
+            if(students[i] == studentId){
+                ok = true;
+            }
+          }
+          console.log("   contest   ttttttttttttt  studentId  "+studentId);
+          observer.next(ok);
+        }),
+        (err) => observer.error(err),
+        () => observer.complete();
+    });
+  }
 }
