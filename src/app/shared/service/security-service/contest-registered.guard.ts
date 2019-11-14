@@ -20,18 +20,25 @@ export class ContestRegisteredGuard implements CanActivate {
       console.log(next.url[1]+'     Rouuuuuuuuuuu'+'uuuuuuuuutttttttt     '+
         next.url[1].toString().length+"    "+next.url[1].toString().indexOf('contest')
         +" "+next.url[1].toString().substring(27));
-      let contesID = next.url[1].toString().substring(27);
+
+      if(next.url[1].toString().indexOf('contest')>0){
+        let contesID = next.url[1].toString().substring(27);
 
 
-      this.securityService.isRegisteredInContest(contesID).subscribe(res => {
-        if (res) {
-          observer.next(res);
-        }
-        else {
-          observer.next(false);
-          this.router.navigate(['**']);
-        }
-      })
+        this.securityService.isRegisteredInContest(contesID).subscribe(res => {
+          if (res) {
+            observer.next(res);
+          }
+          else {
+            observer.next(false);
+            this.router.navigate(['**']);
+          }
+        })
+      }
+      else{
+        observer.next(true);
+      }
+
     })
   }
   

@@ -15,7 +15,7 @@ export interface PeriodicElement {
   status : boolean,
   questionLink : string,
   contestLink : string,
-  register : boolean
+  register : boolean,
 }
 
 @Component({
@@ -29,6 +29,7 @@ export class ContestListComponent implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>();
   interval;
   timeLeft;
+  userId;
   public contests;
   public array = [];
   public register = [];
@@ -55,6 +56,9 @@ export class ContestListComponent implements OnInit {
     // console.log(b);
     // console.log(newDateObj);
     // let formatDate = moment(b).format('MMMM Do YYYY, h:mm:ss a');
+    this.queryService.getLoggedInUserID().subscribe(res =>{
+      this.userId = res;
+    })
     this.questionService.getAllContest() .subscribe(result => {
       this.contests = result;
 
@@ -69,12 +73,12 @@ export class ContestListComponent implements OnInit {
       this.loadData();
       this.dataSource.paginator = this.paginator;
       this.check();
-      this.loadRegisterArray().subscribe(res=>{
-        console.log(this.register);
-        for(let j=0;j<this.array.length;++j){
-          this.data[j].register = this.register [this.array[j]];
-        }
-      });
+      // this.loadRegisterArray().subscribe(res=>{
+      //   console.log(this.register);
+      //   for(let j=0;j<this.array.length;++j){
+      //     this.data[j].register = this.register [this.array[j]];
+      //   }
+      // });
     });
   }
 
@@ -122,7 +126,7 @@ export class ContestListComponent implements OnInit {
           ++j;
         }
       }
-    },1000);
+    },10);
   }
   private loadData() {
     let j=0;
@@ -144,7 +148,13 @@ export class ContestListComponent implements OnInit {
 
         if (status) {
           let isRegistered = false;
-
+          let students = contest.attended;
+          let ok = false;
+          for(let i =0;i<students.length;++i){
+            if(students[i] == this.userId){
+              ok = true;
+            }
+          }
 
           this.data[j] = {
             name: "contests " + (i + 1),
@@ -153,7 +163,8 @@ export class ContestListComponent implements OnInit {
             status: true,
             questionLink: contest.questionId,
             contestLink: this.contests[i].payload.doc.id,
-            register: false,
+            register: ok,
+
           };
           ++j;
         }
@@ -165,5 +176,9 @@ export class ContestListComponent implements OnInit {
   exam(questionLink: any, contestLink:any) {
     questionLink = questionLink  +'contest' + contestLink;
     this.router.navigate(['/questions/exam/' , questionLink]);
+  }
+
+  payment(contestLink:any) {
+    this.router.navigate(['/questions/payment-stripe/' , contestLink]);
   }
 }

@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {QuestionService} from '../services/question.service';
 import {Router} from '@angular/router';
-
+import {MatTableDataSource} from '@angular/material';
+export interface PeriodicElement {
+  Question : string,
+  Difficulties: number,
+  Answer : string,
+  Right : string,
+}
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
+
+  displayedColumns: string[] = [ 'Question', 'Difficulties', 'Answer', 'Right'];
+  data : PeriodicElement[] = [];
+  dataSource = new MatTableDataSource<PeriodicElement>(this.data);
 
   constructor(public questionService: QuestionService,
               private router: Router) { }
@@ -16,17 +26,44 @@ export class ResultComponent implements OnInit {
   D=0;
   R=0;
   estimate = 0;
+  QuestionAttempt = [];
+  Difficulty = [];
+  Answer = [];
+  Results = [];
 
   ngOnInit() {
+
+    this.QuestionAttempt = this.questionService.QuestionAttempt;
+    this.Difficulty = this.questionService.Difficulty;
+    this.Answer = this.questionService.Answer;
+    this.Results = this.questionService.Results;
+    this.loadData();
+
     this.assignValue();
 
   }
 
+  private loadData() {
+    for(let i =0;i<this.QuestionAttempt.length;++i){
+      this.data[i]={
+        Question : this.QuestionAttempt[i],
+        Difficulties: this.Difficulty[i] ,
+        Answer : this.Answer[i],
+        Right : this.Results[i],
+      }
+    }
+  }
+
   private assignValue() {
-      this.D = this.questionService.D;
-     this.R =this.questionService.R ;
-     this.W =this.questionService.W ;
-     this.L =this.questionService.L ;
+
+    console.log(this.Results);
+    console.log(this.Difficulty);
+    console.log(this.Answer);
+    console.log(this.QuestionAttempt);
+    this.D = this.questionService.D;
+    this.R = this.questionService.R;
+    this.W = this.questionService.W;
+    this.L = this.questionService.L;
      // this.estimate = (24/11) + Math.log(5/6) / Math.log(2.718);
     let e;
      if(this.R ==0 || this.W ==0){

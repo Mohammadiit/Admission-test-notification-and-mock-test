@@ -10,6 +10,7 @@ import {ContestResultComponent} from './contest-result/contest-result.component'
 import {ContestResultListComponent} from './contest-result-list/contest-result-list.component';
 import {StudentGuard} from '../shared/service/security-service/student.guard';
 import {ContestRegisteredGuard} from '../shared/service/security-service/contest-registered.guard';
+import {PaymentStripeComponent} from './payment-stripe/payment-stripe.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,9 @@ const routes: Routes = [
   }, {
     path: 'contest-result-list',
     component: ContestResultListComponent
+  }, {
+    path: 'payment-stripe/:id',
+    component: PaymentStripeComponent
   }
 ];
 

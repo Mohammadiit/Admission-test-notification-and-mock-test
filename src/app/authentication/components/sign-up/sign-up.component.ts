@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import * as util from 'util';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserInformation} from '../../../config/interfaces/user.interface';
 import {Roles} from '../../../config/enum/default.enum';
 import {urlPaths} from '../../../config/constants/defaultConstants';
+import {FieldMatcher} from '../../../shared/service/shared.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,15 +15,48 @@ import {urlPaths} from '../../../config/constants/defaultConstants';
 })
 export class SignUpComponent implements OnInit {
 
-  signUpData = this.authService.signUpForm;
+  signUpData : FormGroup;
   userInformation: UserInformation;
-  constructor(private authService: AuthenticationService, private  router: Router) { }
+  private matcher;
+  constructor(private authService: AuthenticationService,
+              private fb: FormBuilder,
+              private  router: Router) { }
 
   ngOnInit() {
+    this.setForm();
+    this.setCustomValidation();
+  }
+  private setForm() {
+   this.signUpData = this.fb.group({
+      fullName: ['',[ Validators.required] ],
+      email: ['',[ Validators.required]],
+      password: ['',[ Validators.required, Validators.min(6)]],
+      confirmPassword: ['',[ Validators.required, Validators.min(6)]]
+    });
+  }
+  private setCustomValidation() {
+    this.signUpData.setValidators(this.passwordMatchValidator);
+    this.signUpData.updateValueAndValidity();
+    this.matcher = new FieldMatcher();
+
   }
   signUp() {
     console.log(util.inspect(this.signUpData.value));
   }
+
+  passwordMatchValidator(group: FormGroup): any {
+    if (group) {
+      if (group.get('password').value !== group.get('confirmPassword').value) {
+        return { not_matching: true };
+      }
+    }
+
+    // if(control.value !== this.changePasswordForm.value.newpassword) {
+    //   return { notMatching: true };
+    // }
+    return null;
+  }
+
   onSubmit() {
     this.userInformation = {
       email: this.signUpData.value.email,
@@ -44,4 +78,6 @@ export class SignUpComponent implements OnInit {
   routeToLogIn() {
     this.router.navigate([urlPaths.Authentication.Signin.url]);
   }
+
+
 }

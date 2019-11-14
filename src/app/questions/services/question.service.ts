@@ -13,6 +13,10 @@ import { firestore } from 'firebase';
 export class QuestionService {
 
   public questionPaper;
+  QuestionAttempt = [];
+  Difficulty = [];
+  Answer = [];
+  Results = [];
   L=0;
   W=0;
   D=0;
@@ -24,10 +28,17 @@ export class QuestionService {
       marks: firestore.FieldValue.arrayUnion(fieldValue)
     });
   }
+  upadateAttendedArrayField(collectionName,id,fieldValue){
+    this.af.collection(collectionName).doc(id).update({
+      attended: firestore.FieldValue.arrayUnion(fieldValue)
+    });
+  }
 
-  uploadQuestion(questions: question[]) {
+  uploadQuestion(questions: question[], fileUploadForm: FormGroup) {
     let now = new Date();
     return this.af.collection('question-paper').add({
+      numberOfQuestions : fileUploadForm.value.questionSize,
+      numberOfQuestionsEachDifficulty : fileUploadForm.value.numberOfQuestion,
       questionArray : questions
       // question1: questions[0],
       // question2: questions[1],

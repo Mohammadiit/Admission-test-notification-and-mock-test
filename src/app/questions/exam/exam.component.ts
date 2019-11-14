@@ -14,6 +14,8 @@ import * as moment from 'moment';
   styleUrls: ['./exam.component.scss']
 })
 export class ExamComponent implements OnInit {
+  private Results =[];
+  private Answers = [];
 
   constructor(public questionService: QuestionService,
               private queryService: QueryServiceService,
@@ -44,6 +46,8 @@ export class ExamComponent implements OnInit {
   subscription: Subscription;
   correctAnswer = null; correct = false; wrong = false;
   attendedDifficulties = [];
+  numberOfQuestion;
+  numberEachDifficulty;
 
   ngOnInit() {
 
@@ -151,11 +155,13 @@ export class ExamComponent implements OnInit {
 
   next() {
 
-    if(this.iterator <10  ){
+    if(this.iterator < this.numberEachDifficulty  ){
       let answer =  this.questions[this.column][this.iterator].answer;
       console.log( "kkkkkkk  " + this.selected + "      " + answer);
       this.iterator = -1;
+      this.Answers.push(answer);
       if ( answer == this.selected) {
+          this.Results.push('Right');
           ++this.R;
           this.calculateEstimate();
         // if (this.column < 4 ) ++this.column;
@@ -163,6 +169,7 @@ export class ExamComponent implements OnInit {
         this.proceedOn();
       }
       else {
+        this.Results.push('Wrong');
         ++this.W;
         this.calculateEstimate();
 
@@ -219,6 +226,10 @@ export class ExamComponent implements OnInit {
       });
     }
     else{
+      this.questionService.Answer = this.Answers;
+      this.questionService.Results = this.Results;
+      this.questionService.QuestionAttempt = this.questionAttempt;
+      this.questionService.Difficulty = this.attendedDifficulties;
       this.questionService.D = this.D;
       this.questionService.R = this.R;
       this.questionService.W = this.W;
@@ -269,7 +280,7 @@ export class ExamComponent implements OnInit {
   }
   private proceedOn() {
     while (1==1){
-      if(this.iterator >= 9) {
+      if(this.iterator >= (this.numberEachDifficulty - 1)) {
         this.finish();
       }
       if(this.questionAttempt.indexOf(this.questions[this.column][++this.iterator].statements) == -1) {
@@ -280,14 +291,19 @@ export class ExamComponent implements OnInit {
     }
   }
   private loadProjects() {
-    for(var key: number = 0; key < 80; key++) {
+
+    this.numberOfQuestion = (this.questionPaper.numberOfQuestions/this.questionPaper.numberOfQuestionsEachDifficulty);
+    this.numberEachDifficulty = this.questionPaper.numberOfQuestionsEachDifficulty;
+
+    for(var key: number = 0; key < this.numberOfQuestion; key++) {
       this.questions[key] = [];
 
     }
+    this.column = (this.numberOfQuestion/2)-1;
     let i=0,j=0,k=0;
 
-    for( i=0;i<40;++i){
-      for (j=0;j<10;++j){
+    for( i=0;i<this.numberOfQuestion;++i){
+      for (j=0;j<this.numberEachDifficulty;++j){
 
 
 

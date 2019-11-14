@@ -29,8 +29,13 @@
           Action
         </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="primary" (click)="exam(element.questionLink,element.contestLink)"
-                  [disabled]="element.status">Enter {{element.register}}</button>
+
+          <button *ngIf="element.register"
+            mat-raised-button color="primary" (click)="exam(element.questionLink,element.contestLink)"
+                  [disabled]="element.status">Enter </button>
+          <button *ngIf="!element.register" (click) = "payment(element.contestLink)"
+            mat-raised-button color="warn"
+          >Register</button>
         </td>
       </ng-container>
 

@@ -1,3 +1,35 @@
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="Question">
+    <th mat-header-cell *matHeaderCellDef> Question Statement </th>
+    <td mat-cell *matCellDef="let element"> {{element.Question}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Difficulties">
+    <th mat-header-cell *matHeaderCellDef> Difficulties </th>
+    <td mat-cell *matCellDef="let element"> {{element.Difficulties}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Answer">
+    <th mat-header-cell *matHeaderCellDef> Answer </th>
+    <td mat-cell *matCellDef="let element"> {{element.Answer}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Right">
+    <th mat-header-cell *matHeaderCellDef> Right/Wrong </th>
+    <td mat-cell *matCellDef="let element"> {{element.Right}} </td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="press(row)"></tr>
+</table>
+
 <div fxLayout="column" fxLayoutAlign="center center" class='px-250'>
   <mat-card class='w-100-p p-48 m-56'>
     <pre class="font-size-20">Total difficulties attempted :{{D}}</pre>

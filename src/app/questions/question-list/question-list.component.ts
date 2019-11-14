@@ -72,10 +72,10 @@ export class QuestionListComponent implements OnInit {
   private loadData() {
 
     for( let i=0;i< this.questionPapers.length; ++i) {
-
+      let question = this.questionPapers[i].payload.doc.data();
       this.data[i]={
         name : "Question " + (i+1),
-      NumberOfQuestions : 50,
+      NumberOfQuestions : question.numberOfQuestions,
         link : this.questionPapers[i].payload.doc.id
       }
     }

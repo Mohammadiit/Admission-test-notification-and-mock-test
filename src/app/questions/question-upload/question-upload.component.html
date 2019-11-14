@@ -1,41 +1,64 @@
-<mat-card>
-  <form class="example-form" fxLayout="column"
-        fxLayoutAlign="center center" [formGroup]="fileUploadForm"
-        >
-    <mat-form-field class="example-full-width">
-      <input matInput
-             formControlName="questionSize" type="number" placeholder="Question Size">
-    </mat-form-field>
-    <mat-form-field  class="example-full-width">
-      <input matInput
-             formControlName="numberOfQuestion" type="number"
-             placeholder="Number of questions each difficulty">
-    </mat-form-field>
-    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+<div fxLayoutAlign="center center">
+  <mat-card class="m-48 mat-elevation-z8 w-40-p h-260"
+            fxLayoutAlign="center center">
+    <div *ngIf="!this.process" class="w-60-p">
+      <form class="example-form" fxLayout="column"
+            fxLayoutAlign="center center" [formGroup]="fileUploadForm"
+      >
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Number of questions</mat-label>
+          <input matInput
+                 formControlName="questionSize" type="number" placeholder="Number of questions">
+          <mat-error
+            *ngIf="fileUploadForm.get('questionSize').errors?.required &&
+                   fileUploadForm.get('questionSize').touched">
+            Required Field
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field  class="example-full-width" appearance="outline">
+          <mat-label>Number of questions each difficulty</mat-label>
+          <input matInput
+                 formControlName="numberOfQuestion" type="number"
+                 placeholder="Number of questions each difficulty">
 
-    <input type = 'hidden'
-           (change)="onFileSelected($event)" #fileInput type="file" id="file" accept=".xlsx">
-      <input mat-button mat-raised-button
-        style="display: inline-block;" formControlName="fileInfo" type="file"
-             (change)="onFileChange($event)" placeholder="Upload file" accept=".xlsx">
-    <label for="file-upload" class="custom-file-upload">
-      Custom Upload
-    </label>
-    <input id="file-upload" type="file"/>
+          <mat-error
+            *ngIf="fileUploadForm.get('numberOfQuestion').errors?.required &&
+                   fileUploadForm.get('numberOfQuestion').touched">
+            Required Field
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary"
+                [disabled]="!fileUploadForm.valid" (click)='onSubmit()'>Next</button>
+      </form>
+    </div>
 
 
-    <button mat-raised-button color="primary" [disabled]="!fileUploadForm.valid" (click)='onSubmit()'>Upload</button>
-  </form>
-</mat-card>
+    <div *ngIf="this.process" fxLayoutAlign="center center">
+      <form [formGroup]="fileForm" fxLayoutAlign="center center">
+        <div>
+          <input mat-button mat-raised-button  formControlName="file"
+                 style="display: inline-block;"  type="file"
+                 (change)="onFileChange($event)" placeholder="Upload file" accept=".xlsx">
+          <mat-error
+            *ngIf="fileForm.get('file').errors?.required &&
+                   fileForm.get('file').touched">
+            Required Field
+          </mat-error>
+        </div>
 
-<form action="#type your action here" method="POST" enctype="multipart/form-data" name="myForm">
-  <div id="yourBtn" onclick="getFile()">click to upload a file</div>
-  <!-- this is your file input tag, so i hide it!-->
-  <!-- i used the onchange event to fire the form submission-->
-  <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload" onchange="sub(this)" /></div>
-  <!-- here you can have file submit button or you can write a simple script to upload the file automatically-->
-  <!-- <input type="submit" value='submit' > -->
-</form>
+
+        <button mat-raised-button color="primary"
+                [disabled]="!fileForm.valid" (click)='upload()'>Upload</button>
+      </form>
+
+    </div>
+
+  </mat-card>
+</div>
+
+
+
 <!--<input type="file" style="display: inline-block;"-->
 <!--       (change)="onFileChange($event)" placeholder="Upload file" accept=".xlsx">-->
 <!--<div fxLayout=row fxLayoutAlign="end column">-->

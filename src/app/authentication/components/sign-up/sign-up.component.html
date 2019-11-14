@@ -10,10 +10,31 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput formControlName="password" placeholder="Password">
+
+      <mat-error
+        *ngIf="signUpData.get('password').touched && signUpData.get('password').invalid
+                   && !signUpData.hasError('not_matching')">
+        "weak_password"</mat-error>
+
+      <mat-error
+        *ngIf="signUpData.get('password').touched && signUpData.hasError('not_matching')
+                   ">
+        Password do not match</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput formControlName="confirmPassword" placeholder="Confirm password">
+      <mat-error
+        *ngIf="signUpData.get('confirmPassword').touched && signUpData.get('confirmPassword').invalid
+                   && !signUpData.hasError('confirmPassword')">
+        "weak_password"</mat-error>
+      <mat-error
+        *ngIf="signUpData.get('confirmPassword').touched && signUpData.hasError('not_matching')
+                   ">
+        Password do not match</mat-error>
+
     </mat-form-field>
+    {{signUpData.hasError('not_matching')}} {{signUpData.get('password').touched}}
+    {{signUpData.get('confirmPassword').touched}}
     <button mat-raised-button color="primary" [disabled]="!signUpData.valid" (click)='onSubmit()'>Sign Up</button>
     Already have an account?
     <button mat-button (click)="routeToLogIn()">Log in</button>

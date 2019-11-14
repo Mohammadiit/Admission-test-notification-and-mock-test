@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
@@ -21,10 +21,10 @@ export class AuthenticationService {
     email: ['']
   });
   public signUpForm = this.fb.group({
-    fullName: [''],
-    email: [''],
-    password: [''],
-    confirmPassword: ['']
+    fullName: ['',[ Validators.required] ],
+    email: ['',[ Validators.required]],
+    password: ['',[ Validators.required, Validators.min(6)]],
+    confirmPassword: ['',[ Validators.required, Validators.min(6)]]
   });
   user: Observable<UserInformation>;
 

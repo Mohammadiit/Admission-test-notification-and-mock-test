@@ -16,8 +16,9 @@ import { SetContestComponent } from './set-contest/set-contest.component';
 import { ContestListComponent } from './contest-list/contest-list.component';
 import { ContestResultComponent } from './contest-result/contest-result.component';
 import { ContestResultListComponent } from './contest-result-list/contest-result-list.component';
+import { PaymentStripeComponent } from './payment-stripe/payment-stripe.component';
 @NgModule({
-  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent, StudentProfileComponent, AddAdminComponent, SetContestComponent, ContestListComponent, ContestResultComponent, ContestResultListComponent],
+  declarations: [QuestionUploadComponent, ExamComponent, QuestionListComponent, ResultComponent, StudentProfileComponent, AddAdminComponent, SetContestComponent, ContestListComponent, ContestResultComponent, ContestResultListComponent, PaymentStripeComponent],
   imports: [
     CommonModule,
     QuestionsRoutingModule,
