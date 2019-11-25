@@ -19,6 +19,7 @@ export class AdmissionInfoListComponent implements OnInit {
                , private http: HttpClient
   ) { }
   items;
+  data = [];
   kk;
   ngOnInit() {
     let i=0;

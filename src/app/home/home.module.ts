@@ -5,13 +5,15 @@ import { HomeRoutingModule } from './home-routing.module';
 import { StudentComponent } from './student/student.component';
 import { AdminComponent } from './admin/admin.component';
 import { AnonymousComponent } from './anonymous/anonymous.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [StudentComponent, AdminComponent, AnonymousComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+     SharedModule
   ]
 })
 export class HomeModule { }

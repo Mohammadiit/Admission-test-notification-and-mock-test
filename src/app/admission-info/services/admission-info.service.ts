@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {AdmissionInformation} from '../../config/interfaces/admission-info.interface';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
@@ -16,19 +16,19 @@ export class AdmissionInfoService {
   }
 
   public admissionInfoForm = this.fb.group({
-    universityName: [''],
-    unitName: [''],
-    applicationStarts: [''],
-    applicationEnds: [''],
-    examDate: [''],
-    totalFees: [''],
-    officialNoticeLink: [''],
-    minimumCGPA: [''],
-    hscPassingYear: [''],
-    sscPassingYear: [''],
-    admitCardLink: [''],
-    seatPlanLink: [''],
-    meritListLink: ['']
+    universityName: ['', [ Validators.required]],
+    unitName: ['', [ Validators.required]],
+    applicationStarts: ['', [ Validators.required]],
+    applicationEnds: ['', [ Validators.required]],
+    examDate: ['', [ Validators.required]],
+    totalFees: ['', [ Validators.required]],
+    officialNoticeLink: ['', [ Validators.required]],
+    minimumCGPA: ['', [ Validators.required]],
+    hscPassingYear: ['', [ Validators.required]],
+    sscPassingYear: ['', [ Validators.required]],
+    admitCardLink: ['', [ Validators.required]],
+    seatPlanLink: ['', [ Validators.required]],
+    meritListLink: ['', [ Validators.required]]
   });
 
   admissionInfoUpload(admissionInformation: AdmissionInformation) {

@@ -59,6 +59,12 @@ pre{
 .bold{
   font-weight: 600 !important;
 }
+.primary-color{
+  color : $primary-color;
+}
+.primary-background-color{
+  background-color : $primary-color;
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

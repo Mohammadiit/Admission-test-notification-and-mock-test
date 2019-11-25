@@ -27,6 +27,8 @@ export class QuestionUploadComponent implements OnInit {
 
   }
 
+
+  
   ngOnInit() {
     this.makeFileUploadForm();
 

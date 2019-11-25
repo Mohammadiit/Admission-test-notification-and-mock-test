@@ -13,7 +13,9 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="applicationStarts" placeholder="Application starts">
+        <input matInput [matDatepicker]="picker" formControlName="applicationStarts" placeholder="Application starts">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
@@ -65,7 +67,7 @@
         <input type="url" formControlName="meritListLink" matInput placeholder="Merit List">
       </mat-form-field>
 
-      <button mat-button mat-raised-button color="primary" (click)="routeToAdmissionInfoList()">Upload</button>
+      <button mat-button mat-raised-button color="primary"  (click)="routeToAdmissionInfoList()">Upload</button>
 
     </form>
   </mat-card>

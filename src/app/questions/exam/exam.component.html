@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="start start"  class='mt-56 mb-56 ml-200' fxLayoutGap="15px">
-  {{time}}
+
   <div fxLayout="column"  class='w-70-p'>
     <mat-card class='w-100-p p-48 '>
       <h3 class="mat-h2">{{statement}}</h3>
@@ -29,9 +29,9 @@
 
     </mat-card>
   </div>
-  <mat-card class='w-25-p p-48'>
-    <p class="font-size-20">Difficulty Label</p>
+  <mat-card class='w-25-p p-48' *ngIf="isContest">
+    <p class="font-size-20">Time</p>
     <p fxLayout="row" fxLayoutAlign="center center" class="font-size-36"
-       style="color: #f26e07">{{difficulty}}</p>
+       style="color: #f26e07"> {{time}}</p>
   </mat-card>
 </div>

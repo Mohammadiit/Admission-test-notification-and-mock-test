@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import * as util from 'util';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserInformation} from '../../../config/interfaces/user.interface';
 import {Roles} from '../../../config/enum/default.enum';
 import {urlPaths} from '../../../config/constants/defaultConstants';
@@ -26,14 +26,30 @@ export class SignUpComponent implements OnInit {
     this.setForm();
     this.setCustomValidation();
   }
+
+
+
   private setForm() {
    this.signUpData = this.fb.group({
       fullName: ['',[ Validators.required] ],
-      email: ['',[ Validators.required]],
-      password: ['',[ Validators.required, Validators.min(6)]],
-      confirmPassword: ['',[ Validators.required, Validators.min(6)]]
+      email: ['',[ Validators.required, Validators.email]],
+      password: ['',[ Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['',[ Validators.required, Validators.minLength(6)
+      ,this.passwordMatcher.bind(this)
+      ]]
     });
   }
+
+  private passwordMatcher(control: FormControl): { [s: string]: boolean } {
+    if (
+      this.signUpData &&
+      (control.value !== this.signUpData.controls.password.value)
+    ) {
+      return { passwordNotMatch: true };
+    }
+    return null;
+  }
+
   private setCustomValidation() {
     this.signUpData.setValidators(this.passwordMatchValidator);
     this.signUpData.updateValueAndValidity();

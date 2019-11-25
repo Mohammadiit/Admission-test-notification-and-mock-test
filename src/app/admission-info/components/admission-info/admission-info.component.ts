@@ -14,7 +14,7 @@ export class AdmissionInfoComponent implements OnInit {
   constructor(private  admissionInfoService: AdmissionInfoService,
               private queryService: QueryServiceService) { }
   singleItem;
-
+  data;
   item = this.admissionInfoService.item;
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class AdmissionInfoComponent implements OnInit {
     this.queryService.getSingleData('admission-info', this.item.payload.doc.id)
       .pipe(first()).subscribe((res) => {
       this.singleItem = res;
+      this.data = this.singleItem.applicationStarts.toDate() ;
 
     });
   }

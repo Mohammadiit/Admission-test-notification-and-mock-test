@@ -4,31 +4,53 @@
         (ngSubmit)="signUp()">
     <mat-form-field class="example-full-width">
       <input matInput formControlName="fullName" placeholder="Full name">
+      <mat-error
+        *ngIf="signUpData.get('fullName').errors?.required &&
+                   signUpData.get('fullName').touched">
+        " Full name is required "
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput formControlName="email" placeholder="Email">
+      <mat-error
+        *ngIf="signUpData.get('email').errors?.required &&
+                   signUpData.get('email').touched">
+         Email  is required
+      </mat-error>
+      <mat-error
+        *ngIf="signUpData.get('email').touched &&
+        signUpData.get('email').invalid && signUpData.get('email').errors.email
+                   ">
+         No valid email </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput formControlName="password" placeholder="Password">
-
       <mat-error
-        *ngIf="signUpData.get('password').touched && signUpData.get('password').invalid
-                   && !signUpData.hasError('not_matching')">
-        "weak_password"</mat-error>
-
+        *ngIf="signUpData.get('password').errors?.required &&
+                   signUpData.get('password').touched">
+         Password is required
+      </mat-error>
       <mat-error
-        *ngIf="signUpData.get('password').touched && signUpData.hasError('not_matching')
+        *ngIf="signUpData.get('password').touched &&  signUpData.get('password').invalid && signUpData.get('password').errors.minlength
                    ">
-        Password do not match</mat-error>
+        weak_password </mat-error>
+
+
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput formControlName="confirmPassword" placeholder="Confirm password">
       <mat-error
-        *ngIf="signUpData.get('confirmPassword').touched && signUpData.get('confirmPassword').invalid
-                   && !signUpData.hasError('confirmPassword')">
-        "weak_password"</mat-error>
+        *ngIf="signUpData.get('confirmPassword').errors?.required &&
+                   signUpData.get('confirmPassword').touched">
+        Confirm password is required
+      </mat-error>
       <mat-error
-        *ngIf="signUpData.get('confirmPassword').touched && signUpData.hasError('not_matching')
+        *ngIf="signUpData.get('confirmPassword').touched && signUpData.get('confirmPassword').invalid
+        && signUpData.get('confirmPassword').errors.minlength">
+        weak_password</mat-error>
+      <mat-error
+        *ngIf="signUpData.get('confirmPassword').touched &&  signUpData.get('confirmPassword').invalid
+         && signUpData.get('confirmPassword').errors['passwordNotMatch'] && !signUpData.get('confirmPassword').errors.minlength
                    ">
         Password do not match</mat-error>
 
