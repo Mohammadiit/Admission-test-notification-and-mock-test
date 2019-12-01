@@ -15,7 +15,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'info',
+    path: 'info/:id',
     component: AdmissionInfoComponent
   },
   {

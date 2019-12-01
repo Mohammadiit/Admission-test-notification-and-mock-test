@@ -107,9 +107,9 @@ export class QuestionService {
     // this.af.collection('businesses').snapshotChanges().pipe(
     //   map(changes => {
     //       return changes.map(change => {
-    //         const data = change.payload.doc.data();
+    //         const applicationStarts = change.payload.doc.applicationStarts();
     //         const id = change.payload.doc.id;
-    //         return { id, ...data };
+    //         return { id, ...applicationStarts };
     //       });
     //     }
     //   )).subscribe(changes => {

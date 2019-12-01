@@ -1,58 +1,45 @@
-<div fxLayout=column >
-  
+<div fxLayout=column>
+
   <mat-card>
-<!--      <div fxLayout=row fxLayoutAlign="end column">-->
-<!--          <button (click)='openQuestionUploadModal()' mat-button>Question Upload</button>-->
-<!--        </div>-->
+<!--    <div *ngIf="isAdmin" fxLayout=row fxLayoutAlign="end column">-->
+<!--      <button (click)='openQuestionUploadModal()' mat-button>Question Upload</button>-->
+<!--    </div>-->
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
+
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-  
+
       <!-- Position Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <th mat-header-cell *matHeaderCellDef> No.</th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
-  
+
       <!-- Name Column -->
       <ng-container matColumnDef="NumberOfQuestions">
-        <th mat-header-cell *matHeaderCellDef> Number Of Quesions </th>
+        <th mat-header-cell *matHeaderCellDef> Number Of Quesions</th>
         <td mat-cell *matCellDef="let element"> {{element.NumberOfQuestions}} </td>
       </ng-container>
-  
-  
-  
+
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="press(row)"></tr>
     </table>
-  
-  
+
+
   </mat-card>
   <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  <!--  <mat-form-field>-->
-  <!--    <mat-label>Favorite food</mat-label>-->
-  <!--    <mat-select>-->
-  <!--      <mat-option  *ngFor="let questionPaper of questionPapers" (click)="press(questionPaper)">-->
-  <!--        {{questionPaper.payload.doc.data().question1.statements}}-->
-  <!--      </mat-option>-->
-  <!--    </mat-select>-->
-  <!--  </mat-form-field>-->
+<!--  <mat-form-field>-->
+<!--    <mat-label>Favorite food</mat-label>-->
+<!--    <mat-select>-->
+<!--      <mat-option  *ngFor="let questionPaper of questionPapers" (click)="press(questionPaper)">-->
+<!--        {{questionPaper.payload.doc.applicationStarts().question1.statements}}-->
+<!--      </mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
 
 <!--<mat-paginator [length]="100"-->
 <!--               [pageSize]="10"-->

@@ -1,16 +1,30 @@
-<mat-card>
-  <form class="example-form" fxLayout="column"
-        fxLayoutAlign="center center" [formGroup]="logInData"
-        (ngSubmit)="logIn()">
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="email" placeholder="Email">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="password" placeholder="Password">
-    </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="!logInData.valid">Log in</button>
-    <a (click)="routeToSignUp()">Sign up</a>
-    Foget password ?
-    <button mat-button (click)="routeToRecoverAccount()">recover account</button>
-  </form>
-</mat-card>
+<div fxLayoutAlign="center center">
+  <mat-card class="m-48 mat-elevation-z8 w-60-p ">
+    <div fxLayoutAlign="center center" class="m-20">
+      <h1 class="font-size-40 p-20">ADMISSION HELPER AND MOCK TEST</h1>
+    </div>
+    <form class="example-form" fxLayout="column"
+          fxLayoutAlign="center center" [formGroup]="logInData"
+          (ngSubmit)="logIn()">
+      <mat-form-field class="example-full-width px-16 font-size-16" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width px-16 font-size-16" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Password">
+      </mat-form-field>
+      <button mat-raised-button class="primary-background-color white w-180 h-40  font-size-20" [disabled]="!logInData.valid">LOG IN</button>
+      <div fxLayout="row" fxLayoutGap="8px" class="p-12 mt-16 font-size-16">
+        <p>Not Registered ?</p>
+        <a (click)="routeToSignUp()">SIGN UP</a>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" class=" font-size-16">
+        <p> Foget password ?</p>
+        <a (click)="routeToRecoverAccount()">RECOVER ACCOUNT</a>
+      </div>
+
+
+    </form>
+  </mat-card>
+</div>

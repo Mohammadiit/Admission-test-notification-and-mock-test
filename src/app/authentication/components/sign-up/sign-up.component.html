@@ -1,65 +1,79 @@
-<mat-card>
-  <form class="example-form" fxLayout="column"
-        fxLayoutAlign="center center" [formGroup]="signUpData"
-        (ngSubmit)="signUp()">
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="fullName" placeholder="Full name">
-      <mat-error
-        *ngIf="signUpData.get('fullName').errors?.required &&
+<div fxLayoutAlign="center center">
+  <mat-card class="m-48 mat-elevation-z8 w-60-p ">
+    <div fxLayoutAlign="center center" class="m-20">
+      <h1 class="font-size-40 p-20">ADMISSION HELPER AND MOCK TEST</h1>
+    </div>
+    <form class="example-form" fxLayout="column"
+          fxLayoutAlign="center center" [formGroup]="signUpData"
+          (ngSubmit)="signUp()">
+      <mat-form-field class="example-full-width px-28 font-size-16" appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" placeholder="Full name">
+        <mat-error
+          *ngIf="signUpData.get('fullName').errors?.required &&
                    signUpData.get('fullName').touched">
-        " Full name is required "
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="email" placeholder="Email">
-      <mat-error
-        *ngIf="signUpData.get('email').errors?.required &&
+           Full name is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width px-28 font-size-16" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email">
+        <mat-error
+          *ngIf="signUpData.get('email').errors?.required &&
                    signUpData.get('email').touched">
-         Email  is required
-      </mat-error>
-      <mat-error
-        *ngIf="signUpData.get('email').touched &&
+          Email is required
+        </mat-error>
+        <mat-error
+          *ngIf="signUpData.get('email').touched &&
         signUpData.get('email').invalid && signUpData.get('email').errors.email
                    ">
-         No valid email </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="password" placeholder="Password">
-      <mat-error
-        *ngIf="signUpData.get('password').errors?.required &&
+          No valid email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width px-28 font-size-16" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Password">
+        <mat-error
+          *ngIf="signUpData.get('password').errors?.required &&
                    signUpData.get('password').touched">
-         Password is required
-      </mat-error>
-      <mat-error
-        *ngIf="signUpData.get('password').touched &&  signUpData.get('password').invalid && signUpData.get('password').errors.minlength
+          Password is required
+        </mat-error>
+        <mat-error
+          *ngIf="signUpData.get('password').touched &&  signUpData.get('password').invalid && signUpData.get('password').errors.minlength
                    ">
-        weak_password </mat-error>
+          weak_password
+        </mat-error>
 
 
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="confirmPassword" placeholder="Confirm password">
-      <mat-error
-        *ngIf="signUpData.get('confirmPassword').errors?.required &&
+      </mat-form-field>
+      <mat-form-field class="example-full-width px-28 font-size-16" appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput formControlName="confirmPassword" placeholder="Confirm password">
+        <mat-error
+          *ngIf="signUpData.get('confirmPassword').errors?.required &&
                    signUpData.get('confirmPassword').touched">
-        Confirm password is required
-      </mat-error>
-      <mat-error
-        *ngIf="signUpData.get('confirmPassword').touched && signUpData.get('confirmPassword').invalid
+          Confirm password is required
+        </mat-error>
+        <mat-error
+          *ngIf="signUpData.get('confirmPassword').touched && signUpData.get('confirmPassword').invalid
         && signUpData.get('confirmPassword').errors.minlength">
-        weak_password</mat-error>
-      <mat-error
-        *ngIf="signUpData.get('confirmPassword').touched &&  signUpData.get('confirmPassword').invalid
+          weak_password
+        </mat-error>
+        <mat-error
+          *ngIf="signUpData.get('confirmPassword').touched &&  signUpData.get('confirmPassword').invalid
          && signUpData.get('confirmPassword').errors['passwordNotMatch'] && !signUpData.get('confirmPassword').errors.minlength
                    ">
-        Password do not match</mat-error>
+          Password do not match
+        </mat-error>
 
-    </mat-form-field>
-    {{signUpData.hasError('not_matching')}} {{signUpData.get('password').touched}}
-    {{signUpData.get('confirmPassword').touched}}
-    <button mat-raised-button color="primary" [disabled]="!signUpData.valid" (click)='onSubmit()'>Sign Up</button>
-    Already have an account?
-    <button mat-button (click)="routeToLogIn()">Log in</button>
-  </form>
-</mat-card>
+      </mat-form-field>
 
+      <button mat-raised-button class="primary-background-color white w-180 h-40  font-size-20" [disabled]="!signUpData.valid" (click)='onSubmit()'>SIGN UP</button>
+      <div fxLayout="row" fxLayoutGap="8px" class="p-12 mt-16 font-size-16">
+        <p>Already have an account ?</p>
+        <a  (click)="routeToLogIn()">Log in</a>
+      </div>
+
+    </form>
+  </mat-card>
+</div>

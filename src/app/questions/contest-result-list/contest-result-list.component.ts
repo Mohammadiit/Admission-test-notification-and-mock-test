@@ -56,13 +56,15 @@ export class ContestResultListComponent implements OnInit {
 
 
       var diff = new Date(contest.startTime) - new Date();
+      diff += contest.duration*60*10000;
       console.log('difffffffffff       '+diff+'    '+new Date(contest.startTime).toString().substring(0,24)
       +'   '+new Date(contest.startTime)
       );
-      let status;
+      let status1;
+
       contest.startTime = new Date(contest.startTime).toString().substring(0,24);
-      if (diff < 0) status = true;
-      else status = false;
+      if (diff < 0) status1 = false;
+      else status1 = true;
       ///     if contest time with duration over      ///
 
       // contest.startTime = moment(contest.startTime).format('MMMM Do YYYY, h:mm:ss a');
@@ -72,7 +74,7 @@ export class ContestResultListComponent implements OnInit {
         name: "contests " + (i + 1),
         duration: contest.duration,
         startTime: contest.startTime,
-        status: true,
+        status: status1,
         contestLink: this.contests[i].payload.doc.id
       };
       ++j;

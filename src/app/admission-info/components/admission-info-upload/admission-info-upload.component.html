@@ -6,48 +6,106 @@
           fxLayoutAlign="center center" [formGroup]="admissionInfoData">
       <mat-form-field>
         <input matInput formControlName="universityName" placeholder="University Name">
+        <mat-error
+          *ngIf="admissionInfoData.get('universityName').errors?.required &&
+                   admissionInfoData.get('universityName').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput formControlName="unitName" placeholder="Unit Name">
+        <mat-error
+          *ngIf="admissionInfoData.get('unitName').errors?.required &&
+                   admissionInfoData.get('unitName').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput [matDatepicker]="picker" formControlName="applicationStarts" placeholder="Application starts">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="admissionInfoData.get('applicationStarts').errors?.required &&
+                   admissionInfoData.get('applicationStarts').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="applicationEnds" placeholder="Application ends">
+        <input matInput [matDatepicker]="picker1" formControlName="applicationEnds" placeholder="Application ends">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error
+          *ngIf="admissionInfoData.get('applicationEnds').errors?.required &&
+                   admissionInfoData.get('applicationEnds').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="examDate" placeholder="Exam Date">
+        <input matInput [matDatepicker]="picker2" formControlName="examDate" placeholder="Exam Date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error
+          *ngIf="admissionInfoData.get('examDate').errors?.required &&
+                   admissionInfoData.get('examDate').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input type="number" formControlName="totalFees" matInput placeholder="Total fees">
+        <mat-error
+          *ngIf="admissionInfoData.get('totalFees').errors?.required &&
+                   admissionInfoData.get('totalFees').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <h3 class="mat-h2">Admission Notice</h3>
 
       <mat-form-field>
         <input type="url" formControlName="officialNoticeLink" matInput placeholder="Official notice link">
+        <mat-error
+          *ngIf="admissionInfoData.get('officialNoticeLink').errors?.required &&
+                   admissionInfoData.get('officialNoticeLink').touched">
+          Required Field
+        </mat-error>
+        <mat-error
+          *ngIf="admissionInfoData.get('officialNoticeLink').touched && admissionInfoData.get('officialNoticeLink').invalid
+                   && admissionInfoData.get('officialNoticeLink').errors?.pattern">
+          Enter Valid URL</mat-error>
       </mat-form-field>
 
       <h3 class="mat-h2"> General Requirements</h3>
 
       <mat-form-field>
         <input type="number" formControlName="minimumCGPA" matInput placeholder="Minimum total GPA">
+        <mat-error
+          *ngIf="admissionInfoData.get('minimumCGPA').errors?.required &&
+                   admissionInfoData.get('minimumCGPA').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="hscPassingYear" placeholder="HSC Passing year">
+        <input matInput type="month" formControlName="hscPassingYear" placeholder="HSC Passing year">
+        <mat-error
+          *ngIf="admissionInfoData.get('hscPassingYear').errors?.required &&
+                   admissionInfoData.get('hscPassingYear').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="sscPassingYear" placeholder="SSC Passing year">
+        <input matInput type="month" formControlName="sscPassingYear" placeholder="SSC Passing year">
+        <mat-error
+          *ngIf="admissionInfoData.get('sscPassingYear').errors?.required &&
+                   admissionInfoData.get('sscPassingYear').touched">
+          Required Field
+        </mat-error>
       </mat-form-field>
 
 
@@ -55,20 +113,48 @@
 
       <mat-form-field>
         <input type="url" formControlName="admitCardLink" matInput placeholder="Admit card link">
+        <mat-error
+          *ngIf="admissionInfoData.get('admitCardLink').errors?.required &&
+                   admissionInfoData.get('admitCardLink').touched">
+          Required Field
+        </mat-error>
+        <mat-error
+          *ngIf="admissionInfoData.get('admitCardLink').touched && admissionInfoData.get('admitCardLink').invalid
+                   && admissionInfoData.get('admitCardLink').errors?.pattern">
+          Enter Valid URL</mat-error>
       </mat-form-field>
 
 
       <mat-form-field>
         <input type="url" formControlName="seatPlanLink" matInput placeholder="Seat Plan">
+        <mat-error
+          *ngIf="admissionInfoData.get('seatPlanLink').errors?.required &&
+                   admissionInfoData.get('seatPlanLink').touched">
+          Required Field
+        </mat-error>
+        <mat-error
+          *ngIf="admissionInfoData.get('seatPlanLink').touched && admissionInfoData.get('seatPlanLink').invalid
+                   && admissionInfoData.get('seatPlanLink').errors?.pattern">
+          Enter Valid URL</mat-error>
       </mat-form-field>
 
 
       <mat-form-field>
         <input type="url" formControlName="meritListLink" matInput placeholder="Merit List">
+        <mat-error
+          *ngIf="admissionInfoData.get('meritListLink').errors?.required &&
+                   admissionInfoData.get('meritListLink').touched">
+          Required Field
+        </mat-error>
+        <mat-error
+          *ngIf="admissionInfoData.get('meritListLink').touched && admissionInfoData.get('meritListLink').invalid
+                   && admissionInfoData.get('meritListLink').errors?.pattern">
+          Enter Valid URL</mat-error>
       </mat-form-field>
 
-      <button mat-button mat-raised-button color="primary"  (click)="routeToAdmissionInfoList()">Upload</button>
-
+      <button mat-button mat-raised-button color="primary" [disabled]="!admissionInfoData.valid"
+              (click)="routeToAdmissionInfoList()">Upload</button>
+<!--      [disabled]="!admissionInfoData.valid"-->
     </form>
   </mat-card>
 </div>

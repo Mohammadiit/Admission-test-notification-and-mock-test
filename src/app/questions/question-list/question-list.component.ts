@@ -3,6 +3,8 @@ import {urlPaths} from '../../config/constants/defaultConstants';
 import {QuestionService} from '../services/question.service';
 import {Router} from '@angular/router';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {SharedService} from '../../shared/service/shared.service';
+import {SecurityService} from '../../shared/service/security-service/security.service';
 
 
 
@@ -38,7 +40,7 @@ export class QuestionListComponent implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 //////////////////////////////////////////////////////
-
+  isAdmin
 
 
 
@@ -47,10 +49,13 @@ export class QuestionListComponent implements OnInit {
 
 
   constructor(public questionService: QuestionService,
+              private securityService: SecurityService,
               private router: Router) { }
 
   ngOnInit() {
-
+    this.securityService.isAdmin().subscribe(res=>{
+      this.isAdmin = res;
+    })
     // window.addEventListener("beforeunload", function (e) {
     //   var confirmationMessage = "\o/";
     //   console.log("cond");
@@ -76,7 +81,7 @@ export class QuestionListComponent implements OnInit {
       this.data[i]={
         name : "Question " + (i+1),
       NumberOfQuestions : question.numberOfQuestions,
-        link : this.questionPapers[i].payload.doc.id
+          link : this.questionPapers[i].payload.doc.id
       }
     }
   }
@@ -84,7 +89,9 @@ export class QuestionListComponent implements OnInit {
   press(row: any) {
     this.questionService.questionPaper = this.questionPapers[row.link];
     let link = row.link + 'exammmm';
-    this.router.navigate(['/questions/exam/' , link]);
+    if(!this.isAdmin){
+      this.router.navigate(['/questions/exam/' , link]);
+    }
   }
 
 

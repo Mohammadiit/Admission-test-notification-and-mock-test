@@ -21,6 +21,7 @@ export class AdmissionInfoUploadComponent implements OnInit {
   admissionInfoData = this.admissionInfoService.admissionInfoForm;
   admissionInformation: AdmissionInformation;
   ngOnInit() {
+
   }
 
   signOut() {
@@ -57,6 +58,7 @@ export class AdmissionInfoUploadComponent implements OnInit {
     };
     console.log(this.admissionInfoData.value);
     this.admissionInfoUpload(this.admissionInformation);
+    this.admissionInfoData.reset();
   }
 
   private admissionInfoUpload(admissionInformation: AdmissionInformation) {

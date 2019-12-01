@@ -84,7 +84,9 @@ export class SignUpComponent implements OnInit {
       }
     };
     this.registerUser(this.userInformation);
+
     this.router.navigate([urlPaths.Authentication.Signup]);
+    this.signUpData.reset();
   }
 
   private registerUser(signUpData: UserInformation) {

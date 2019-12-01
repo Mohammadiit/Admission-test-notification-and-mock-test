@@ -7,32 +7,53 @@ export const defaultConst = {
 export const admissionHelperConst = {
   sideBar: [
     {
-      name: 'Admission Information List',
+      name: 'Admission Info List',
       url: '/admission-info/list',
-      icon: 'home',
+      icon: 'assignment',
       role: [Roles.Admin, Roles.Customer],
-      mini_name: 'Home'
+      mini_name: 'Ad.list'
     },
     {
-      name: 'Admission Information Upload',
+      name: 'Admission Info Upload',
       url: '/admission-info/upload',
-      icon: 'home',
+      icon: 'cloud_upload',
       role: [Roles.Admin],
-      mini_name: 'Home'
+      mini_name: 'Ad.upload'
     },
     {
       name: 'Question Upload',
-      url: '/questions/list',
-      icon: 'home',
+      url: '/questions/upload',
+      icon: 'question_answer',
       role: [Roles.Admin],
-      mini_name: 'Home'
+      mini_name: 'Q.upload'
     },
     {
       name: 'Exam',
       url: '/questions/list',
-      icon: 'home',
+      icon: 'explicit',
       role: [Roles.Customer],
-      mini_name: 'Home'
+      mini_name: 'Exam'
+    },
+    {
+      name: 'Contest List',
+      url: '/questions/contest-list',
+      icon: 'format_align_justify',
+      role: [Roles.Admin, Roles.Customer],
+      mini_name: 'Con.list'
+    },
+    {
+      name: 'Set contest',
+      url: '/questions/set-contest',
+      icon: 'people_outline',
+      role: [Roles.Admin],
+      mini_name: 'Set.contest'
+    },
+    {
+      name: 'Contest results',
+      url: '/questions/contest-result-list',
+      icon: 'bar_chart',
+      role: [Roles.Customer],
+      mini_name: 'Con.result'
     }
   ]
 };

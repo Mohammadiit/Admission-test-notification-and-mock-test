@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {QuestionService} from '../services/question.service';
 import {QueryServiceService} from '../../shared/service/query-service.service';
 import {Router} from '@angular/router';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
+
+export interface PeriodicElement {
+  participantName : string,
+  score : number
+}
 
 @Component({
   selector: 'app-contest-result',
@@ -9,6 +15,11 @@ import {Router} from '@angular/router';
   styleUrls: ['./contest-result.component.scss']
 })
 export class ContestResultComponent implements OnInit {
+
+  displayedColumns: string[] = [ 'participantName', 'score'];
+  data : PeriodicElement[] = [];
+  dataSource = new MatTableDataSource<PeriodicElement>(this.data);
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   contestId;
   result;
@@ -24,8 +35,21 @@ export class ContestResultComponent implements OnInit {
       res =>{
         console.log(res);
         this.result = res;
+        this.loadData();
+        this.dataSource.paginator = this.paginator;
       }
     )
   }
 
+  private loadData() {
+    // this.result = this.result.payload.doc.data();
+    for( let i=0;i< this.result.marks.length; ++i) {
+      let marks = this.result.marks[i];
+      this.data[i]={
+        participantName : marks.fullName,
+        score : marks.score,
+
+      }
+    }
+  }
 }

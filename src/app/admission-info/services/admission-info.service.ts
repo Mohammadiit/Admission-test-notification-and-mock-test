@@ -10,6 +10,7 @@ import {first} from 'rxjs/operators';
 })
 export class AdmissionInfoService {
   item;
+  reg = '(https://.*)';
   constructor(private fb: FormBuilder
   , public af: AngularFirestore
   ) {
@@ -22,13 +23,17 @@ export class AdmissionInfoService {
     applicationEnds: ['', [ Validators.required]],
     examDate: ['', [ Validators.required]],
     totalFees: ['', [ Validators.required]],
-    officialNoticeLink: ['', [ Validators.required]],
+    officialNoticeLink: ['', [ Validators.required,
+      Validators.pattern(this.reg)]],
     minimumCGPA: ['', [ Validators.required]],
     hscPassingYear: ['', [ Validators.required]],
     sscPassingYear: ['', [ Validators.required]],
-    admitCardLink: ['', [ Validators.required]],
-    seatPlanLink: ['', [ Validators.required]],
-    meritListLink: ['', [ Validators.required]]
+    admitCardLink: ['', [ Validators.required,
+      Validators.pattern(this.reg)]],
+    seatPlanLink: ['', [ Validators.required,
+      Validators.pattern(this.reg)]],
+    meritListLink: ['', [ Validators.required,
+      Validators.pattern(this.reg)]]
   });
 
   admissionInfoUpload(admissionInformation: AdmissionInformation) {

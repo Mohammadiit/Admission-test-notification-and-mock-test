@@ -26,11 +26,12 @@ export interface PeriodicElement {
 export class ContestListComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'duration', 'startTime', 'Actions'];
   data : PeriodicElement[] = [];
-  dataSource = new MatTableDataSource<PeriodicElement>();
+  dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   interval;
   timeLeft;
   userId;
   public contests;
+  isAdmin;
   public array = [];
   public register = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -41,6 +42,7 @@ export class ContestListComponent implements OnInit {
 
   ngOnInit() {
     //     Stop watch //
+
 
     // console.log('kkkkkkkkkkkkk       forrrrrrrrrrr' + moment().startOf('day')
     //   .seconds(154)
@@ -59,27 +61,26 @@ export class ContestListComponent implements OnInit {
     this.queryService.getLoggedInUserID().subscribe(res =>{
       this.userId = res;
     })
-    this.questionService.getAllContest() .subscribe(result => {
-      this.contests = result;
+    this.securityService.isAdmin().subscribe(res=>{
+      this.isAdmin = res;
+      console.log("ttttttttttttttt");
+      console.log(this.isAdmin);
+      this.questionService.getAllContest() .subscribe(result => {
+        this.contests = result;
 
 
-
-
-
-
-
-
-
-      this.loadData();
-      this.dataSource.paginator = this.paginator;
-      this.check();
-      // this.loadRegisterArray().subscribe(res=>{
-      //   console.log(this.register);
-      //   for(let j=0;j<this.array.length;++j){
-      //     this.data[j].register = this.register [this.array[j]];
-      //   }
-      // });
+        this.loadData();
+        this.dataSource.paginator = this.paginator;
+        this.check();
+        // this.loadRegisterArray().subscribe(res=>{
+        //   console.log(this.register);
+        //   for(let j=0;j<this.array.length;++j){
+        //     this.applicationStarts[j].register = this.register [this.array[j]];
+        //   }
+        // });
+      });
     });
+
   }
 
   loadRegisterArray(): Observable<any> {
@@ -169,7 +170,7 @@ export class ContestListComponent implements OnInit {
           ++j;
         }
       }
-      this.dataSource.data = this.data;
+      // this.dataSource.applicationStarts = this.data;
   }
 
 

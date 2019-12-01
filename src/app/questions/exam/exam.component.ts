@@ -69,10 +69,12 @@ export class ExamComponent implements OnInit {
     }
 
     if (url.indexOf('contest')>0) {
+
       this.contestId = url.substring(43,63);
       console.log(url.substring(16,36)+ '   '+url.substring(43,63));
 
       this.isContest = true;
+      this.finish();
       this.queryService.getSingleData('contests',this.contestId).subscribe(res =>{
         this.contest = res;
         this.calculateDuration();
@@ -214,7 +216,11 @@ export class ExamComponent implements OnInit {
       this.getUserName().subscribe(res=>{
         console.log(res);
         this.estimateMark();
-        let payload = res.metaData.fullName + ':' +this.estimate;
+        // let payload = res.metaData.fullName + ':' +this.estimate;
+        let payload = {
+          fullName : res.metaData.fullName,
+          score : this.estimate
+        }
         this.questionService.upadateArrayField('contests',
           this.contestId,'marks',payload);
         let time = 0;

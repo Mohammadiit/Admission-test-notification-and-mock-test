@@ -67,9 +67,9 @@ export class NavbarComponent {
     // );
     this.afAuth.auth.onAuthStateChanged
     // this.authenticationService.isLoggedIn.subscribe(
-    //   data => {
-    //     console.log(data);
-    //     this.isLoggedIn = data;
+    //   applicationStarts => {
+    //     console.log(applicationStarts);
+    //     this.isLoggedIn = applicationStarts;
     //   }
     // );
 

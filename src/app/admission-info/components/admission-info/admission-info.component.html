@@ -1,19 +1,18 @@
-<div fxLayout="column" fxLayoutAlign="center center" class='px-250'>
+<div fxLayout="column" fxLayoutAlign="center center" >
 
-
-
-  <mat-card class='w-100-p p-48 m-56'>
+<div>
+  <mat-card class='w-100-p p-48 m-56' fxLayout="column">
 
     <h1>{{singleItem.universityName}}</h1>
     <h3>Unit Name: {{singleItem.unitName}}.</h3>
 
     <h2>Important Dates And Informations</h2>
 
-    <p>Application starts:{{data | date: 'dd MMM yyyy'}}</p>
+    <p>Application starts:{{applicationStarts | date: 'dd MMM yyyy'}}</p>
 
-    <p>Application ends:{{singleItem.applicationEnds}}</p>
+    <p>Application ends:{{applicationEnds | date: 'dd MMM yyyy'}}</p>
 
-    <p>Exam Date:{{singleItem.examDate}}</p>
+    <p>Exam Date:{{examDate | date: 'dd MMM yyyy'}}</p>
 
     <p>Total fees:{{singleItem.totalFees}}</p>
 
@@ -25,7 +24,7 @@
     <br>
     <a mat-raised-button class="h-60 w-352 font-size-28 pt-8 ml-116 mt-28"
        style="background-color:#76448a;color: #F1C40F; font-weight: 600; text-decoration: none"
-      href="{{singleItem.admitCardLink}}" target="_blank">
+       href="{{singleItem.admitCardLink}}" target="_blank">
       Admit Card Download</a>
 
 
@@ -36,7 +35,7 @@
     <p>SSC passing year:{{singleItem.sscPassingYear}}</p>
     <a mat-raised-button class="h-60 w-352 font-size-28 pt-8 ml-116 mt-28"
        style="background-color:#239856;color: #F1C40F; font-weight: 600; text-decoration: none"
-      href="{{singleItem.seatPlanLink}}" target="_blank">
+       href="{{singleItem.seatPlanLink}}" target="_blank">
       Seat Plan Download</a>
     <a mat-raised-button class="h-60 w-352 font-size-28 pt-8 ml-116 mt-28"
        style="background-color:#2874a6;color: #F1C40F; font-weight: 600; text-decoration: none"
@@ -44,4 +43,7 @@
       Merit List Download</a>
 
   </mat-card>
+</div>
+
+
 </div>
