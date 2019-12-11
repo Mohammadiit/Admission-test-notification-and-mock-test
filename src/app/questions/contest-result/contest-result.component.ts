@@ -23,12 +23,11 @@ export class ContestResultComponent implements OnInit, OnDestroy {
 
   contestId;
   result;
+  tt=0;
   constructor(public questionService: QuestionService,
               private queryService: QueryServiceService,
               private router: Router) { }
-  public ngOnDestroy() {
-    alert("Hello! I am an alert box!!");
-  }
+
   ngOnInit() {
     let url = this.router.url;
     this.contestId = url.substring(26,46);

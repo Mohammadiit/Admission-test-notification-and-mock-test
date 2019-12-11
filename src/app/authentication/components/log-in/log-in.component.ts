@@ -20,7 +20,9 @@ export class LogInComponent implements OnInit {
   constructor(private authService: AuthenticationService, private  router: Router,
               private securityService: SecurityService,
               private sharedService: SharedService
-              ) { }
+              ) {
+    this.logInData.reset();
+  }
 
   ngOnInit() {
   }
@@ -37,7 +39,7 @@ export class LogInComponent implements OnInit {
         this.StudentCheck();
 
         this.router.navigate(['']);
-        this.logInData.reset();
+
       }
     });
   }

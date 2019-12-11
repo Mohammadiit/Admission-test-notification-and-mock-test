@@ -150,24 +150,26 @@ export class ContestListComponent implements OnInit {
         if (status) {
           let isRegistered = false;
           let students = contest.attended;
-          let ok = false;
+          let ok = true;
           for(let i =0;i<students.length;++i){
             if(students[i] == this.userId){
-              ok = true;
+              ok = false;
             }
           }
+          if(ok){
+            this.data[j] = {
+              name: "contests " + (i + 1),
+              duration: contest.duration,
+              startTime: contest.startTime,
+              status: true,
+              questionLink: contest.questionId,
+              contestLink: this.contests[i].payload.doc.id,
+              register: ok,
 
-          this.data[j] = {
-            name: "contests " + (i + 1),
-            duration: contest.duration,
-            startTime: contest.startTime,
-            status: true,
-            questionLink: contest.questionId,
-            contestLink: this.contests[i].payload.doc.id,
-            register: ok,
+            };
+            ++j;
+          }
 
-          };
-          ++j;
         }
       }
       // this.dataSource.applicationStarts = this.data;

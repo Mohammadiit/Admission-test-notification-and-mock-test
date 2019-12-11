@@ -80,10 +80,10 @@ export class SecurityService {
         .subscribe((res2) => {
           console.log(res2);
           let students = res2.attended;
-          let ok = false;
+          let ok = true;
           for(let i =0;i<students.length;++i){
             if(students[i] == studentId){
-                ok = true;
+                ok = false;
             }
           }
           console.log("   contest   ttttttttttttt  studentId  "+studentId);

@@ -33,8 +33,9 @@ export class AccountRecoveryComponent implements OnInit {
       // console.log(res);
       if (res && res.code) {
         console.log(res.code);
+        this.sharedService.openSnackBarLattest('User not found','ERROR');
       } else {
-        this.openSnackBar();
+        this.sharedService.openSnackBarLattest('Email is sent. Please check it ', 'DONE')
       }
     });
   }

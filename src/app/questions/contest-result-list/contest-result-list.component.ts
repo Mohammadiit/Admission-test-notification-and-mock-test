@@ -54,11 +54,11 @@ export class ContestResultListComponent implements OnInit {
       // let contestTimeWithDuration = moment(contest.startTime).add(contest.duration, 'm').toDate();
       let d = new Date(contest.startTime);
 
-
-      var diff = new Date(contest.startTime) - new Date();
-      diff += contest.duration*60*10000;
+      let now = new Date();
+      var diff = new Date(contest.startTime) - now;
+      diff += contest.duration*60*1000;
       console.log('difffffffffff       '+diff+'    '+new Date(contest.startTime).toString().substring(0,24)
-      +'   '+new Date(contest.startTime)
+      +'   '+now
       );
       let status1;
 
@@ -69,7 +69,7 @@ export class ContestResultListComponent implements OnInit {
 
       // contest.startTime = moment(contest.startTime).format('MMMM Do YYYY, h:mm:ss a');
 
-      if(!status1){
+      // if(!status1){
         this.data[j] = {
           name: "contests " + (i + 1),
           duration: contest.duration,
@@ -78,7 +78,7 @@ export class ContestResultListComponent implements OnInit {
           contestLink: this.contests[i].payload.doc.id
         };
         ++j;
-      }
+      // }
 
     }
   }

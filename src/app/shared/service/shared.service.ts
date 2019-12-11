@@ -26,6 +26,11 @@ export class SharedService {
       duration: 2000,
     });
   }
+  openSnackBarLonger(message: string, action: string) {
+    this.snackbar.open(message, action, {
+      duration: 10000,
+    });
+  }
 
 }
 

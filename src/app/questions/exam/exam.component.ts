@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {QuestionService} from '../services/question.service';
 import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {question} from '../../config/interfaces/question.interface';
@@ -14,7 +14,7 @@ import {SharedService} from '../../shared/service/shared.service';
   templateUrl: './exam.component.html',
   styleUrls: ['./exam.component.scss']
 })
-export class ExamComponent implements OnInit {
+export class ExamComponent implements OnInit, OnDestroy  {
   private Results =[];
   private Answers = [];
 
@@ -51,7 +51,20 @@ export class ExamComponent implements OnInit {
   attendedDifficulties = [];
   numberOfQuestion;
   numberEachDifficulty;
+  normal = 0;
+  public ngOnDestroy() {
+    if(this.normal == 0){
+      if(!this.isContest) {
+        this.sharedService.openSnackBarLonger('Your result is this', 'DONE');
+      }
+      else {
+        this.sharedService.openSnackBarLonger('Contest result is this', 'DONE');
+      }
+      this.normal = 2;
+      this.finish();
+    }
 
+  }
   ngOnInit() {
 
     let url = this.router.url;
@@ -220,6 +233,14 @@ export class ExamComponent implements OnInit {
   }
   finish(){
     if(this.isContest){
+      if(this.normal == 2) {
+        this.queryService.getLoggedInUserID().subscribe(res =>{
+          let studentId = res;
+          this.questionService.
+          upadateAttendedArrayField('contests',
+            this.contestId, studentId);
+        })
+      }
       if(this.duration!=0) {
         this.sharedService.openSnackBarLattest('Your assessment is finished','DONE');
       }

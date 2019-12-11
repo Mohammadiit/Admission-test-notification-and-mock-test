@@ -20,6 +20,7 @@ const routes: Routes = [
   }, {
     path: 'exam/:id',
     component: ExamComponent,
+    canActivate: [ContestRegisteredGuard]
 
 
   }, {
@@ -34,11 +35,11 @@ const routes: Routes = [
     component: SetContestComponent
   }, {
     path: 'contest-list',
-    component: ContestListComponent
+    component: ContestListComponent,
+
   }, {
     path: 'contest-result/:id',
     component: ContestResultComponent,
-
   }, {
     path: 'contest-result-list',
     component: ContestResultListComponent
