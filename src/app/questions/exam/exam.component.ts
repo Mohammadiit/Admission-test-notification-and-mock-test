@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {QuestionService} from '../services/question.service';
-import {NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {question} from '../../config/interfaces/question.interface';
 import {urlPaths} from '../../config/constants/defaultConstants';
 import {Observable, Subscription} from 'rxjs';
 import {QueryServiceService} from '../../shared/service/query-service.service';
 import * as moment from 'moment';
+import {SharedService} from '../../shared/service/shared.service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class ExamComponent implements OnInit {
 
   constructor(public questionService: QuestionService,
               private queryService: QueryServiceService,
-              private router: Router) { }
+              private sharedService:SharedService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
   questionPaper;
   questionAttempt = [];
   statement;
@@ -62,6 +65,7 @@ export class ExamComponent implements OnInit {
         this.questionPaper = res;
         console.log(res);
 
+
         this.loadProjects();
         this.questionShow();
         // console.log(this.questionPaper.question1.statements);
@@ -74,7 +78,6 @@ export class ExamComponent implements OnInit {
       console.log(url.substring(16,36)+ '   '+url.substring(43,63));
 
       this.isContest = true;
-      this.finish();
       this.queryService.getSingleData('contests',this.contestId).subscribe(res =>{
         this.contest = res;
         this.calculateDuration();
@@ -116,7 +119,11 @@ export class ExamComponent implements OnInit {
 
   private timeCheck() {
     this.interval = setInterval(() => {
-      if(this.duration == 0) this.finish();
+      if(this.duration == 0) {
+        this.sharedService.openSnackBarLattest('Time has finished', 'DONE');
+        this.finish();
+
+      }
       this.time = moment().startOf('day')
         .seconds(this.duration)
         .format('H:mm:ss');
@@ -213,6 +220,9 @@ export class ExamComponent implements OnInit {
   }
   finish(){
     if(this.isContest){
+      if(this.duration!=0) {
+        this.sharedService.openSnackBarLattest('Your assessment is finished','DONE');
+      }
       this.getUserName().subscribe(res=>{
         console.log(res);
         this.estimateMark();
@@ -240,7 +250,10 @@ export class ExamComponent implements OnInit {
       this.questionService.R = this.R;
       this.questionService.W = this.W;
       this.questionService.L = this.L;
-      this.router.navigate([urlPaths.Question.result.url]);
+
+      let id = Math.random().toString(36).substring(7);
+      this.questionService.uploadExamResult(id);
+      this.router.navigate([urlPaths.Question.result.url , id]);
     }
   }
 
@@ -268,6 +281,8 @@ export class ExamComponent implements OnInit {
 
       })
     })
+
+
 
 
 

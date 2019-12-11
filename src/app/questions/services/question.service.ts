@@ -33,7 +33,19 @@ export class QuestionService {
       attended: firestore.FieldValue.arrayUnion(fieldValue)
     });
   }
+  uploadExamResult( id){
+    this.af.collection("exam-result").doc(id).set({
+      QuestionAttempt: this.QuestionAttempt,
+      Difficulty: this.Difficulty,
+      Answer: this.Answer,
+      Results: this.Results,
+      L: this.L,
+      W: this.W,
+      D: this.D,
+      R: this.R,
 
+    })
+  }
   uploadQuestion(questions: question[], fileUploadForm: FormGroup) {
     let now = new Date();
     return this.af.collection('question-paper').add({

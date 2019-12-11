@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {QuestionService} from '../services/question.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material';
+import {QueryServiceService} from '../../shared/service/query-service.service';
+import {SharedService} from '../../shared/service/shared.service';
 export interface PeriodicElement {
   Question : string,
   Difficulties: number,
@@ -14,13 +16,18 @@ export interface PeriodicElement {
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
+  url;
 
   displayedColumns: string[] = [ 'Question', 'Difficulties', 'Answer', 'Right'];
   data : PeriodicElement[] = [];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
 
   constructor(public questionService: QuestionService,
-              private router: Router) { }
+              private queryService: QueryServiceService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    this.url = activatedRoute.snapshot.url[1].path;
+  }
   L=0;
   W=0;
   D=0;
@@ -30,13 +37,26 @@ export class ResultComponent implements OnInit {
   Difficulty = [];
   Answer = [];
   Results = [];
-
+  examInfo;
+  
   ngOnInit() {
 
-    this.QuestionAttempt = this.questionService.QuestionAttempt;
-    this.Difficulty = this.questionService.Difficulty;
-    this.Answer = this.questionService.Answer;
-    this.Results = this.questionService.Results;
+    this.queryService.getSingleData('exam-result', this.url).subscribe(res =>{
+      this.examInfo = res;
+      this.QuestionAttempt = this.examInfo.QuestionAttempt;
+      console.log(this.QuestionAttempt);
+      this.Difficulty = this.examInfo.Difficulty;
+      this.Answer = this.examInfo.Answer;
+      this.Results = this.examInfo.Results;
+
+      this.D = this.examInfo.D;
+      this.R = this.examInfo.R;
+      this.W = this.examInfo.W;
+      this.L = this.examInfo.L;
+
+      console.log(res);
+    });
+
     this.loadData();
 
     this.assignValue();
@@ -60,10 +80,7 @@ export class ResultComponent implements OnInit {
     console.log(this.Difficulty);
     console.log(this.Answer);
     console.log(this.QuestionAttempt);
-    this.D = this.questionService.D;
-    this.R = this.questionService.R;
-    this.W = this.questionService.W;
-    this.L = this.questionService.L;
+
      // this.estimate = (24/11) + Math.log(5/6) / Math.log(2.718);
     let e;
      if(this.R ==0 || this.W ==0){

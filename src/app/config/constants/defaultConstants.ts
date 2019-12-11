@@ -7,10 +7,16 @@ export const defaultConst = {
 export const admissionHelperConst = {
   sideBar: [
     {
+      name: 'Home',
+      url: '',
+      icon: 'home',
+      role: [Roles.Admin, Roles.Customer, Roles.Anonymous ],
+      mini_name: 'Home'
+    },{
       name: 'Admission Info List',
       url: '/admission-info/list',
       icon: 'assignment',
-      role: [Roles.Admin, Roles.Customer],
+      role: [Roles.Admin, Roles.Customer, Roles.Anonymous],
       mini_name: 'Ad.list'
     },
     {

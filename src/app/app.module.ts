@@ -20,7 +20,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule
+  MatTableModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule
 } from '@angular/material';
 
 ///  firebase     ////
@@ -67,7 +67,8 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

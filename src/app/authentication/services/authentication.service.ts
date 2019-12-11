@@ -14,11 +14,11 @@ export class AuthenticationService {
 
 
   public logInForm = this.fb.group({
-    email: [''],
-    password: ['']
+    email: ['',[ Validators.required, Validators.email]],
+    password: ['',[ Validators.required]]
   });
   public recoverAccountForm = this.fb.group({
-    email: ['']
+    email: ['',[ Validators.required, Validators.email]]
   });
   public signUpForm = this.fb.group({
     fullName: ['',[ Validators.required] ],

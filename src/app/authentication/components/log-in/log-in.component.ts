@@ -5,7 +5,8 @@ import * as util from 'util'; // has no default export
 import { inspect } from 'util';
 import {first} from 'rxjs/operators';
 import {urlPaths} from '../../../config/constants/defaultConstants';
-import {SecurityService} from '../../../shared/service/security-service/security.service'; // or directly
+import {SecurityService} from '../../../shared/service/security-service/security.service';
+import {SharedService} from '../../../shared/service/shared.service'; // or directly
 
 @Component({
   selector: 'app-log-in',
@@ -17,7 +18,8 @@ export class LogInComponent implements OnInit {
   logInData = this.authService.logInForm;
 
   constructor(private authService: AuthenticationService, private  router: Router,
-              private securityService: SecurityService
+              private securityService: SecurityService,
+              private sharedService: SharedService
               ) { }
 
   ngOnInit() {
@@ -27,7 +29,9 @@ export class LogInComponent implements OnInit {
     this.authService.signIn(this.logInData.value).pipe(first()).subscribe((res) => {
       if (res && res.code) {
          console.log(res.code);
+         this.sharedService.openSnackBarLattest('Invalid Email or password', 'ERROR');
       } else {
+        this.sharedService.openSnackBarLattest('Successfully Logged in', 'DONE');
         this.authService.isLoggedIn.next(true);
         this.AdminCheck();
         this.StudentCheck();
@@ -61,4 +65,8 @@ export class LogInComponent implements OnInit {
   }
 
 
+  backToHome() {
+    this.router.navigate(['']);
+
+  }
 }

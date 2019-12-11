@@ -20,10 +20,13 @@ import { FileUploadTaskComponent } from './components/file-upload-task/file-uplo
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule }    from '@angular/common/http';
 import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN  } from '@angular/fire/functions';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [SnackbarComponent, FileUploaderComponent, FileUploadTaskComponent],
   imports: [
+    MatMenuModule,
+    MatListModule,
     MatPaginatorModule,
     MatRadioModule,
     MatToolbarModule,
@@ -49,6 +52,8 @@ import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN  } from '@angular/fire/fun
     AngularFireFunctionsModule,
   ],
   exports: [
+    MatMenuModule,
+    MatListModule,
     MatPaginatorModule,
     MatRadioModule,
     MatToolbarModule,

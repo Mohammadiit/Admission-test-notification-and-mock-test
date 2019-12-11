@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {QuestionService} from '../services/question.service';
 import {QueryServiceService} from '../../shared/service/query-service.service';
 import {Router} from '@angular/router';
@@ -14,7 +14,7 @@ export interface PeriodicElement {
   templateUrl: './contest-result.component.html',
   styleUrls: ['./contest-result.component.scss']
 })
-export class ContestResultComponent implements OnInit {
+export class ContestResultComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [ 'participantName', 'score'];
   data : PeriodicElement[] = [];
@@ -26,7 +26,9 @@ export class ContestResultComponent implements OnInit {
   constructor(public questionService: QuestionService,
               private queryService: QueryServiceService,
               private router: Router) { }
-
+  public ngOnDestroy() {
+    alert("Hello! I am an alert box!!");
+  }
   ngOnInit() {
     let url = this.router.url;
     this.contestId = url.substring(26,46);

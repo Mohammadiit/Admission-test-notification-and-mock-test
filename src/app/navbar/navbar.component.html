@@ -95,20 +95,35 @@
 <!--            </button>-->
 <!--          </mat-menu>-->
 <!--        </div>-->
+        <div [matMenuTriggerFor]="menu"  fxLayout="row" fxLayoutAlign="center center"
+             class="mr-64">
 
+          <!-- (click)='route(Username.url)' -->
+          <button mat-button class="font-size-16"> <i class="material-icons-outlined cursor-pointer">
+            settings
+          </i></button>
 
-        <div *ngIf='!isLoggedIn' (click)='routeToLogIn()' fxLayout="row" fxLayoutAlign="center center" class="mr-64">
-          <mat-icon class="material-icons-outlined cursor-pointer">
-            settings
-          </mat-icon>
-          <button mat-button class="font-size-16">Log in</button>
+        <mat-menu #menu="matMenu" class="w-80 mt-16 primary-background-color ">
+          <button mat-menu-item *ngIf='!isLoggedIn' (click)='routeToLogIn()'>
+            <div class="white">Log in</div>
+          </button>
+          <button mat-menu-item *ngIf='isLoggedIn' (click)='routeToLogOut()'>
+            <div class="white">Log out</div>
+          </button>
+        </mat-menu>
         </div>
-        <div *ngIf='isLoggedIn' (click)='routeToLogOut()' fxLayout="row" fxLayoutAlign="center center" class="mr-64">
-          <mat-icon class="material-icons-outlined cursor-pointer">
-            settings
-          </mat-icon>
-          <button mat-button class="font-size-16">Log out</button>
-        </div>
+<!--        <div *ngIf='!isLoggedIn' (click)='routeToLogIn()' fxLayout="row" fxLayoutAlign="center center" class="mr-64">-->
+<!--          <mat-icon class="material-icons-outlined cursor-pointer">-->
+<!--            settings-->
+<!--          </mat-icon>-->
+<!--          <button mat-button class="font-size-16">Log in</button>-->
+<!--        </div>-->
+<!--        <div *ngIf='isLoggedIn' (click)='routeToLogOut()' fxLayout="row" fxLayoutAlign="center center" class="mr-64">-->
+<!--          <mat-icon class="material-icons-outlined cursor-pointer">-->
+<!--            settings-->
+<!--          </mat-icon>-->
+<!--          <button mat-button class="font-size-16">Log out</button>-->
+<!--        </div>-->
       </div>
 
 

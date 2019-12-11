@@ -38,12 +38,14 @@ export class NavbarComponent {
           console.log(this.isLoggedIn);
         } else {
           // do something else
+          let i=0;
+          this.sideBarPush('Anonymous');
           this.isLoggedIn = false;
           console.log(this.isLoggedIn);
         }
       })
     )
-      .subscribe()
+      .subscribe();
   }
 
   constructor(private breakpointObserver: BreakpointObserver,
@@ -88,14 +90,22 @@ export class NavbarComponent {
   }
   makeSideBar() {
     let admin;
-    this.securityService.isAdmin().subscribe((res)=>{
+
+    console.log("LLLLLgogggggggg    " + this.isLoggedIn);
+    // if(this.isLoggedIn){
+      this.securityService.isAdmin().subscribe((res)=>{
         if(res){
           this.sideBarPush('Admin');
         }
         else{
           this.sideBarPush('Student');
         }
-    })
+      })
+    // }
+    // else {
+    //   this.sideBarPush('Anonymous');
+    // }
+
 
 
   }

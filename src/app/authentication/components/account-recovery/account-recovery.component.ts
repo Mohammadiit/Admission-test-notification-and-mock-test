@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {UserInformation} from '../../../config/interfaces/user.interface';
 import {first} from 'rxjs/operators';
 import {SharedService} from '../../../shared/service/shared.service';
-import {defaultConst} from '../../../config/constants/defaultConstants';
+import {defaultConst, urlPaths} from '../../../config/constants/defaultConstants';
 
 @Component({
   selector: 'app-account-recovery',
@@ -38,6 +38,15 @@ export class AccountRecoveryComponent implements OnInit {
       }
     });
   }
+
+  routeToLogIn() {
+    this.router.navigate([urlPaths.Authentication.Signin.url]);
+  }
+  backToHome() {
+    this.router.navigate(['']);
+
+  }
+
   openSnackBar() {
     this.sharedService.openSnackBar({
       data: { message: defaultConst.emailsent, isAccepted: true },

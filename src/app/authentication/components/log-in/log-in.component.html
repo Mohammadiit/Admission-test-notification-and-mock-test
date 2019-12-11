@@ -9,10 +9,26 @@
       <mat-form-field class="example-full-width px-16 font-size-16" appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" placeholder="Email">
+        <mat-error
+          *ngIf="logInData.get('email').errors?.required &&
+                   logInData.get('email').touched">
+          Email is required
+        </mat-error>
+        <mat-error
+          *ngIf="logInData.get('email').touched &&
+        logInData.get('email').invalid && logInData.get('email').errors.email
+                   ">
+          No valid email
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width px-16 font-size-16" appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password" placeholder="Password">
+        <mat-error
+          *ngIf="logInData.get('password').errors?.required &&
+                   logInData.get('password').touched">
+          Password is required
+        </mat-error>
       </mat-form-field>
       <button mat-raised-button class="primary-background-color white w-180 h-40  font-size-20" [disabled]="!logInData.valid">LOG IN</button>
       <div fxLayout="row" fxLayoutGap="8px" class="p-12 mt-16 font-size-16">
@@ -22,6 +38,10 @@
       <div fxLayout="row" fxLayoutGap="8px" class=" font-size-16">
         <p> Foget password ?</p>
         <a (click)="routeToRecoverAccount()">RECOVER ACCOUNT</a>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" class=" mt-16 font-size-16">
+        <p> Back to home</p>
+        <a (click)="backToHome()">BACK TO HOME</a>
       </div>
 
 

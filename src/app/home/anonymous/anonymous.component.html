@@ -1,67 +1,94 @@
-<div fxLayout="row" >
+<div fxLayout="row" class="p-36">
   <div fxFlex="50">
-    <mat-card class="example-card " >
+    <mat-card class="example-card" style="padding: 0px!important;
+      ">
 
-        <mat-toolbar  class="primary-background-color">
+        <mat-toolbar  class="primary-background-color white ">
           <mat-card-title>Admission Information</mat-card-title>
         </mat-toolbar>
 
-      <mat-card-content *ngFor="let i of [1,2]">
-        <mat-card-title>University name</mat-card-title>
-        <mat-card-subtitle>Unit name</mat-card-subtitle>
-        <p class="p-18">
-          Application Starts:
+      <mat-card-content *ngFor="let i of list" class="p-24 font-size-16">
+        <mat-card-title>{{i.payload.doc.data().universityName}}</mat-card-title>
+        <mat-card-subtitle class="font-size-16 pt-12">Unit name: {{i.payload.doc.data().unitName}}</mat-card-subtitle>
+        <p >
+          Application Starts:   {{i.payload.doc.data().applicationStarts.toDate()| date: 'dd MMM yyyy'}}
         </p>
         <p>
-          Application Starts:
+          Application Ends:  {{i.payload.doc.data().applicationEnds.toDate()| date: 'dd MMM yyyy'}}
         </p>
         <p>
-          Application Starts:
+          Exam date:  {{i.payload.doc.data().examDate.toDate()| date: 'dd MMM yyyy'}}
         </p>
+        <button mat-raised-button (click)="routeToAdmissionInfo(i.payload.doc.id)"
+                class="primary-background-color white mt-20">Details</button>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>Details</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
+
     </mat-card>
   </div>
-  <div fxLayout="column" fxFlex="50">
-    <div fxFlex="50">
-      <mat-card class="p-0">
+  <div fxLayout="column" fxFlex="50" class="pl-36">
+    <div fxFlex="50" >
+      <mat-card class="p-0" style="padding: 0px!important;">
         <!-- <mat-card-header> -->
-        <mat-toolbar color="primary">
+        <mat-toolbar class="primary-background-color white">
           <mat-toolbar-row>
                         <span>
-                            <mat-card-title>Dupay Features</mat-card-title>
+                            <mat-card-title>Exam</mat-card-title>
                         </span>
           </mat-toolbar-row>
         </mat-toolbar>
 
         <!-- </mat-card-header> -->
 
-        <mat-card-content>
-                kkkkkk
+        <mat-card-content class="p-20">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon class="primary-color">note</mat-icon>
+              <p mat-line> Multiple Question papers </p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon class="primary-color">note</mat-icon>
+              <p mat-line> Computerized Automated Test </p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon class="primary-color">note</mat-icon>
+              <p mat-line> Full result and performance list </p>
+            </mat-list-item>
+          </mat-list>
         </mat-card-content>
         <!-- <mat-card-actions>
         <button mat-button>LIKE</button>
     </mat-card-actions> -->
       </mat-card>
     </div>
-    <div fxFlex="50">
-      <mat-card class="p-0">
+    <div fxFlex="30" class="pt-20">
+      <mat-card class="p-0" style="padding: 0px!important;">
         <!-- <mat-card-header> -->
-        <mat-toolbar color="primary">
+        <mat-toolbar class="primary-background-color white">
           <mat-toolbar-row>
                         <span>
-                            <mat-card-title>Dupay Features</mat-card-title>
+                            <mat-card-title>Contest</mat-card-title>
                         </span>
           </mat-toolbar-row>
         </mat-toolbar>
 
         <!-- </mat-card-header> -->
 
-        <mat-card-content>
-          kkkkkk
+        <mat-card-content class="p-20">
+
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon class="primary-color">note</mat-icon>
+              <p mat-line> Attending multiple students  </p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon class="primary-color">note</mat-icon>
+              <p mat-line> Result list </p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon class="primary-color">note</mat-icon>
+              <p mat-line> Time framed test </p>
+            </mat-list-item>
+          </mat-list>
         </mat-card-content>
         <!-- <mat-card-actions>
         <button mat-button>LIKE</button>

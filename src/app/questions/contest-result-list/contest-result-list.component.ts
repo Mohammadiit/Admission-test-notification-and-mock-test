@@ -69,15 +69,17 @@ export class ContestResultListComponent implements OnInit {
 
       // contest.startTime = moment(contest.startTime).format('MMMM Do YYYY, h:mm:ss a');
 
+      if(!status1){
+        this.data[j] = {
+          name: "contests " + (i + 1),
+          duration: contest.duration,
+          startTime: contest.startTime,
+          status: status1,
+          contestLink: this.contests[i].payload.doc.id
+        };
+        ++j;
+      }
 
-      this.data[j] = {
-        name: "contests " + (i + 1),
-        duration: contest.duration,
-        startTime: contest.startTime,
-        status: status1,
-        contestLink: this.contests[i].payload.doc.id
-      };
-      ++j;
     }
   }
 

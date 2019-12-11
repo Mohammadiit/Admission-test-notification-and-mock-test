@@ -6,7 +6,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserInformation} from '../../../config/interfaces/user.interface';
 import {Roles} from '../../../config/enum/default.enum';
 import {urlPaths} from '../../../config/constants/defaultConstants';
-import {FieldMatcher} from '../../../shared/service/shared.service';
+import {FieldMatcher, SharedService} from '../../../shared/service/shared.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
   userInformation: UserInformation;
   private matcher;
   constructor(private authService: AuthenticationService,
+              private sharedService: SharedService,
               private fb: FormBuilder,
               private  router: Router) { }
 
@@ -91,11 +92,16 @@ export class SignUpComponent implements OnInit {
 
   private registerUser(signUpData: UserInformation) {
     this.authService.signUp(signUpData);
+    this.router.navigate([urlPaths.Authentication.Signin.url]);
   }
 
   routeToLogIn() {
     this.router.navigate([urlPaths.Authentication.Signin.url]);
   }
 
+  backToHome() {
+    this.router.navigate(['']);
+
+  }
 
 }

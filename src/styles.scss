@@ -59,6 +59,12 @@ pre{
 .bold{
   font-weight: 600 !important;
 }
+button{
+  cursor: pointer;
+}
+a{
+  cursor: pointer;
+}
 .primary-color{
   color : $primary-color;
 }
