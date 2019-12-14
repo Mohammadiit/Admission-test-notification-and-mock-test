@@ -22,7 +22,7 @@ export class StudentGuard implements CanActivate {
         }
         else {
           observer.next(false);
-          this.router.navigate(['auth/log-in']);
+          this.router.navigate(['**']);
         }
       })
     })

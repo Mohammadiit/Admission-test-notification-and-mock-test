@@ -15,13 +15,15 @@ import {FieldMatcher, SharedService} from '../../../shared/service/shared.servic
 })
 export class SignUpComponent implements OnInit {
 
-  signUpData : FormGroup;
+  signUpData : FormGroup = null;
   userInformation: UserInformation;
   private matcher;
   constructor(private authService: AuthenticationService,
               private sharedService: SharedService,
               private fb: FormBuilder,
-              private  router: Router) { }
+              private  router: Router) {
+    // this.signUpData.reset();
+  }
 
   ngOnInit() {
     this.setForm();
@@ -74,7 +76,9 @@ export class SignUpComponent implements OnInit {
     return null;
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
+
     this.userInformation = {
       email: this.signUpData.value.email,
       password: this.signUpData.value.password,
@@ -86,13 +90,23 @@ export class SignUpComponent implements OnInit {
     };
     this.registerUser(this.userInformation);
 
-    this.router.navigate([urlPaths.Authentication.Signup]);
-    this.signUpData.reset();
+    // this.router.navigate([urlPaths.Authentication.Signup]);
+
   }
 
   private registerUser(signUpData: UserInformation) {
-    this.authService.signUp(signUpData);
-    this.router.navigate([urlPaths.Authentication.Signin.url]);
+    this.router.navigate(['/auth/log-in']);
+    this.authService.signUp(signUpData).subscribe(res =>{
+      if (res ) {
+          console.log(res);
+        this.router.navigate(['/auth/log-in']);
+
+      }
+      else {
+        this.router.navigate(['/auth/log-in']);
+      }
+
+    });
   }
 
   routeToLogIn() {

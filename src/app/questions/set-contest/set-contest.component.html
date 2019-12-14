@@ -1,38 +1,47 @@
-<mat-card>
-  <form class="example-form" fxLayout="column"
-        fxLayoutAlign="center center" [formGroup]="contestForm"
-        >
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="startTime" type="datetime-local" placeholder="YYYY/MM/DD HH:MM:SS">
-      <mat-error
-        *ngIf="contestForm.get('startTime').errors?.required &&
+<div fxLayoutAlign="center center" class="w-100-p">
+
+  <mat-card fxLayoutAlign="center center" class="m-48 mat-elevation-z8 w-60-p ">
+
+    <form class="example-form w-60-p" fxLayout="column"
+          fxLayoutAlign="center center" [formGroup]="contestForm"
+    >
+      <mat-form-field class="example-full-width">
+
+        <input matInput formControlName="startTime" type="datetime-local" appearance="outline"
+               >
+        <mat-error
+          *ngIf="contestForm.get('startTime').errors?.required &&
                    contestForm.get('startTime').touched">
-        Required Field
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput formControlName="duration" type="number" placeholder="Duration (Minute)">
-      <mat-error
-        *ngIf="contestForm.get('duration').errors?.required &&
+          Required Field
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Duration</mat-label>
+
+        <input matInput formControlName="duration" type="number" appearance="outline" placeholder="Duration (Minute)">
+        <mat-error
+          *ngIf="contestForm.get('duration').errors?.required &&
                    contestForm.get('duration').touched">
-        Required Field
-      </mat-error>
-    </mat-form-field>
+          Required Field
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Favorite food</mat-label>
-      <mat-select formControlName="question">
-        <mat-option *ngFor="let questionPaper of questionPapers; let i = index"  [value]="questionPaper.payload.doc.id">
-          Question {{i+1}}
-        </mat-option>
-      </mat-select>
-      <mat-error
-        *ngIf="contestForm.get('question').errors?.required &&
+      <mat-form-field>
+        <mat-label>Select question</mat-label>
+        <mat-select formControlName="question">
+          <mat-option *ngFor="let questionPaper of questionPapers; let i = index"
+                      [value]="questionPaper.payload.doc.id">
+            Question {{i + 1}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="contestForm.get('question').errors?.required &&
                    contestForm.get('question').touched">
-        Required Field
-      </mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="!contestForm.valid" (click)='onSubmit()'>Sign Up</button>
+          Required Field
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!contestForm.valid" (click)='onSubmit()'>Set contest</button>
 
-  </form>
-</mat-card>
+    </form>
+  </mat-card>
+</div>

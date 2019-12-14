@@ -1,7 +1,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* You can add global styles to this file, and also import other style files */
 @import './styles/corestyle.scss';
+@import './styles/color.scss';
 @import './styles/fonts.scss';
+
 html,
 body {
   height: 100% !important;
@@ -79,4 +81,25 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+th{
+  background-color: $primary-color;
+  color: white !important;
+  font-size: 20px !important;
+}
+button{
+  background-color: $primary-color !important;
+  color: white !important;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+}
+mat-card{
+  table{
+    margin-top: 36px !important;
+  }
 }

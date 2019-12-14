@@ -21,6 +21,7 @@ export class NavbarComponent {
   isExpanded: boolean = false;
   sidebar = [];
   selectedRow: number;
+  demo = true;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

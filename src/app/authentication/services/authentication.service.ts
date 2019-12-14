@@ -36,18 +36,30 @@ export class AuthenticationService {
   }
 
   signUp(user: UserInformation) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(user.email,
-      user.password)
-      .then((accepted) => {
-        user.metaData.uid = accepted.user.uid;
-         return this.setUserDoc(user); // create initial user document
-      })
-      .catch(error => this.handleError(error));
+    return new Observable((observer) => {
+      this.afAuth.auth.createUserWithEmailAndPassword(user.email,
+        user.password)
+        .then((accepted) => {
+          this.afAuth.auth.currentUser.sendEmailVerification();
+          user.metaData.uid = accepted.user.uid;
+          this.setUserDoc(user); // create initial user document
+           this.router.navigate(['/auth/log-in']);
+          observer.next(accepted);
+        })
+        .catch((error) => {
+          this.handleError(error);
+          // this.router.navigate(['/auth/log-in']);
+          observer.next(error);
+
+        });
+    });
+
   }
   signIn(user: UserInformation) : Observable<any> {
     return new Observable((observer) => {
       this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
         .then((acc) => {
+
           observer.next(acc);
         })
         .catch((err) => {

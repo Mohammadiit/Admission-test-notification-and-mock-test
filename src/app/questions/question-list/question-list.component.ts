@@ -83,6 +83,7 @@ export class QuestionListComponent implements OnInit {
       NumberOfQuestions : question.numberOfQuestions,
           link : this.questionPapers[i].payload.doc.id
       }
+
     }
   }
 

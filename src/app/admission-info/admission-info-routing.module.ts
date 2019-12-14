@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'upload',
     component: AdmissionInfoUploadComponent,
-
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'info/:id',

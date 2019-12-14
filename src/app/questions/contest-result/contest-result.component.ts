@@ -14,7 +14,7 @@ export interface PeriodicElement {
   templateUrl: './contest-result.component.html',
   styleUrls: ['./contest-result.component.scss']
 })
-export class ContestResultComponent implements OnInit, OnDestroy {
+export class ContestResultComponent implements OnInit{
 
   displayedColumns: string[] = [ 'participantName', 'score'];
   data : PeriodicElement[] = [];
@@ -24,6 +24,7 @@ export class ContestResultComponent implements OnInit, OnDestroy {
   contestId;
   result;
   tt=0;
+  highest = 0;
   constructor(public questionService: QuestionService,
               private queryService: QueryServiceService,
               private router: Router) { }
@@ -34,10 +35,18 @@ export class ContestResultComponent implements OnInit, OnDestroy {
     console.log(url, url.length  + '  '+url.substring(26,46));
     this.queryService.getSingleData('contests',this.contestId).subscribe(
       res =>{
-        console.log(res);
-        this.result = res;
-        this.loadData();
-        this.dataSource.paginator = this.paginator;
+        this.queryService.getSingleData('question-paper' , res.questionId)
+          .subscribe(res2 =>{
+            let num = res2.numberOfQuestions;
+            if(num == 200) this.highest = 21;
+            if(num == 400) this.highest = 31;
+            console.log(res);
+            this.result = res;
+            this.loadData();
+            this.dataSource.paginator = this.paginator;
+
+          });
+
       }
     )
   }

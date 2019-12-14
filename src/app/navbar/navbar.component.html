@@ -15,7 +15,7 @@
     <mat-toolbar *ngIf="!isExpanded" fxLayout="row" fxLayoutAlign="space-between center" class="white-color-foreground">
 
       <div>
-        <button mat-mini-fab color='warn' mat-icon-button (click)="isExpanded = !isExpanded" class='mt-8'>
+        <button mat-mini-fab color='warn' mat-icon-button [disabled]=" demo" (click)="isExpanded = !isExpanded" class='mt-8'>
           <mat-icon>menu</mat-icon>
         </button>
       </div>
@@ -59,10 +59,11 @@
   </mat-sidenav>
   <mat-sidenav-content>
 
-    <mat-toolbar color="primary" class="h-64 w-100-p ">
+    <mat-toolbar color="primary" class="h-76 w-100-p ">
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px" class="w-100-p">
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
           <div >
+
 <!--            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">-->
 <!--              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>-->
 <!--            </button>-->
@@ -71,7 +72,8 @@
 <!--            <span *ngIf="!drawer.opened">DUPAY</span>-->
 <!--            <div *ngIf="drawer.opened" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">-->
 <!--              <div>DUPAY</div>-->
-
+<!--          <img src="../../../assets/Admission_3.png"  alt="Italian Trulli">-->
+          <p class="bold  m-0" >ADMISSION HELP DESK AND MOCK TEST</p>
 
 <!--            </div>-->
 

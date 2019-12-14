@@ -11,38 +11,50 @@ import {ContestResultListComponent} from './contest-result-list/contest-result-l
 import {StudentGuard} from '../shared/service/security-service/student.guard';
 import {ContestRegisteredGuard} from '../shared/service/security-service/contest-registered.guard';
 import {PaymentStripeComponent} from './payment-stripe/payment-stripe.component';
+import {AuthGuard} from '../shared/service/security-service/auth.guard';
+import {AdminGuard} from '../shared/service/security-service/admin.guard';
 
 
 const routes: Routes = [
   {
     path: 'upload',
-    component: QuestionUploadComponent
+    component: QuestionUploadComponent,
+    canActivate: [AuthGuard, AdminGuard]
+
+
   }, {
     path: 'exam/:id',
     component: ExamComponent,
-    canActivate: [ContestRegisteredGuard]
+    canActivate: [AuthGuard, ContestRegisteredGuard, StudentGuard]
 
 
   }, {
     path: 'list',
     component: QuestionListComponent,
-
+    canActivate: [AuthGuard]
   }, {
     path: 'result/:id',
-    component: ResultComponent
+    component: ResultComponent,
+    canActivate: [AuthGuard, StudentGuard]
   }, {
     path: 'set-contest',
-    component: SetContestComponent
+    component: SetContestComponent,
+    canActivate: [AuthGuard, AdminGuard]
+
   }, {
     path: 'contest-list',
     component: ContestListComponent,
+    canActivate: [AuthGuard]
+
 
   }, {
     path: 'contest-result/:id',
     component: ContestResultComponent,
+    canActivate: [AuthGuard, StudentGuard]
   }, {
     path: 'contest-result-list',
-    component: ContestResultListComponent
+    component: ContestResultListComponent,
+    canActivate: [AuthGuard, StudentGuard]
   }, {
     path: 'payment-stripe/:id',
     component: PaymentStripeComponent

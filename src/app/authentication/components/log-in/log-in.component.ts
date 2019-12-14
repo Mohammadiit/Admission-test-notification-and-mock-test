@@ -22,6 +22,8 @@ export class LogInComponent implements OnInit {
               private sharedService: SharedService
               ) {
     this.logInData.reset();
+
+
   }
 
   ngOnInit() {

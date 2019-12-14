@@ -30,7 +30,9 @@ export class ResultComponent implements OnInit {
   }
   L=0;
   W=0;
+  highest = 0;
   D=0;
+  averageDifficulty =0;
   R=0;
   estimate = 0;
   QuestionAttempt = [];
@@ -45,7 +47,7 @@ export class ResultComponent implements OnInit {
       this.examInfo = res;
       this.QuestionAttempt = this.examInfo.QuestionAttempt;
       console.log(this.QuestionAttempt);
-      this.Difficulty = this.examInfo.Difficulty;
+      this.Difficulty = (this.examInfo.Difficulty) ;
       this.Answer = this.examInfo.Answer;
       this.Results = this.examInfo.Results;
 
@@ -53,13 +55,22 @@ export class ResultComponent implements OnInit {
       this.R = this.examInfo.R;
       this.W = this.examInfo.W;
       this.L = this.examInfo.L;
+      if(this.Difficulty[0] == '10'){
+        this.highest = 21;
+      }
+      if(this.Difficulty[0] == '20'){
+        this.highest = 31;
+      }
+      this.averageDifficulty = Math.round(this.D/this.L);
+
+      this.assignValue();
 
       console.log(res);
     });
 
     this.loadData();
 
-    this.assignValue();
+
 
   }
 
@@ -84,13 +95,17 @@ export class ResultComponent implements OnInit {
      // this.estimate = (24/11) + Math.log(5/6) / Math.log(2.718);
     let e;
      if(this.R ==0 || this.W ==0){
-       if(this.R ==0)  e = (this.D/this.L) + (Math.log((this.R+.5)/(this.W-0.5)) / Math.log(2.718));
+       if(this.R ==0) {
+         e = (this.D / this.L) + (Math.log((this.R + .5) / (this.W - 0.5)) / Math.log(2.718));
+
+       }
        if(this.W ==0)  e = (this.D/this.L) + (Math.log((this.R-.5)/(this.W+0.5)) / Math.log(2.718));
      }
      else{
        e = (this.D/this.L) + (Math.log(this.R/this.W) / Math.log(2.718));
      }
+     if(e < 0 ) e = 0;
      e = Number((e).toFixed(2));
-      this.estimate = (e+1.89)*10;
+      this.estimate = Math.round(Math.abs(e));
   }
 }

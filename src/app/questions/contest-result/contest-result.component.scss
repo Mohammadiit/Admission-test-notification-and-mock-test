@@ -1,5 +1,12 @@
-table {
-  width: 100%;
+th{
+  width: 50%;
+  align-items: center;
+  //text-align: center !important;
+}
+td{
+  width: 50%;
+  //text-align: center !important;
+
 }
 tr:hover {
   background-color: #e3e4ec;

@@ -176,7 +176,7 @@ export class ExamComponent implements OnInit, OnDestroy  {
   }
 
   next() {
-
+    this.column;
     if(this.iterator < this.numberEachDifficulty  ){
       let answer =  this.questions[this.column][this.iterator].answer;
       console.log( "kkkkkkk  " + this.selected + "      " + answer);
@@ -211,8 +211,8 @@ export class ExamComponent implements OnInit, OnDestroy  {
       let sum = this.sumPm();
       console.log ("summmmmmmmmmmmmmmmmmmm          "+sum);
       this.column = Math.round(this.column +((this.R - sum[0])/sum[1]));
-      if(this.column >39){
-        this.column =39;
+      if(this.column > this.numberOfQuestion-1){
+        this.column = this.numberOfQuestion - 1 ;
       }
       if(this.column<0) this.column = 0;
   }
@@ -262,7 +262,7 @@ export class ExamComponent implements OnInit, OnDestroy  {
         console.log(this.estimate);
       });
     }
-    else{
+    else {
       this.questionService.Answer = this.Answers;
       this.questionService.Results = this.Results;
       this.questionService.QuestionAttempt = this.questionAttempt;
@@ -288,7 +288,8 @@ export class ExamComponent implements OnInit, OnDestroy  {
       e = (this.D/this.L) + (Math.log(this.R/this.W) / Math.log(2.718));
     }
     e = Number((e).toFixed(2));
-    this.estimate = (e+1.89)*10;
+    if ( e < 0) e = 0;
+    this.estimate = e;
   }
   private getUserName(): Observable<any>  {
   let user;
