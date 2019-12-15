@@ -46,11 +46,12 @@ export class ResultComponent implements OnInit {
     this.queryService.getSingleData('exam-result', this.url).subscribe(res =>{
       this.examInfo = res;
       this.QuestionAttempt = this.examInfo.QuestionAttempt;
-      console.log(this.QuestionAttempt);
       this.Difficulty = (this.examInfo.Difficulty) ;
       this.Answer = this.examInfo.Answer;
       this.Results = this.examInfo.Results;
-
+      for ( let i =0; i< this.QuestionAttempt.length; ++i){
+          this.QuestionAttempt [i] = this.QuestionAttempt [i].substring(0, 80);
+      }
       this.D = this.examInfo.D;
       this.R = this.examInfo.R;
       this.W = this.examInfo.W;

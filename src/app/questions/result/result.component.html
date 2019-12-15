@@ -8,19 +8,19 @@
       </p>
     </div>
 
-    <div fxFlex="10">
-      <h2>Difficulty</h2>
+    <div fxFlex="8">
+      <h2>Diff</h2>
 
       <p *ngFor="let info of Difficulty">
         {{info}}
       </p></div>
-    <div fxFlex="20">
+    <div fxFlex="30">
       <h2>Answer</h2>
 
       <p *ngFor="let info of Answer">
         {{info}}
       </p></div>
-    <div fxFlex="15">
+    <div fxFlex="10">
       <h2>Result</h2>
 
       <p *ngFor="let info of Results">
@@ -35,7 +35,7 @@
 
 <div fxLayout="column" fxLayoutAlign="center center" class='px-250'>
   <mat-card class='w-100-p p-48 m-56'>
-    <pre class="font-size-20">Total difficulties attempted :{{averageDifficulty}}</pre>
+    <pre class="font-size-20">Average difficulties attempted:{{averageDifficulty}}</pre>
     <pre class="font-size-20">Total questions attempted    :{{L}}</pre>
     <pre class="font-size-20">Total Right answers          :{{R}}</pre>
     <pre class="font-size-20">Total wrong answers          :{{W}}</pre>
