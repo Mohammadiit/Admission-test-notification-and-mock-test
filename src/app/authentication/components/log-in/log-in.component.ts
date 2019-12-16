@@ -16,7 +16,7 @@ import {SharedService} from '../../../shared/service/shared.service'; // or dire
 export class LogInComponent implements OnInit {
 
   logInData = this.authService.logInForm;
-
+  isLoading = false;
   constructor(private authService: AuthenticationService, private  router: Router,
               private securityService: SecurityService,
               private sharedService: SharedService
@@ -30,11 +30,14 @@ export class LogInComponent implements OnInit {
   }
   logIn() {
     console.log(util.inspect(this.logInData.value));
+    this.isLoading = true;
     this.authService.signIn(this.logInData.value).pipe(first()).subscribe((res) => {
       if (res && res.code) {
+        this.isLoading = false;
          console.log(res.code);
          this.sharedService.openSnackBarLattest('Invalid Email or password', 'ERROR');
       } else {
+        this.isLoading = false;
         this.sharedService.openSnackBarLattest('Successfully Logged in', 'DONE');
         this.authService.isLoggedIn.next(true);
         this.AdminCheck();

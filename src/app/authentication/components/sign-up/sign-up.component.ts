@@ -98,11 +98,14 @@ export class SignUpComponent implements OnInit {
     this.router.navigate(['/auth/log-in']);
     this.authService.signUp(signUpData).subscribe(res =>{
       if (res ) {
+        this.sharedService.openSnackBarLattest('Verification email has been sent. Please check', 'done');
           console.log(res);
         this.router.navigate(['/auth/log-in']);
 
       }
       else {
+        this.sharedService.openSnackBarLattest('Verification email has been sent. Please check', 'done');
+
         this.router.navigate(['/auth/log-in']);
       }
 

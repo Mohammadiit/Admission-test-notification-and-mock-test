@@ -25,6 +25,7 @@ import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [SnackbarComponent, FileUploaderComponent, FileUploadTaskComponent],
   imports: [
+    MatProgressBarModule,
     MatMenuModule,
     MatListModule,
     MatPaginatorModule,
@@ -52,6 +53,8 @@ import {MatListModule} from '@angular/material/list';
     AngularFireFunctionsModule,
   ],
   exports: [
+    MatProgressBarModule,
+
     MatMenuModule,
     MatListModule,
     MatPaginatorModule,

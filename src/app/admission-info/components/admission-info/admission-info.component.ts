@@ -19,6 +19,7 @@ export class AdmissionInfoComponent implements OnInit {
               private queryService: QueryServiceService) {
     this.url = activatedRoute.snapshot.url[1].path;
     console.log(activatedRoute.snapshot.url[1].path);
+
   }
   singleItem;
   applicationStarts;
