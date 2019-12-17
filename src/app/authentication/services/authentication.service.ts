@@ -33,6 +33,7 @@ export class AuthenticationService {
               private afs: AngularFirestore,
               private router: Router) {
     this.isLoggedIn = new BehaviorSubject(true);
+
   }
 
   signUp(user: UserInformation) {
